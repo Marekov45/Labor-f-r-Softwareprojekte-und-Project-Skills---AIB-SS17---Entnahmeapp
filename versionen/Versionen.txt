@@ -1,0 +1,9 @@
+Versionen
+Zu finden unter:
+-	Project Structure - Project
+-	Project Structure - Facets - Android-Gradle - Properties und Flavors
+Android Studio
+-	Project SDK: 1.8
+-	Compile SDK Version: API 25: Android 7.1.1
+-	Build Tools Version: 25.0.2
+-	Min SDK Version: 22
