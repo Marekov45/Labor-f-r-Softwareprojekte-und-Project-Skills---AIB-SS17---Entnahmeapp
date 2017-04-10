@@ -1,4 +1,4 @@
-Versionen Android
+Verwendete Versionen von Android
 Zu finden unter:
 -	Project Structure - Project
 -	Project Structure - Facets - Android-Gradle - Properties und Flavors
