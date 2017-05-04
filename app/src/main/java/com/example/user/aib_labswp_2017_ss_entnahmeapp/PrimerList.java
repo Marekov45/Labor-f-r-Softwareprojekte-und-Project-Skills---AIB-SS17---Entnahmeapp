@@ -1,17 +1,24 @@
 package com.example.user.aib_labswp_2017_ss_entnahmeapp;
 
-import android.*;
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.view.View;
+import android.widget.*;
 import android.os.Bundle;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
@@ -21,65 +28,31 @@ import java.io.IOException;
 public class PrimerList extends AppCompatActivity {
 
     private Spinner spinner;
-    private SurfaceView cameraPreview;
-    private static final String[] items = {"Entnommen", "Nicht entnommen"};
-    private CameraSource cameraSource;
-    private final int RequestCameraPermissionID = 1001;
+    private TextView txtResult;
+    private Button scanButton;
+    private String[] items = {"Entnommen","Nicht Entnommen"};
+    public static final int REQUEST_CODE = 100;
+    public static final int PERMISSION_REQUEST = 200;
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode)
-        {
-            case RequestCameraPermissionID:
-            {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-                        return;
-                    }
-                    try {
-                        cameraSource.start(cameraPreview.getHolder());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            break;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.primerlist);
 
-        cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
-        cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
+        scanButton = (Button) findViewById(R.id.scan);
+        txtResult = (TextView) findViewById(R.id.txtResult);
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
+        }
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
-                    ActivityCompat.requestPermissions(PrimerList.this, new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
-                    return;
-                }
-
-                try {
-                    cameraSource.start(cameraPreview.getHolder());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-                cameraSource.stop();
+            public void onClick(View v) {
+                Intent intent = new Intent(PrimerList.this, ScanActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -91,4 +64,32 @@ public class PrimerList extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
     }
-}
+
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+                if(data != null){
+                    final Barcode barcode = data.getParcelableExtra("barcode");
+                    txtResult.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtResult.setText(barcode.displayValue);
+                        }
+                    });
+                }
+            }
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+
+

@@ -4,32 +4,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <SurfaceView
-            android:id="@+id/cameraPreview" android:layout_height="200dp"
-            android:layout_gravity="right"
-            android:layout_marginEnd="34dp"
-            android:layout_marginTop="30dp" android:layout_alignParentEnd="true" android:layout_alignParentTop="true"
-            android:layout_width="400dp"/>
+    <Button
+            android:text="Primer scannen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan"
+            android:layout_alignBaseline="@+id/button6" android:layout_alignBottom="@+id/button6"
+            android:layout_alignStart="@+id/textView" android:layout_alignEnd="@+id/button2"/>
+    <Button
+            android:text="Manuelle Eingabe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6"
+            android:layout_marginBottom="67dp" android:layout_above="@+id/button7" android:layout_alignParentEnd="true"
+            android:layout_marginEnd="107dp"/>
+    <Button
+            android:text="Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button7"
+            android:layout_marginBottom="33dp" android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/button6"/>
     <TextView
             android:text="Auftrags-ID"
             android:id="@+id/textView" android:layout_width="250dp"
             android:textSize="24sp"
             android:textStyle="bold" android:gravity="left|center"
             android:layout_height="30dp"
-            android:layout_marginTop="27dp" android:layout_below="@+id/cameraPreview"
-            android:layout_alignStart="@+id/button2"/>
+            android:layout_below="@+id/txtResult" android:layout_alignStart="@+id/button2"
+            android:layout_marginTop="83dp"/>
     <Button
             android:text="Liste anzeigen"
             android:layout_width="233dp"
             android:layout_height="wrap_content" android:id="@+id/button2"
             android:gravity="center"
-            android:layout_marginStart="17dp"
-            android:layout_alignTop="@+id/cameraPreview" android:layout_alignParentStart="true"
-            android:layout_above="@+id/textView"/>
+            android:layout_marginStart="26dp"
+            android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+            android:layout_marginTop="62dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/txtResult"
+            android:layout_height="50dp" android:textSize="24sp" android:textAllCaps="true"
+            android:text="Ergebnis" android:gravity="center"
+            android:layout_marginEnd="59dp" android:layout_below="@+id/button6" android:layout_alignEnd="@+id/scan"/>
     <TableLayout
             android:layout_width="match_parent"
             android:layout_height="321dp"
-            android:layout_below="@+id/textView" android:layout_alignParentStart="true" android:layout_marginTop="20dp">
+            android:layout_below="@+id/button2" android:layout_alignParentStart="true" android:layout_marginTop="88dp">
 
         <TableRow>
             <TextView android:text="Primername"
@@ -60,11 +81,11 @@
                     android:textSize="24sp" android:layout_weight="1" android:gravity="center"/>
         </TableRow>
 
-        <ScrollView android:layout_height="match_parent">
+        <ScrollView android:layout_height="409dp">
             <TableLayout android:id="@+id/primer_table"
                          android:layout_width="fill_parent"
                          android:layout_height="fill_parent">
-                <TableRow>
+                <TableRow >
                     <TextView android:text="3AOX1"
                               android:layout_column="0"
                               android:layout_weight="1" android:textStyle="bold" android:textSize="18sp"
@@ -75,7 +96,7 @@
                               android:layout_width="30dp"
                               android:layout_column="1"
                               android:layout_weight="1" android:textStyle="bold" android:textSize="18sp"
-                              android:layout_height="30dp">
+                              android:layout_height="60dp">
                     </TextView>
                     <TextView android:text="G7"
                               android:layout_width="30dp"
@@ -95,24 +116,4 @@
             </TableLayout>
         </ScrollView>
     </TableLayout>
-    <Button
-            android:text="Logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button7" android:layout_alignParentBottom="true" android:layout_alignEnd="@+id/cameraPreview"
-            android:layout_marginBottom="39dp"/>
-    <Button
-            android:text="Manuelle Eingabe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button6"
-            android:layout_above="@+id/button7" android:layout_alignEnd="@+id/button7"
-            android:layout_marginBottom="53dp" android:layout_alignStart="@+id/cameraPreview"/>
-    <Button
-            android:text="Primer scannen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button5"
-            android:layout_alignBaseline="@+id/button6" android:layout_alignBottom="@+id/button6"
-            android:layout_alignStart="@+id/textView" android:layout_alignEnd="@+id/button2"/>
 </RelativeLayout>
