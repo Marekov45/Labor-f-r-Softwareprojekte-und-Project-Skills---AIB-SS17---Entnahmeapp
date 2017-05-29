@@ -1,4 +1,4 @@
-package com.example.user.aib_labswp_2017_ss_entnahmeapp;
+package client.aib_labswp_2017_ss_entnahmeapp;
 
 import org.junit.Test;
 

@@ -1,26 +1,16 @@
-package com.example.user.aib_labswp_2017_ss_entnahmeapp;
+package client_aib_labswp_2017_ss_entnahmeapp.View;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Vibrator;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
+import client.aib_labswp_2017_ss_entnahmeapp.R;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
-
-import java.io.IOException;
 
 /**
  * Created by Marvin on 30.04.2017.

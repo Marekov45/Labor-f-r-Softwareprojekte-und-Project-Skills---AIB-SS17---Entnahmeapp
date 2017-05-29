@@ -1,6 +1,5 @@
-package com.example.user.aib_labswp_2017_ss_entnahmeapp;
+package client_aib_labswp_2017_ss_entnahmeapp.View;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,6 +10,7 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
+import client.aib_labswp_2017_ss_entnahmeapp.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;

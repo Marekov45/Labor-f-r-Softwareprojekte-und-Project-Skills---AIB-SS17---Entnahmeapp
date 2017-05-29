@@ -1,4 +1,4 @@
-package com.example.user.aib_labswp_2017_ss_entnahmeapp;
+package client.aib_labswp_2017_ss_entnahmeapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.user.aib_labswp_2017_ss_entnahmeapp", appContext.getPackageName());
+        assertEquals("client.aib_labswp_2017_ss_entnahmeapp", appContext.getPackageName());
     }
 }
