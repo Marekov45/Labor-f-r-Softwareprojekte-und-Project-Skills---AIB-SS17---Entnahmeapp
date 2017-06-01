@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.user.aib_labswp_2017_ss_entnahmeapp"
+        applicationId "client.aib_labswp_2017_ss_entnahmeapp"
         minSdkVersion 22
         multiDexEnabled true
         targetSdkVersion 25
