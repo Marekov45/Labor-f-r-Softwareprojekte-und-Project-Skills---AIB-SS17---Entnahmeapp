@@ -1,4 +1,4 @@
-package client_aib_labswp_2017_ss_entnahmeapp.View;
+package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
 import android.Manifest;
 import android.content.Intent;

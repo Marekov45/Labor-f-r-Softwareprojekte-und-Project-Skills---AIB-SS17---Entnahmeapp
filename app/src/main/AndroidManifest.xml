@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.LoginActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PrimerList"
                 android:configChanges="orientation"
                 android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
@@ -21,7 +21,7 @@
 
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.PrimerList"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
                 android:configChanges="orientation"
                 android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.ScanActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.ScanActivity"
                 android:configChanges="orientation"
                 android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
