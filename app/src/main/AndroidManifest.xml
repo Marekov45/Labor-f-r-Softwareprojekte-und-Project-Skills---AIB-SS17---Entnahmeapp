@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="client.aib_labswp_2017_ss_entnahmeapp">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera"/>
 
     <application
             android:allowBackup="true"
@@ -15,29 +15,32 @@
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PrimerList"
                 android:configChanges="orientation"
-                android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
-
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
                 android:configChanges="orientation"
-                android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.ScanActivity"
                 android:configChanges="orientation"
-                android:screenOrientation="portrait"
                 android:label="@string/title_activity_login"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
-
+        </activity>
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui">
+        </activity>
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
         </activity>
     </application>
 
