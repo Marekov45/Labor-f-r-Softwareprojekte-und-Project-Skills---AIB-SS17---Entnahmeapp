@@ -11,5 +11,4 @@ public interface LoginAPI {
 
     @GET("/authentication/{username}/{password}")
     Call<Boolean> getAuthentification(@Path("username") String username, @Path("password") String password);
-//    public boolean login (String name, String password);
 }

@@ -59,20 +59,23 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     }
 
     private void startSelectedActivity() {
-        User user = new User(mPasswordView.getText().toString(), mNameView.getText().toString());
+        User user = new User( mNameView.getText().toString(), mPasswordView.getText().toString());
 
 
         switch (spinnerGui.getSelectedItemPosition()) {
             case 0:
                 Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
+                intentLabor.putExtra("USER",user);
                 startActivity(intentLabor);
                 break;
             case 1:
                 Intent intentEntnahme = new Intent(LoginActivity.this, PrimerList.class);
+                intentEntnahme.putExtra("USER",user);
                 startActivity(intentEntnahme);
                 break;
             case 2:
                 Intent intentRueck = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
+                intentRueck.putExtra("USER",user);
                 startActivity(intentRueck);
                 break;
         }

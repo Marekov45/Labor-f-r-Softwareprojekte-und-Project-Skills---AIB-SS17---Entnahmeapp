@@ -1,0 +1,16 @@
+package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+
+import java.util.List;
+
+/**
+ * Created by User on 08.06.2017.
+ */
+public interface ListAPI {
+
+    @GET("/app/list/{typeOfProcess}/{username}/{password}")
+    Call<List> getPicklist(@Path("typeOfProcess") String typeOfProcess , @Path("username") String username, @Path("password") String password);
+}
