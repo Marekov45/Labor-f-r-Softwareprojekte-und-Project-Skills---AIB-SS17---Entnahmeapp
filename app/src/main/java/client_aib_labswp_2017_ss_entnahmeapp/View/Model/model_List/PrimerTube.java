@@ -1,5 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.*;
 
 /**
@@ -19,11 +21,10 @@ public class PrimerTube {
     private StorageLocation storageLocation;
     private boolean returnToStorage;
     private String manufacturer;
+    private long obejctID;
 
-    public PrimerTube(long objectID, LocalDateTime takeOutDate, LocalDateTime putBackDate, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer) {
-        super(objectID);
-        this.takeOutDate = takeOutDate;
-        this.putBackDate = putBackDate;
+    public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer) {
+        this.obejctID=objectID;
         this.primerTubeID = primerTubeID;
         this.primerUID = primerUID;
         this.name = name;
@@ -31,5 +32,40 @@ public class PrimerTube {
         this.storageLocation = storageLocation;
         this.returnToStorage = returnToStorage;
         this.manufacturer = manufacturer;
+    }
+
+    public PrimerTube() {
+    }
+
+    public String getPrimerTubeID() {
+        return primerTubeID;
+    }
+
+    public String getPrimerUID() {
+        return primerUID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLotNr() {
+        return lotNr;
+    }
+
+    public StorageLocation getStorageLocation() {
+        return storageLocation;
+    }
+
+    public boolean isReturnToStorage() {
+        return returnToStorage;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public long getObejctID() {
+        return obejctID;
     }
 }

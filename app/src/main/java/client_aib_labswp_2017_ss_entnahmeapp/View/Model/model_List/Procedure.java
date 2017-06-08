@@ -4,14 +4,16 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
  * Represents a procedure that can be processed in a lab.
  * Created by User
  */
-public class Procedure{
+public class Procedure {
 
     private String shortCut;
     private String procedureName;
+    private long objectID;
 
-    public Procedure(String shortCut, String procedureName) {
+    public Procedure(String shortCut, String procedureName, long objectID) {
         this.shortCut = shortCut;
         this.procedureName = procedureName;
+        this.objectID = objectID;
     }
 
     public Procedure() {
@@ -23,5 +25,9 @@ public class Procedure{
 
     public String getProcedureName() {
         return procedureName;
+    }
+
+    public long getObjectID() {
+        return objectID;
     }
 }
