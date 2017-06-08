@@ -24,9 +24,6 @@ public class PrimerList extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +49,6 @@ public class PrimerList extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
     }
 
 
@@ -70,12 +66,6 @@ public class PrimerList extends AppCompatActivity {
                 }
             }
         }
-
-
-
-
-
-
     }
 
 
