@@ -13,6 +13,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObs
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginAPI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginControllerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 
 import static client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode.*;
 
@@ -58,6 +59,9 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     }
 
     private void startSelectedActivity() {
+        User user = new User(mPasswordView.getText().toString(), mNameView.getText().toString());
+
+
         switch (spinnerGui.getSelectedItemPosition()) {
             case 0:
                 Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
