@@ -10,7 +10,6 @@ public class User {
     public User(String name, String password){
         this.username = name;
         this.password=password;
-        System.out.println(username+password);
     }
 
     public void setUsername(String username) {
