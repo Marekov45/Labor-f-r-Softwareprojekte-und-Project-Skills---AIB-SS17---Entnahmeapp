@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginAPI;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +27,7 @@ public class LoginControllerImpl {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.code() == HttpsURLConnection.HTTP_OK) {
                     Boolean status = response.body();
-                    cObserver.onResponseSuccess(status);
+                    cObserver.onResponseSuccess(status, ResponseCode.LOGIN);
                 } else {
                     cObserver.onResponseError();
                 }
@@ -34,7 +35,6 @@ public class LoginControllerImpl {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                t.printStackTrace();
                 cObserver.onResponseFailure();
             }
         });
@@ -42,21 +42,5 @@ public class LoginControllerImpl {
 
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
-    }
-
-    public boolean login(String name, String password) {
-
-
-        //Call for rest
-
-        //1
-        //2
-        //3
-        //return
-        if (name.equals("lea") && password.equals("123")) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
