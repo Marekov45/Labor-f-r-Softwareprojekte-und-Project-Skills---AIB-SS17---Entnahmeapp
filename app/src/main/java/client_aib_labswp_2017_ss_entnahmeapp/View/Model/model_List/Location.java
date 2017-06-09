@@ -29,4 +29,16 @@ public class Location  {
     public long getObjectID() {
         return objectID;
     }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public void setProcedures(Procedure[] procedures) {
+        this.procedures = procedures;
+    }
+
+    public void setObjectID(long objectID) {
+        this.objectID = objectID;
+    }
 }

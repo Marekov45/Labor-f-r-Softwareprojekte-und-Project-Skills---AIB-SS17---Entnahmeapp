@@ -30,4 +30,16 @@ public class Procedure {
     public long getObjectID() {
         return objectID;
     }
+
+    public void setShortCut(String shortCut) {
+        this.shortCut = shortCut;
+    }
+
+    public void setProcedureName(String procedureName) {
+        this.procedureName = procedureName;
+    }
+
+    public void setObjectID(long objectID) {
+        this.objectID = objectID;
+    }
 }

@@ -96,12 +96,12 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LIST:
-                receivePrimerList(o);
+                receivePrimerList();
                 break;
         }
     }
 
-    private void receivePrimerList(Object o) {
+    private void receivePrimerList() {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
     }

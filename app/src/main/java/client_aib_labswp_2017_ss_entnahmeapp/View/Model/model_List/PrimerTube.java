@@ -1,17 +1,21 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
 
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.test.DemoResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.time.*;
+import java.util.Date;
+
 
 /**
  * Created by SimonHauck-GamingPC on 23.04.2017.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class PrimerTube {
 
 //    private LocalDateTime takeOutDate;
 //    private LocalDateTime putBackDate;
+    private DemoResponse takeOutDate;
+    private DemoResponse putBackDate;
 
     // PrimerTubeID  , PrimerUID from Labor, PrimerTube Name, LotNR from Storage
     private String primerTubeID;
@@ -21,10 +25,10 @@ public class PrimerTube {
     private StorageLocation storageLocation;
     private boolean returnToStorage;
     private String manufacturer;
-    private long obejctID;
+    private long objectID;
 
     public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer) {
-        this.obejctID=objectID;
+        this.objectID=objectID;
         this.primerTubeID = primerTubeID;
         this.primerUID = primerUID;
         this.name = name;
@@ -65,7 +69,55 @@ public class PrimerTube {
         return manufacturer;
     }
 
-    public long getObejctID() {
-        return obejctID;
+    public long getObjectID() {
+        return objectID;
+    }
+
+    public void setPrimerTubeID(String primerTubeID) {
+        this.primerTubeID = primerTubeID;
+    }
+
+    public void setPrimerUID(String primerUID) {
+        this.primerUID = primerUID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLotNr(String lotNr) {
+        this.lotNr = lotNr;
+    }
+
+    public void setStorageLocation(StorageLocation storageLocation) {
+        this.storageLocation = storageLocation;
+    }
+
+    public void setReturnToStorage(boolean returnToStorage) {
+        this.returnToStorage = returnToStorage;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setObjectID(long objectID) {
+        this.objectID = objectID;
+    }
+
+    public DemoResponse getTakeOutDate() {
+        return takeOutDate;
+    }
+
+    public void setTakeOutDate(DemoResponse takeOutDate) {
+        this.takeOutDate = takeOutDate;
+    }
+
+    public DemoResponse getPutBackDate() {
+        return putBackDate;
+    }
+
+    public void setPutBackDate(DemoResponse putBackDate) {
+        this.putBackDate = putBackDate;
     }
 }

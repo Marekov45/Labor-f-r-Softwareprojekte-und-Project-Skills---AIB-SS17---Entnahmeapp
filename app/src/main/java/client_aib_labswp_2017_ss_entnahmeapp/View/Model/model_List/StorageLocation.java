@@ -42,4 +42,24 @@ public class StorageLocation {
     public long getObjectID() {
         return objectID;
     }
+
+    public void setTower(int tower) {
+        this.tower = tower;
+    }
+
+    public void setBox(int box) {
+        this.box = box;
+    }
+
+    public void setColumn(char column) {
+        this.column = column;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setObjectID(long objectID) {
+        this.objectID = objectID;
+    }
 }
