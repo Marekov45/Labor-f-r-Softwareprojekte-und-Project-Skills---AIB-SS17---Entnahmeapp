@@ -76,36 +76,39 @@
                     android:layout_alignParentStart="true" android:weightSum="1" android:layout_weight="0.73">
 
                 <TableRow>
-                    <TextView android:text="Primername"
+                    <TextView android:text="@string/tvPosition"
                               android:layout_column="0"
                               android:layout_weight="1"
-                              android:textStyle="bold" android:textSize="24sp" android:layout_width="30dp"
+                              android:textStyle="bold" android:textSize="24sp" android:layout_width="wrap_content"
                               android:layout_height="30dp" android:gravity="center"
-                              android:textColor="@android:color/white"/>
-                    <TextView android:text="PrimerID"
+                              android:textColor="@android:color/white" android:id="@+id/tvPosition"
+                              android:textAlignment="center"/>
+                    <TextView android:text="@string/tvPrimername"
                               android:layout_column="1"
                               android:layout_weight="1" android:textStyle="bold" android:textSize="24sp"
-                              android:layout_width="30dp" android:layout_height="30dp" android:gravity="center"
-                              android:textColor="@android:color/white">
+                              android:layout_width="wrap_content" android:layout_height="30dp" android:gravity="center"
+                              android:textColor="@android:color/white" android:id="@+id/tvPrimername"
+                              android:textAlignment="center">
                     </TextView>
-                    <TextView android:text="Lagerposition"
-                              android:layout_width="30dp"
+                    <TextView android:text="@string/tvPimerKoordinate"
+                              android:layout_width="wrap_content"
                               android:layout_column="2"
                               android:layout_weight="1" android:textStyle="bold" android:textSize="24sp"
-                              android:layout_height="30dp" android:textColor="@android:color/white">
+                              android:layout_height="30dp" android:textColor="@android:color/white"
+                              android:id="@+id/tvPimerKoordinate" android:textAlignment="center">
                     </TextView>
                     <TextView
-                            android:text="Status"
+                            android:text="@string/tvDestination"
                             android:layout_width="30dp"
-                            android:layout_height="30dp" android:textStyle="bold"
+                            android:layout_height="wrap_content" android:textStyle="bold"
                             android:textSize="24sp" android:layout_weight="1" android:gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white" android:id="@+id/tvDestination"/>
                     <TextView
-                            android:text="Abteilung"
-                            android:layout_width="30dp"
+                            android:text="@string/tvManualTake"
+                            android:layout_width="wrap_content"
                             android:layout_height="30dp" android:textStyle="bold"
                             android:textSize="24sp" android:layout_weight="1" android:gravity="center"
-                            android:textColor="@android:color/white"/>
+                            android:textColor="@android:color/white" android:id="@+id/tvManualTake"/>
                 </TableRow>
 
                 <ScrollView android:layout_height="wrap_content" android:background="?attr/colorControlHighlight" android:layout_marginTop="10dp">

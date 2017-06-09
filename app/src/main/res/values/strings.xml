@@ -21,6 +21,12 @@
     <string name="radioAll">Alle Listen</string>
 
     <string name="descriptionTake">Primer-Entnahme</string>
+    <string name="tvPosition">Pos</string>
+
+    <string name="tvPrimername">Primer</string>
+    <string name="tvPimerKoordinate">Lagerkoordinate</string>
+    <string name="tvDestination">Zielort</string>
+    <string name="tvManualTake">Man. Entn.</string>
 
 
 </resources>

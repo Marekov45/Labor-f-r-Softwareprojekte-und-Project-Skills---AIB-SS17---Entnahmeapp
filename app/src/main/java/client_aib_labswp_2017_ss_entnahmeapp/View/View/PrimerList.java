@@ -96,6 +96,8 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                     return "M";
             case R.id.radioExtra:
                     return "E";
+            case R.id.radioAll:
+                return "A";
         }
         return null;
     }
