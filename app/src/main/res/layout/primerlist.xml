@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="59dp" android:weightSum="1" android:background="@android:color/white">
             <RadioGroup
+                    android:id="@+id/listGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -35,19 +36,23 @@
                 <RadioButton
                         android:text="@string/radioRoboter"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/radioRoboter" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioRoboter" android:layout_weight="1"
+                        />
                 <RadioButton
                         android:text="@string/radioManuell"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/radioManuell" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioManuell" android:layout_weight="1"
+                />
                 <RadioButton
                         android:text="@string/radioExtra"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/radioExtra" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioExtra" android:layout_weight="1"
+                        />
                 <RadioButton
                         android:text="@string/radioAll"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/radioAll" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioAll" android:layout_weight="1"
+                        />
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/bListeAnzeigen"
