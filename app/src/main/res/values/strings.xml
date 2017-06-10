@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">aib_labswp_2017_ss_entnahmeapp</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_labor">Labor</string>
     <string name="title_activity_primerlist">Liste</string>string>
     <!-- Strings related to login -->
     <string name="prompt_email">Benutzername</string>

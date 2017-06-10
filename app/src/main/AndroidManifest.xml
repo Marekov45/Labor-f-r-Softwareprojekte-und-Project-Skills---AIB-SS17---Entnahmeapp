@@ -38,7 +38,11 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui">
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
+                  android:configChanges="orientation"
+                  android:label="@string/title_activity_labor"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
         </activity>

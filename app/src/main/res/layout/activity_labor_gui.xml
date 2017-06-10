@@ -48,7 +48,7 @@
                     android:textSize="24sp" android:layout_weight="1" android:gravity="center"/>
         </TableRow>
 
-        <ScrollView android:layout_height="476dp">
+        <ScrollView android:layout_height="531dp">
             <TableLayout android:id="@+id/primer_table"
                          android:layout_width="fill_parent"
                          android:layout_height="fill_parent">
