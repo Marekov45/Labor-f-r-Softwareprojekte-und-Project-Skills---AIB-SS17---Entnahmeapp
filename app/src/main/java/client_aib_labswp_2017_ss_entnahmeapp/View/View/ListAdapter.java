@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
 import java.util.List;
 
@@ -66,6 +67,10 @@ public class ListAdapter extends ArrayAdapter<PickList> {
         holder.txtPrice.setText(String.valueOf(currentPickList.getObjectID()));
         holder.txt2.setText(currentPickList.getEntryDate().toString());
         holder.txt3.setText("3");
+
+        for(PrimerTube primerTube: currentPickList.getPickList()){
+
+        }
         return rowView;
     }
 }

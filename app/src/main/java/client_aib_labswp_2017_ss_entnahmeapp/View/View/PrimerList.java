@@ -49,12 +49,6 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
-//        String[] items = getResources().getStringArray(R.array.list_items);
-
-
-
-//        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, items);
-//        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
