@@ -110,7 +110,8 @@ public class ListImpl {
 
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
-
+                t.printStackTrace();
+                cObserver.onResponseFailure();
             }
         });
     }
@@ -136,7 +137,8 @@ public class ListImpl {
 
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
-
+                t.printStackTrace();
+                cObserver.onResponseFailure();
             }
         });
     }
