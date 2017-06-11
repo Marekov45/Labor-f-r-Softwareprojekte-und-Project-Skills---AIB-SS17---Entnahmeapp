@@ -16,8 +16,10 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -137,10 +139,8 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LIST:
-                receivePrimerList(o);
-                break;
             case COMPLETELIST:
-                receiveAllPrimerList(o);
+                receivePrimerList(o);
                 break;
             case TAKEPRIMER:
                 takePrimer(o);
@@ -151,18 +151,19 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     private void takePrimer(Object o) {
     }
 
-    private void receiveAllPrimerList(Object o) {
-        System.out.println(o.toString());
-
-        Toast.makeText(this, "SuccessALLPRIMERLOFALLLISTS", Toast.LENGTH_SHORT).show();
-    }
-
     private void receivePrimerList(Object o) {
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, pickLists);
+
+        List<PrimerTube> tubes = new ArrayList<>();
+        for(PickList pickList: pickLists){
+            tubes.addAll(pickList.getPickList());
+        }
+
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, tubes, pickLists);
         listView.setAdapter(adapter);
+
     }
 
     @Override

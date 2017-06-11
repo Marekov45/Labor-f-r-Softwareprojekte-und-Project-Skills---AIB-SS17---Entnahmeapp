@@ -23,6 +23,14 @@ public class StorageLocation {
     public StorageLocation() {
     }
 
+    /**
+     * @return String representation of {@link StorageLocation} onject.
+     */
+    @Override
+    public String toString() {
+        return "Tower: " + tower + "; Box" + box + "; Column: " + column + "; Row: " + row;
+    }
+
     public int getTower() {
         return tower;
     }

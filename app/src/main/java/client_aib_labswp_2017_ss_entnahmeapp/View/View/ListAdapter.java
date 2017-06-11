@@ -17,15 +17,20 @@ import java.util.List;
 /**
  * Created by User on 11.06.2017.
  */
-public class ListAdapter extends ArrayAdapter<PickList> {
+public class ListAdapter extends ArrayAdapter<PrimerTube> {
     private int vg;
+    private List<PrimerTube> primerTubes;
     private List<PickList> pickLists;
     Context context;
 
-    public ListAdapter(Context context, int vg, int id, List<PickList> picklists) {
-        super(context, vg, id, picklists);
+    private int listIndex = 0;
+    private int primerTubeIndex = 0;
+
+    public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists) {
+        super(context, vg, id, primerTubes);
         this.context = context;
-        this.pickLists = picklists;
+        this.primerTubes = primerTubes;
+        this.pickLists = pickLists;
         this.vg = vg;
     }
 
@@ -53,7 +58,7 @@ public class ListAdapter extends ArrayAdapter<PickList> {
             holder.manualScan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Button was clicked for item "+position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Button was clicked for item " + position, Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -61,16 +66,32 @@ public class ListAdapter extends ArrayAdapter<PickList> {
 
         }
 
-        PickList currentPickList = pickLists.get(position);
+
+        PrimerTube primerTube = primerTubes.get(position);
         ViewHolder holder = (ViewHolder) rowView.getTag();
-        holder.txtModel.setText(currentPickList.getDestination().getLocationName());
-        holder.txtPrice.setText(String.valueOf(currentPickList.getObjectID()));
-        holder.txt2.setText(currentPickList.getEntryDate().toString());
-        holder.txt3.setText("3");
+        holder.txtModel.setText(String.valueOf(position));
+        holder.txtPrice.setText(primerTube.getName());
+        holder.txt2.setText(primerTube.getStorageLocation().toString());
 
-        for(PrimerTube primerTube: currentPickList.getPickList()){
-
+        PickList pickListFinal = null;
+        int postitioncounter = position;
+        for(PickList pickList:pickLists){
+            postitioncounter = postitioncounter-pickList.getPickList().size();
+            if(postitioncounter<0){
+                pickListFinal = pickList;
+                break;
+            }
         }
+
+        holder.txt3.setText(pickListFinal.getDestination().getLocationName());
+
+//        primerTubeIndex++;
+//        if(primerTubeIndex>= pickLists.get(listIndex).getPickList().size()){
+//            primerTubeIndex = 0;
+//            listIndex++;
+//        }
+
+
         return rowView;
     }
 }
