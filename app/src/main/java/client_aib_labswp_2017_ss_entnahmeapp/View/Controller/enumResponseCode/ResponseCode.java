@@ -8,6 +8,8 @@ public enum ResponseCode {
     LOGIN,
     LIST,
     COMPLETELIST,
+    COMPLETEGATHEREDLIST,
+    GATHEREDLIST,
     TAKEPRIMER;
 
 
