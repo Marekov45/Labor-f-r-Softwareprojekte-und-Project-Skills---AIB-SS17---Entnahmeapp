@@ -7,7 +7,8 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode;
 public enum ResponseCode {
     LOGIN,
     LIST,
-    COMPLETELIST;
+    COMPLETELIST,
+    TAKEPRIMER;
 
 
     private ResponseCode(){}

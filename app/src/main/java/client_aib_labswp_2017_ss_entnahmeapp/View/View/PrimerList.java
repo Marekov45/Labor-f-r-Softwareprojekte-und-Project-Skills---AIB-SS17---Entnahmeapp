@@ -140,7 +140,13 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             case COMPLETELIST:
                 receiveAllPrimerList(o);
                 break;
+            case TAKEPRIMER:
+                takePrimer(o);
+                break;
         }
+    }
+
+    private void takePrimer(Object o) {
     }
 
     private void receiveAllPrimerList(Object o) {

@@ -17,4 +17,7 @@ public interface ListAPI {
 
     @GET("/app/list/{username}/{password}")
     Call<List<PickList>> getAllPicklists(@Path("username") String username, @Path("password") String password);
+
+    @GET("/app/takePrimer/{id}/{username}/{password}")
+    Call takePrimer(@Path("id") long id, @Path("usermane") String username, @Path("password") String password);
 }

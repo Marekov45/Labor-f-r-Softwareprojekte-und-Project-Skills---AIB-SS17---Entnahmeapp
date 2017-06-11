@@ -88,6 +88,23 @@ public class ListImpl {
 
     }
 
+    public void takePrimer(long id, String name, String password){
+        Call call = listAPI.takePrimer(id, name, password);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if(response.code()==HttpsURLConnection.HTTP_OK){
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
+
+    }
+
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }
