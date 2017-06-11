@@ -54,6 +54,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(PrimerList.this, Pop.class));
                 Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
             }
         });

@@ -46,6 +46,11 @@
         </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
         </activity>
+    <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
+    android:theme="@style/AppTheme.CustomTheme"
+    >
+    </activity>
+
     </application>
 
 </manifest>
