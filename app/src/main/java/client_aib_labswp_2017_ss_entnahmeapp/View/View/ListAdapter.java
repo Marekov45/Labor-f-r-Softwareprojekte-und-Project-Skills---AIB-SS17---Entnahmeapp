@@ -9,19 +9,22 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
+
+import java.util.List;
 
 /**
  * Created by User on 11.06.2017.
  */
-public class ListAdapter extends ArrayAdapter<String> {
+public class ListAdapter extends ArrayAdapter<PickList> {
     private int vg;
-    String[] items_list;
+    private List<PickList> pickLists;
     Context context;
 
-    public ListAdapter(Context context, int vg, int id, String[] items_list) {
-        super(context, vg, id, items_list);
+    public ListAdapter(Context context, int vg, int id, List<PickList> picklists) {
+        super(context, vg, id, picklists);
         this.context = context;
-        this.items_list = items_list;
+        this.pickLists = picklists;
         this.vg = vg;
     }
 
@@ -34,7 +37,7 @@ public class ListAdapter extends ArrayAdapter<String> {
         public Button manualScan;
     }
 
-    public View getView(final int postition, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
         if (rowView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,7 +52,7 @@ public class ListAdapter extends ArrayAdapter<String> {
             holder.manualScan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), "Button was clicked for item "+postition, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Button was clicked for item "+position, Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -57,12 +60,12 @@ public class ListAdapter extends ArrayAdapter<String> {
 
         }
 
-        String[] items = items_list[postition].split("_");
+        PickList currentPickList = pickLists.get(position);
         ViewHolder holder = (ViewHolder) rowView.getTag();
-        holder.txtModel.setText(items[0]);
-        holder.txtPrice.setText(items[1]);
-        holder.txt2.setText(items[2]);
-        holder.txt3.setText(items[3]);
+        holder.txtModel.setText(currentPickList.getDestination().getLocationName());
+        holder.txtPrice.setText(String.valueOf(currentPickList.getObjectID()));
+        holder.txt2.setText(currentPickList.getEntryDate().toString());
+        holder.txt3.setText("3");
         return rowView;
     }
 }

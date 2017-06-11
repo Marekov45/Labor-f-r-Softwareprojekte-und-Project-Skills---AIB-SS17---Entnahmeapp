@@ -15,18 +15,20 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObs
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import com.google.android.gms.vision.barcode.Barcode;
+
+import java.util.List;
 
 /**
  * Created by Marvin on 30.04.2017.
  */
 public class PrimerList extends AppCompatActivity implements CustomObserver {
 
-    private Spinner spinner;
+
     private TextView txtResult;
     private Button scanButton;
     private Button bListeAnzeigen;
-    private String[] items = {"Entnommen", "Nicht Entnommen"};
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private ListImpl listImpl;
@@ -36,7 +38,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     private RadioButton radioExtra;
     private RadioButton radioAllLists;
 
-
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +46,24 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         setContentView(R.layout.primerlist);
         final User uobj = getIntent().getParcelableExtra("USER");
 
-        ListView listView = (ListView) findViewById(R.id.listv);
+        listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
-        String[] items = getResources().getStringArray(R.array.list_items);
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, items);
-        listView.setAdapter(adapter);
+//        String[] items = getResources().getStringArray(R.array.list_items);
+
+
+
+//        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, items);
+//        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(PrimerList.this, Pop.class));
-                Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
+                if(id!=-1){
+                    startActivity(new Intent(PrimerList.this, Pop.class));
+                    Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -157,9 +165,10 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
     private void receivePrimerList(Object o) {
         System.out.println(o.toString());
-
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-
+        List<PickList> pickLists = (List<PickList>) o;
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, pickLists);
+        listView.setAdapter(adapter);
     }
 
     @Override
