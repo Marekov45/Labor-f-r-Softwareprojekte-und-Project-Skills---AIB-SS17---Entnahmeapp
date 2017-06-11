@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import android.os.Bundle;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
@@ -36,24 +37,41 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     private RadioButton radioAllLists;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.primerlist);
         final User uobj = getIntent().getParcelableExtra("USER");
 
+        ListView listView = (ListView) findViewById(R.id.listv);
+        ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
+        listView.addHeaderView(headerView);
+        String[] items = getResources().getStringArray(R.array.list_items);
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, items);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(PrimerList.this, Pop.class));
+                Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
 
         scanButton = (Button) findViewById(R.id.scan);
         bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
-        txtResult = (TextView) findViewById(R.id.txtResult);
+
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
 
         radioRoboter = (RadioButton) findViewById(R.id.radioRoboter);
         radioManual = (RadioButton) findViewById(R.id.radioManuell);
         radioExtra = (RadioButton) findViewById(R.id.radioExtra);
         radioAllLists = (RadioButton) findViewById(R.id.radioAll);
+
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -74,15 +92,16 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
                 listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
 
+
             }
         });
 
-        spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PrimerList.this,
-                android.R.layout.simple_spinner_item, items);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+//        spinner = (Spinner) findViewById(R.id.spinner);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PrimerList.this,
+//                android.R.layout.simple_spinner_item, items);
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
     }
 
     private String chooseList() {
@@ -121,12 +140,14 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LIST:
-                receivePrimerList();
+                receivePrimerList(o);
                 break;
         }
     }
 
-    private void receivePrimerList() {
+    private void receivePrimerList(Object o) {
+        System.out.println(o.toString());
+
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
     }
