@@ -2,6 +2,7 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Call;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class ListImpl {
 
-    private final String BASE_URL = "http://10.0.2.2:8080/";
+    private final String BASE_URL = "http://192.168.0.103:8080/";
 
 //    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssX").create();
 
@@ -86,6 +87,60 @@ public class ListImpl {
             }
         });
 
+    }
+
+    public void requestAllGatheredPrimers(String name, String password) {
+        Call<List<PrimerTube>> call = listAPI.getAllGatheredPrimers(name,password);
+        call.enqueue(new Callback<List<PrimerTube>>() {
+            @Override
+            public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
+                if(response.code()==HttpsURLConnection.HTTP_OK){
+                    List<PrimerTube> gatheredPrimerListAll =response.body();
+                    System.out.println(gatheredPrimerListAll.size());
+                    cObserver.onResponseSuccess(gatheredPrimerListAll, ResponseCode.COMPLETEGATHEREDLIST);
+                }else {
+                    try {
+                        System.out.println(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+    }
+
+    public void requestGatheredPrimers(String name,String username, String password) {
+        Call<List<PrimerTube>> call = listAPI.getGatheredPrimers(name,username,password);
+        call.enqueue(new Callback<List<PrimerTube>>() {
+            @Override
+            public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
+                if(response.code()==HttpsURLConnection.HTTP_OK){
+                    List<PrimerTube> gatheredPrimerList =response.body();
+                    System.out.println(gatheredPrimerList.size());
+                    cObserver.onResponseSuccess(gatheredPrimerList, ResponseCode.GATHEREDLIST);
+                }else {
+                    try {
+                        System.out.println(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
     }
 
     public void takePrimer(long id, String name, String password){
