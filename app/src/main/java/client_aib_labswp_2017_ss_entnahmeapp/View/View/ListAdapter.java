@@ -23,9 +23,6 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     private List<PickList> pickLists;
     Context context;
 
-    private int listIndex = 0;
-    private int primerTubeIndex = 0;
-
     public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists) {
         super(context, vg, id, primerTubes);
         this.context = context;
@@ -36,10 +33,10 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
 
     //Hold views of the listView to improve its scrolling performance
     static class ViewHolder {
-        public TextView txtModel;
-        public TextView txtPrice;
-        public TextView txt2;
-        public TextView txt3;
+        public TextView txtPos;
+        public TextView txtPrimer;
+        public TextView txtStorageLocation;
+        public TextView txtDestination;
         public Button manualScan;
     }
 
@@ -49,12 +46,12 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(vg, parent, false);
             ViewHolder holder = new ViewHolder();
-            holder.txtModel = (TextView) rowView.findViewById(R.id.txtmodel);
-            holder.txtPrice = (TextView) rowView.findViewById(R.id.txtprice);
-            holder.txt2 = (TextView) rowView.findViewById(R.id.txt2);
-            holder.txt3 = (TextView) rowView.findViewById(R.id.txt3);
+            holder.txtPos = (TextView) rowView.findViewById(R.id.txtPos);
+            holder.txtPrimer = (TextView) rowView.findViewById(R.id.txtPrimer);
+            holder.txtStorageLocation = (TextView) rowView.findViewById(R.id.txtStorageLocation);
+            holder.txtDestination = (TextView) rowView.findViewById(R.id.txtDestination);
 
-            holder.manualScan = (Button) rowView.findViewById(R.id.btn);
+            holder.manualScan = (Button) rowView.findViewById(R.id.btnTakePrimer);
             holder.manualScan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,9 +66,9 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
 
         PrimerTube primerTube = primerTubes.get(position);
         ViewHolder holder = (ViewHolder) rowView.getTag();
-        holder.txtModel.setText(String.valueOf(position));
-        holder.txtPrice.setText(primerTube.getName());
-        holder.txt2.setText(primerTube.getStorageLocation().toString());
+        holder.txtPos.setText(String.valueOf(position));
+        holder.txtPrimer.setText(primerTube.getName());
+        holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
         PickList pickListFinal = null;
         int postitioncounter = position;
@@ -82,16 +79,13 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
                 break;
             }
         }
-
-        holder.txt3.setText(pickListFinal.getDestination().getLocationName());
+        holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
 
 //        primerTubeIndex++;
 //        if(primerTubeIndex>= pickLists.get(listIndex).getPickList().size()){
 //            primerTubeIndex = 0;
 //            listIndex++;
 //        }
-
-
         return rowView;
     }
 }

@@ -35,10 +35,6 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public static final int PERMISSION_REQUEST = 200;
     private ListImpl listImpl;
     private RadioGroup listGroup;
-    private RadioButton radioRoboter;
-    private RadioButton radioManual;
-    private RadioButton radioExtra;
-    private RadioButton radioAllLists;
 
     private ListView listView;
 
@@ -70,13 +66,6 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
 
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
-
-        radioRoboter = (RadioButton) findViewById(R.id.radioRoboter);
-        radioManual = (RadioButton) findViewById(R.id.radioManuell);
-        radioExtra = (RadioButton) findViewById(R.id.radioExtra);
-        radioAllLists = (RadioButton) findViewById(R.id.radioAll);
-
-
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
@@ -161,7 +150,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             tubes.addAll(pickList.getPickList());
         }
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, tubes, pickLists);
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists);
         listView.setAdapter(adapter);
 
     }
