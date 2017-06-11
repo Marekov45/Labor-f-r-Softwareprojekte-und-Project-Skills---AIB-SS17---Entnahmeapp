@@ -58,6 +58,36 @@ public class ListImpl {
             }
         });
     }
+
+
+    public void requestAllLists(String name, String password){
+        Call<List<PickList>> call = listAPI.getAllPicklists(name,password);
+        call.enqueue(new Callback<List<PickList>>() {
+            @Override
+            public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
+                if(response.code()==HttpsURLConnection.HTTP_OK){
+                    List<PickList> primerListAllProc =response.body();
+                    System.out.println(primerListAllProc.size());
+                    cObserver.onResponseSuccess(primerListAllProc, ResponseCode.COMPLETELIST);
+                }else {
+                    try {
+                        System.out.println(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PickList>> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+
+    }
+
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

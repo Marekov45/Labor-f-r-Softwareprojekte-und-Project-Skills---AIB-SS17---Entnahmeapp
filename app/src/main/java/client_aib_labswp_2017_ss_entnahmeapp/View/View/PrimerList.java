@@ -89,19 +89,14 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
 
+                if(chooseList().equals("A")){
+                    listImpl.requestAllLists(uobj.getUsername(), uobj.getPassword());
+                }else{
+                    listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
 
-                listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
-
-
+                }
             }
         });
-
-//        spinner = (Spinner) findViewById(R.id.spinner);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PrimerList.this,
-//                android.R.layout.simple_spinner_item, items);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
     }
 
     private String chooseList() {
@@ -142,7 +137,16 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             case LIST:
                 receivePrimerList(o);
                 break;
+            case COMPLETELIST:
+                receiveAllPrimerList(o);
+                break;
         }
+    }
+
+    private void receiveAllPrimerList(Object o) {
+        System.out.println(o.toString());
+
+        Toast.makeText(this, "SuccessALLPRIMERLOFALLLISTS", Toast.LENGTH_SHORT).show();
     }
 
     private void receivePrimerList(Object o) {

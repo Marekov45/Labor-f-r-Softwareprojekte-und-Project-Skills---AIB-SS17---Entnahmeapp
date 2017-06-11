@@ -14,4 +14,7 @@ public interface ListAPI {
 
     @GET("/app/list/{typeOfProcess}/{username}/{password}")
     Call<List<PickList>> getPicklist(@Path("typeOfProcess") String typeOfProcess , @Path("username") String username, @Path("password") String password);
+
+    @GET("/app/list/{username}/{password}")
+    Call<List<PickList>> getAllPicklists(@Path("username") String username, @Path("password") String password);
 }
