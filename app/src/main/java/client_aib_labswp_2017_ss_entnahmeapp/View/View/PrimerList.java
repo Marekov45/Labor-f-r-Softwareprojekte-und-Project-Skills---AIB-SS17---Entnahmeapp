@@ -51,6 +51,13 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtmodel, items);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
 
@@ -83,6 +90,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
 
                 listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
+
 
             }
         });
@@ -131,12 +139,14 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LIST:
-                receivePrimerList();
+                receivePrimerList(o);
                 break;
         }
     }
 
-    private void receivePrimerList() {
+    private void receivePrimerList(Object o) {
+        System.out.println(o.toString());
+
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
     }

@@ -27,49 +27,12 @@
     <string name="tvPrimername">Primer</string>
     <string name="tvPimerKoordinate">Lagerkoordinate</string>
     <string name="tvDestination">Zielort</string>
-    <string name="tvManualTake">Man. Entn.</string>
+    <string name="btn">Entnommen</string>
 
 
     <string-array name="list_items">
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
-        <item>iPhone_800€</item>
-        <item>iPad_900€</item>
-        <item>iPod_200€</item>
+        <item>iPhone_800€_jkjk_adfs</item>
+        <item>iPhone_800€_jkjk_adfs</item>
     </string-array>
 
 

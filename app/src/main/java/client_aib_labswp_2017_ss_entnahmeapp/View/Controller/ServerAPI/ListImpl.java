@@ -30,7 +30,7 @@ public class ListImpl {
     private ListAPI listAPI = mRetrofit.create(ListAPI.class);
     private CustomObserver cObserver;
 
-    public void requestList (String name, String password, String typeOfProcess){
+    public void requestList (String name, final String password, String typeOfProcess){
 
         Call<List<PickList>> call = listAPI.getPicklist(typeOfProcess, name, password);
         call.enqueue(new Callback<List<PickList>>() {
@@ -38,6 +38,7 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if(response.code()== HttpsURLConnection.HTTP_OK){
                     List<PickList> primerList = response.body();
+                    System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LIST);
 
                 }else{
