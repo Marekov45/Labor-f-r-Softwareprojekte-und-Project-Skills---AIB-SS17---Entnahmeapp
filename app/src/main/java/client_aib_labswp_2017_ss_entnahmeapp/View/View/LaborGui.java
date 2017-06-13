@@ -33,8 +33,10 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setContentView(R.layout.activity_login);
                 listImpl.requestAllGatheredPrimers(uobj.getUsername(),uobj.getPassword());
             }
+
         });
 
 

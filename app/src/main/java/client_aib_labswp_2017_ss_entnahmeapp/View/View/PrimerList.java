@@ -30,6 +30,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
     private TextView txtResult;
     private Button scanButton;
+    private Button logoutButton;
     private Button bListeAnzeigen;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
@@ -47,6 +48,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +92,9 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 }
             }
         });
-    }
+
+
+    };
 
     private String chooseList() {
 

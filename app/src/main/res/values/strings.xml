@@ -10,7 +10,9 @@
     <string name="action_sign_in">Login</string>
     <string name="spinner_prompt">Wähle eine GUI</string>
     <string-array name="gui_array">
-        <item>Labor</item>
+        <item>Bitte Ansicht wählen</item>
+        <item>Labor(Tracking)</item>
+        <item>Labor(zuletzt bearbeitet)</item>
         <item>Lager Entnahme</item>
         <item>Lager Rückgabe</item>
     </string-array>
