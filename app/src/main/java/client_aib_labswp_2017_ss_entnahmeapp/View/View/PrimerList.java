@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Marvin on 30.04.2017.
+ *
  */
 public class PrimerList extends AppCompatActivity implements CustomObserver {
 
