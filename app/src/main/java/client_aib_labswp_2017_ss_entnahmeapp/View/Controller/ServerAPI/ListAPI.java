@@ -20,7 +20,7 @@ public interface ListAPI {
     Call<List<PickList>> getAllPicklists(@Path("username") String username, @Path("password") String password);
 
     @GET("/app/takePrimer/{id}/{username}/{password}")
-    Call takePrimer(@Path("id") long id, @Path("usermane") String username, @Path("password") String password);
+    Call <Void> takePrimer(@Path("id") long id, @Path("username") String username, @Path("password") String password);
 
     @GET("/app/gatheredPrimer/{username}/{password}")
     Call <List<PrimerTube>> getAllGatheredPrimers(@Path("username") String username, @Path("password") String password);

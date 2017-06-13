@@ -3,6 +3,7 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -35,14 +36,14 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public static final int PERMISSION_REQUEST = 200;
     private ListImpl listImpl;
     private RadioGroup listGroup;
-
+    private User uobj;
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.primerlist);
-        final User uobj = getIntent().getParcelableExtra("USER");
+        uobj = getIntent().getParcelableExtra("USER");
 
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
@@ -51,9 +52,9 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(id!=-1){
+                if (id != -1) {
                     startActivity(new Intent(PrimerList.this, Pop.class));
-                    Toast.makeText(PrimerList.this, "List Item was clicked at "+position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrimerList.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -82,9 +83,9 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
 
-                if(chooseList().equals("A")){
+                if (chooseList().equals("A")) {
                     listImpl.requestAllLists(uobj.getUsername(), uobj.getPassword());
-                }else{
+                } else {
                     listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
 
                 }
@@ -98,11 +99,11 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
         switch (selectedID) {
             case R.id.radioRoboter:
-                    return "S";
+                return "S";
             case R.id.radioManuell:
-                    return "M";
+                return "M";
             case R.id.radioExtra:
-                    return "E";
+                return "E";
             case R.id.radioAll:
                 return "A";
         }
@@ -138,6 +139,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     }
 
     private void takePrimer(Object o) {
+        Toast.makeText(this, "Primer has been taken", Toast.LENGTH_SHORT).show();
     }
 
     private void receivePrimerList(Object o) {
@@ -146,11 +148,11 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         List<PickList> pickLists = (List<PickList>) o;
 
         List<PrimerTube> tubes = new ArrayList<>();
-        for(PickList pickList: pickLists){
+        for (PickList pickList : pickLists) {
             tubes.addAll(pickList.getPickList());
         }
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists);
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
 
     }

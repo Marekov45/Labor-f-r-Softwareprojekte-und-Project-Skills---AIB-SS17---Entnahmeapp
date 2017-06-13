@@ -31,18 +31,18 @@ public class ListImpl {
     private ListAPI listAPI = mRetrofit.create(ListAPI.class);
     private CustomObserver cObserver;
 
-    public void requestList (String name, final String password, String typeOfProcess){
+    public void requestList(String name, final String password, String typeOfProcess) {
 
         Call<List<PickList>> call = listAPI.getPicklist(typeOfProcess, name, password);
         call.enqueue(new Callback<List<PickList>>() {
             @Override
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
-                if(response.code()== HttpsURLConnection.HTTP_OK){
+                if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
                     System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LIST);
 
-                }else{
+                } else {
                     try {
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
@@ -61,16 +61,16 @@ public class ListImpl {
     }
 
 
-    public void requestAllLists(String name, String password){
-        Call<List<PickList>> call = listAPI.getAllPicklists(name,password);
+    public void requestAllLists(String name, String password) {
+        Call<List<PickList>> call = listAPI.getAllPicklists(name, password);
         call.enqueue(new Callback<List<PickList>>() {
             @Override
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
-                if(response.code()==HttpsURLConnection.HTTP_OK){
-                    List<PickList> primerListAllProc =response.body();
+                if (response.isSuccessful()) {
+                    List<PickList> primerListAllProc = response.body();
                     System.out.println(primerListAllProc.size());
                     cObserver.onResponseSuccess(primerListAllProc, ResponseCode.COMPLETELIST);
-                }else {
+                } else {
                     try {
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
@@ -90,15 +90,15 @@ public class ListImpl {
     }
 
     public void requestAllGatheredPrimers(String name, String password) {
-        Call<List<PrimerTube>> call = listAPI.getAllGatheredPrimers(name,password);
+        Call<List<PrimerTube>> call = listAPI.getAllGatheredPrimers(name, password);
         call.enqueue(new Callback<List<PrimerTube>>() {
             @Override
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
-                if(response.code()==HttpsURLConnection.HTTP_OK){
-                    List<PrimerTube> gatheredPrimerListAll =response.body();
+                if (response.isSuccessful()) {
+                    List<PrimerTube> gatheredPrimerListAll = response.body();
                     System.out.println(gatheredPrimerListAll.size());
                     cObserver.onResponseSuccess(gatheredPrimerListAll, ResponseCode.COMPLETEGATHEREDLIST);
-                }else {
+                } else {
                     try {
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
@@ -116,16 +116,16 @@ public class ListImpl {
         });
     }
 
-    public void requestGatheredPrimers(String name,String username, String password) {
-        Call<List<PrimerTube>> call = listAPI.getGatheredPrimers(name,username,password);
+    public void requestGatheredPrimers(String name, String username, String password) {
+        Call<List<PrimerTube>> call = listAPI.getGatheredPrimers(name, username, password);
         call.enqueue(new Callback<List<PrimerTube>>() {
             @Override
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
-                if(response.code()==HttpsURLConnection.HTTP_OK){
-                    List<PrimerTube> gatheredPrimerList =response.body();
+                if (response.isSuccessful()) {
+                    List<PrimerTube> gatheredPrimerList = response.body();
                     System.out.println(gatheredPrimerList.size());
                     cObserver.onResponseSuccess(gatheredPrimerList, ResponseCode.GATHEREDLIST);
-                }else {
+                } else {
                     try {
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
@@ -143,21 +143,32 @@ public class ListImpl {
         });
     }
 
-    public void takePrimer(long id, String name, String password){
-        Call call = listAPI.takePrimer(id, name, password);
-        call.enqueue(new Callback() {
+    public void takePrimer(long id, String name, String password) {
+        Call<Void> call = listAPI.takePrimer(id, name, password);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                if(response.code()==HttpsURLConnection.HTTP_OK){
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    cObserver.onResponseSuccess(null, ResponseCode.TAKEPRIMER);
+                } else {
+                    try {
+                        System.out.println(response.code());
+                        System.out.println(response.errorBody().string());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
                 }
             }
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
             }
         });
-
     }
 
     public void setCObserver(CustomObserver customObserver) {
