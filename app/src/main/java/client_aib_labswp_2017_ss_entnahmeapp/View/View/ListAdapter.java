@@ -15,6 +15,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,7 +29,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     Context context;
     ListImpl listImpl;
     User user;
-    View rowView;
+//    View rowView;
 
     public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl) {
         super(context, vg, id, primerTubes);
@@ -35,8 +37,8 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         this.primerTubes = primerTubes;
         this.pickLists = pickLists;
         this.vg = vg;
-        this.user=user;
-        this.listImpl= listImpl;
+        this.user = user;
+        this.listImpl = listImpl;
     }
 
     //Hold views of the listView to improve its scrolling performance
@@ -49,40 +51,49 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     }
 
     public View getView(final int position, final View convertView, ViewGroup parent) {
-        rowView = convertView;
-        if (rowView == null) {
+        View view = convertView;
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(vg, parent, false);
-            final ViewHolder holder = new ViewHolder();
-            holder.txtPos = (TextView) rowView.findViewById(R.id.txtPos);
-            holder.txtPrimer = (TextView) rowView.findViewById(R.id.txtPrimer);
-            holder.txtStorageLocation = (TextView) rowView.findViewById(R.id.txtStorageLocation);
-            holder.txtDestination = (TextView) rowView.findViewById(R.id.txtDestination);
-            rowView.setTag(holder);
+            view = inflater.inflate(vg, parent, false);
+            ViewHolder viewholder = new ViewHolder();
+            viewholder.txtPos = (TextView) view.findViewById(R.id.txtPos);
+            viewholder.txtPrimer = (TextView) view.findViewById(R.id.txtPrimer);
+            viewholder.txtStorageLocation = (TextView) view.findViewById(R.id.txtStorageLocation);
+            viewholder.txtDestination = (TextView) view.findViewById(R.id.txtDestination);
+            view.setTag(viewholder);
+
         }
 
-        PrimerTube primerTube = primerTubes.get(position);
-        ViewHolder holder = (ViewHolder) rowView.getTag();
+//        System.out.println(position);
+
+        final PrimerTube primerTube = primerTubes.get(position);
+        final ViewHolder holder = (ViewHolder) view.getTag();
         holder.txtPos.setText(String.valueOf(position));
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
-        holder.manualScan = (Button) rowView.findViewById(R.id.btnTakePrimer);
+        holder.manualScan = (Button) view.findViewById(R.id.btnTakePrimer);
+
         holder.manualScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println(position);
-//                    listImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
-//                    rowView.setBackgroundColor(Color.RED);
-//                    holder.manualScan.setEnabled(false);
+                listImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
+//                remove(getItem(position));
+//
+//                notifyDataSetChanged();
             }
         });
 
+        if(primerTube.isTaken()){
+            holder.manualScan.setEnabled(false);
+        }
+
         PickList pickListFinal = null;
         int postitioncounter = position;
-        for(PickList pickList:pickLists){
-            postitioncounter = postitioncounter-pickList.getPickList().size();
-            if(postitioncounter<0){
+        for (PickList pickList : pickLists) {
+            postitioncounter = postitioncounter - pickList.getPickList().size();
+            if (postitioncounter < 0) {
                 pickListFinal = pickList;
                 break;
             }
@@ -94,6 +105,8 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
 //            primerTubeIndex = 0;
 //            listIndex++;
 //        }
-        return rowView;
+
+        return view;
     }
+
 }

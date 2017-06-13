@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by SimonHauck-GamingPC on 23.04.2017.
  */
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PrimerTube {
 
 //    private LocalDateTime takeOutDate;
@@ -27,6 +27,8 @@ public class PrimerTube {
     private String manufacturer;
     private long objectID;
 
+    private boolean taken;
+
     public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer) {
         this.objectID=objectID;
         this.primerTubeID = primerTubeID;
@@ -36,9 +38,11 @@ public class PrimerTube {
         this.storageLocation = storageLocation;
         this.returnToStorage = returnToStorage;
         this.manufacturer = manufacturer;
+        taken = false;
     }
 
     public PrimerTube() {
+        taken = false;
     }
 
     public String getPrimerTubeID() {
@@ -119,5 +123,13 @@ public class PrimerTube {
 
     public void setPutBackDate(DemoResponse putBackDate) {
         this.putBackDate = putBackDate;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 }
