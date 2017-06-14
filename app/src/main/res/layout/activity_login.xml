@@ -2,7 +2,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/blue"
+              android:background="#ffffff"
 
               android:gravity="center_horizontal"
               android:orientation="vertical"
@@ -13,12 +13,20 @@
               tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity" android:weightSum="1">
 
     <!-- Login progress -->
+
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="135dp" app:srcCompat="@drawable/cegat_logo" android:id="@+id/imageView2"
+            android:layout_height="135dp" app:srcCompat="@drawable/cegat" android:id="@+id/imageView2"
             android:layout_marginTop="25dp" android:adjustViewBounds="false" android:cropToPadding="false"
-            android:scaleType="fitStart" android:layout_marginBottom="25dp"/>
-
+            android:scaleType="fitStart" android:layout_marginBottom="25dp" android:foregroundGravity="left"
+            android:layout_gravity="left" android:layout_margin="50dp"/>
+    <TextView
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView3" android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textColor="@color/cast_intro_overlay_background_color" android:textSize="30sp"
+            android:layout_margin="0dp" android:layout_marginBottom="100dp" android:layout_marginTop="40dp"/>
     <LinearLayout
             android:id="@+id/login_form"
             android:layout_width="299dp"
@@ -34,7 +42,7 @@
             <EditText
                     android:id="@+id/name"
                     android:layout_height="40dp"
-                    android:hint="@string/prompt_email"
+                    android:hint="@string/prompt_email" android:textColor="@color/blue"
                     android:background="@drawable/edittext_bg"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -49,7 +57,7 @@
 
             <EditText
                     android:id="@+id/password"
-                    android:hint="@string/prompt_password"
+                    android:hint="@string/prompt_password" android:textColor="@color/blue"
                     android:background="@drawable/edittext_bg"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
@@ -66,7 +74,7 @@
                 android:entries="@array/gui_array"
                 android:prompt="@string/spinner_prompt"
                 android:popupBackground="@color/wallet_bright_foreground_holo_dark"
-                android:backgroundTint="@color/cast_libraries_material_featurehighlight_text_header_color"
+                android:backgroundTint="@color/colorAccent"
                 android:background="@color/wallet_dim_foreground_disabled_holo_dark"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/spinner_prompt"
@@ -78,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/auswahlWarnung"
                 android:color="@color/cast_expanded_controller_ad_container_white_stripe_color"
-                android:visibility="invisible" android:textColor="@color/cast_libraries_material_featurehighlight_text_body_color"
+                android:visibility="invisible" android:textColor="@color/colorPrimaryDark"
                 android:textAlignment="center" android:textSize="18sp" android:textStyle="normal|bold|italic"/>
         <Button
                 android:id="@+id/sign_in_button"
