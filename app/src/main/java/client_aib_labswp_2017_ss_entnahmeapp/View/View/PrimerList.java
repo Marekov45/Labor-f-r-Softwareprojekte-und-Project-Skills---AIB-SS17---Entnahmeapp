@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,6 +32,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
 
     private TextView txtResult;
     private Button scanButton;
+    private Button logoutButton;
     private Button bListeAnzeigen;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
@@ -48,6 +50,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,6 +70,13 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
 
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
+        logoutButton = (Button) findViewById(R.id.btnLogout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(PrimerList.this);
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
@@ -78,6 +88,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
 
         bListeAnzeigen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +102,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 }
             }
         });
-    }
+    };
 
     private String chooseList() {
 

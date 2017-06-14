@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,8 +34,8 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listImpl.requestAllGatheredPrimers(uobj.getUsername(),uobj.getPassword());
-            }
+                NavUtils.navigateUpFromSameTask(LaborGui.this);            }
+
         });
 
 

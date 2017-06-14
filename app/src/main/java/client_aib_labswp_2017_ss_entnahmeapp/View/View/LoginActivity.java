@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     // UI references.
     private EditText mNameView;
     private EditText mPasswordView;
+    private TextView textWarnung;
     private View mLoginFormView;
     private Spinner spinnerGui;
     private Button mSignInButton;
@@ -46,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mLoginFormView = findViewById(R.id.login_form);
 
+        textWarnung = (TextView) findViewById(R.id.auswahlWarnung);
+
         addListenerToButton();
     }
 
@@ -64,20 +67,29 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
 
         switch (spinnerGui.getSelectedItemPosition()) {
             case 0:
+                textWarnung.setVisibility(View.VISIBLE);
+                break;
+            case 1:
                 Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
                 intentLabor.putExtra("USER",user);
                 startActivity(intentLabor);
                 break;
-            case 1:
+            case 2 :
+                Intent intentLetzte = new Intent(LoginActivity.this, LastProcessedListActivity.class);
+                intentLetzte.putExtra("USER",user);
+                startActivity(intentLetzte);
+                break;
+            case 3:
                 Intent intentEntnahme = new Intent(LoginActivity.this, PrimerList.class);
                 intentEntnahme.putExtra("USER",user);
                 startActivity(intentEntnahme);
                 break;
-            case 2:
+            case 4:
                 Intent intentRueck = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
                 intentRueck.putExtra("USER",user);
                 startActivity(intentRueck);
                 break;
+
         }
     }
 
