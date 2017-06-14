@@ -16,6 +16,7 @@
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PrimerList"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_login"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -38,19 +39,25 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
-                  android:configChanges="orientation"
-                  android:label="@string/title_activity_labor"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
+                android:configChanges="orientation"
+                android:label="@string/title_activity_labor"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
+        <activity
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity">
         </activity>
-    <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
-    android:theme="@style/AppTheme.CustomTheme"
-    >
-    </activity>
-
+        <activity
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
+                android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
+                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity">
+        </activity>
     </application>
 
 </manifest>

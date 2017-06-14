@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -68,6 +69,13 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
 
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
+        logoutButton = (Button) findViewById(R.id.btnLogout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(PrimerList.this);
+            }
+        });
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
@@ -79,6 +87,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
 
         bListeAnzeigen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +101,6 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 }
             }
         });
-
-
     };
 
     private String chooseList() {

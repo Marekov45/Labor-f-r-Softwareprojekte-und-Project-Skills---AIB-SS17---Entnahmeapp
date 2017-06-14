@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 startActivity(intentLabor);
                 break;
             case 2 :
-                Intent intentLetzte = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
+                Intent intentLetzte = new Intent(LoginActivity.this, LastProcessedListActivity.class);
                 intentLetzte.putExtra("USER",user);
                 startActivity(intentLetzte);
                 break;
