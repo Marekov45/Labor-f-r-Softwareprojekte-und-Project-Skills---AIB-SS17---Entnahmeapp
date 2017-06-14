@@ -3,15 +3,12 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.util.List;
 
@@ -172,7 +169,7 @@ public class ListImpl {
     }
 
     public void requestLastSangerList(String name, String password){
-        Call<List<PickList>> call= listAPI.getLastProcessedSangerm(name, password);
+        Call<List<PickList>> call= listAPI.getLastProcessedSanger(name, password);
         call.enqueue(new Callback<List<PickList>>() {
             @Override
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {

@@ -33,5 +33,8 @@
     <string name="btnLogout">Logout</string>
     <string name="tvPrimerEntnahme">Primer-Entnahme</string>
     <string name="tvLastProcessedList">Aktuelle Roboter-Liste</string>
+    <string name="btnShowList">Liste anzeigen</string>
+
+
 
 </resources>

@@ -3,7 +3,6 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
@@ -154,7 +153,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     }
 
     private void receivePrimerList(Object o) {
-        System.out.println(o.toString());
+//        System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
 
@@ -163,7 +162,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
             tubes.addAll(pickList.getPickList());
         }
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
 
     }
