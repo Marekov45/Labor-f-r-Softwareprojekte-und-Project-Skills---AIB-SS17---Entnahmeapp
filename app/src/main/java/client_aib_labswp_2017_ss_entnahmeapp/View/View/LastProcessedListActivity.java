@@ -22,8 +22,8 @@ import java.util.List;
 
 public class LastProcessedListActivity extends AppCompatActivity implements CustomObserver {
 
-    private Button logoutButton;
-    private Button showList;
+    private Button logoutButtonLastSanger;
+    private Button showListLastSanger;
     private User uobj;
     private ListView listView;
     private ListImpl listImpl;
@@ -44,22 +44,20 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         listView.addHeaderView(headerView);
 
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
-        logoutButton = (Button) findViewById(R.id.btnLogout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutButtonLastSanger = (Button) findViewById(R.id.btnLogoutLastSanger);
+        logoutButtonLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavUtils.navigateUpFromSameTask(LastProcessedListActivity.this);
             }
         });
-        showList = (Button) findViewById(R.id.btnShowList);
-
-        showList.setOnClickListener(new View.OnClickListener() {
+        showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
+        showListLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                listImpl.requestLastSangerList(uobj.getUsername(), uobj.getPassword());
+                listImpl.requestLastSangerList(uobj.getUsername(), uobj.getPassword());
             }
         });
-
     }
 
     @Override
@@ -80,7 +78,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             tubes.addAll(pickList.getPickList());
         }
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        ListAdapterLastSanger adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
     }
 
