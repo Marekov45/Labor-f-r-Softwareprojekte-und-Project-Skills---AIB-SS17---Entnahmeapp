@@ -10,7 +10,8 @@ public enum ResponseCode {
     COMPLETELIST,
     COMPLETEGATHEREDLIST,
     GATHEREDLIST,
-    TAKEPRIMER;
+    TAKEPRIMER,
+    LASTSANGER;
 
 
     private ResponseCode(){}

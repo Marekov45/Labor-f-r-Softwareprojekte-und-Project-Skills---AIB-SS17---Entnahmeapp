@@ -171,6 +171,33 @@ public class ListImpl {
         });
     }
 
+    public void requestLastSangerList(String name, String password){
+        Call<List<PickList>> call= listAPI.getLastProcessedSangerm(name, password);
+        call.enqueue(new Callback<List<PickList>>() {
+            @Override
+            public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
+                if(response.isSuccessful()){
+                    List<PickList> primerList = response.body();
+                    System.out.println(primerList.size());
+                    cObserver.onResponseSuccess(primerList, ResponseCode.LASTSANGER);
+                }else{
+                    try {
+                        System.out.println(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PickList>> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+    }
+
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

@@ -27,4 +27,7 @@ public interface ListAPI {
 
     @GET("/app/search/gatheredPrimer/{name}/{username}/{password}")
     Call <List<PrimerTube>> getGatheredPrimers(@Path("name") String name, @Path("username") String username, @Path("password") String password);
+
+    @GET("/app/sanger/{username}/{password}")
+    Call<List<PickList>> getLastProcessedSangerm(@Path("username") String username, @Path("password") String password);
 }
