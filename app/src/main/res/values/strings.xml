@@ -31,5 +31,7 @@
     <string name="tvDestination">Zielort</string>
     <string name="btnTakeOut">Entnehmen</string>
     <string name="btnLogout">Logout</string>
+    <string name="tvPrimerEntnahme">Primer-Entnahme</string>
+    <string name="tvLastProcessedList">Aktuelle Roboter-Liste</string>
 
 </resources>

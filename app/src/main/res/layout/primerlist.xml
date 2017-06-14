@@ -24,10 +24,10 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true" android:layout_width="210dp" android:layout_height="130dp" android:layout_marginLeft="10dp"/>
             <TextView
-                    android:text="Primer-Entnahme"
+                    android:text="@string/tvPrimerEntnahme"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/textView2" android:textSize="44sp"
+                    android:id="@+id/tvLastProcessedList" android:textSize="44sp"
                     android:textColor="@color/cast_expanded_controller_background_color"
                     android:layout_alignBottom="@+id/imageView" android:layout_centerHorizontal="true"
                     android:textAlignment="center" android:gravity="center"
