@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_labor_gui"
+        android:id="@+id/activity_lager_rueckgabe_gui"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -13,23 +13,46 @@
         tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui">
 
 
-    <SearchView
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/search"
-            android:layout_below="@+id/imageView" android:layout_alignParentStart="true"
-            android:layout_marginTop="21dp" android:layout_alignEnd="@+id/tvLastProcessedList"/>
+    <TextView
+            android:text="Primer-Rückgabe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" android:textSize="30sp"
+            android:textColor="@color/cast_expanded_controller_background_color"
+            android:layout_alignBottom="@+id/imageView" android:layout_centerHorizontal="true"
+    />
+    <Button
+            android:text="Entnommene Primer "
+            android:layout_height="wrap_content" android:id="@+id/entnommene_anzeigen"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentLeft="true" android:layout_marginTop="30dp"
+            android:layout_gravity="fill_vertical" android:textSize="14sp"
+            android:background="@color/wallet_bright_foreground_holo_dark" android:layout_width="wrap_content"
+            style="@android:style/Widget.DeviceDefault.Button.Small" android:layout_alignStart="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"/>
+    <Button
+            android:text="Scan"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan"
+            android:textColor="@color/cast_expanded_controller_background_color" android:layout_alignTop="@+id/search"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView2" android:layout_marginTop="30dp" android:textSize="24sp"
+            android:layout_width="150dp"
+            android:layout_toRightOf="@+id/textView2"/>
     <TableLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="49dp"
-            android:layout_height="wrap_content" android:layout_below="@+id/search"
-            android:layout_alignParentStart="true" android:background="?attr/colorControlHighlight">
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" android:background="?attr/colorControlHighlight"
+            android:gravity="bottom|center_vertical" android:layout_toEndOf="@+id/imageView"
+            android:layout_alignBottom="@+id/logout"
+            android:layout_below="@+id/scan" android:layout_marginTop="10dp">
 
-        <TableRow>
+        <TableRow android:gravity="top" android:layout_gravity="top">
             <TextView android:text="Primer"
                       android:layout_column="1"
                       android:layout_weight="1"
                       android:textStyle="bold" android:textSize="24sp" android:layout_width="match_parent"
-                      android:layout_height="match_parent" android:gravity="center"
+                      android:layout_height="match_parent" android:gravity="top|center"
                       android:textColor="@color/cast_expanded_controller_background_color"/>
             <TextView android:text="PrimerTubeID"
                       android:layout_column="1"
@@ -45,7 +68,7 @@
                       android:textColor="@color/cast_expanded_controller_background_color">
             </TextView>
             <TextView
-                    android:text="Standort/Roboter"
+                    android:text="Lagerkoordinate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:textStyle="bold"
                     android:textSize="24sp" android:layout_weight="1" android:gravity="center"
@@ -53,40 +76,35 @@
             <TextView
                     android:text="Bemerkung"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal"
+                    android:textStyle="normal|bold" android:textSize="24sp"
+                    android:textColor="@color/cast_expanded_controller_background_color"/>
         </TableRow>
 
-        <ScrollView android:layout_height="531dp" android:layout_width="match_parent">
+        <ScrollView android:layout_height="531dp" android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal">
             <TableLayout android:id="@+id/primer_table"
                          android:layout_width="fill_parent"
-                         android:layout_height="fill_parent">
+                         android:layout_height="fill_parent" android:layout_gravity="center_vertical">
             </TableLayout>
         </ScrollView>
     </TableLayout>
     <Button
-            android:text="Scan"
+            android:text="Logout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_alignBottom="@+id/search"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="19dp" android:id="@+id/button3"
-            android:textColor="@color/cast_expanded_controller_background_color"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp" android:id="@+id/logout"
+            android:textColor="@color/cast_expanded_controller_background_color"
+            android:layout_marginStart="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+
     <ImageView
             android:adjustViewBounds="true"
             android:scaleType="centerCrop" app:srcCompat="@drawable/cegat3"
             android:id="@+id/imageView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" android:layout_width="150dp" android:layout_height="120dp"/>
-    <TextView
-            android:text="Primer-Rückgabe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvLastProcessedList" android:textSize="44sp"
-            android:textColor="@color/cast_expanded_controller_background_color"
-            android:layout_alignBottom="@+id/imageView" android:layout_centerHorizontal="true"/>
-    <Button
-            android:text="Logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/button3" android:layout_marginBottom="36dp" android:id="@+id/logout"
-            android:textColor="@color/cast_expanded_controller_background_color"/>
+            android:layout_width="150dp" android:layout_height="120dp" android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" android:layout_marginTop="16dp"
+            android:layout_gravity="left" android:layout_margin="20dp"/>
 
 </RelativeLayout>
