@@ -45,6 +45,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         setContentView(R.layout.primerlist);
         final User uobj = getIntent().getParcelableExtra("USER");
 
+
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
@@ -92,7 +93,6 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
                 }
             }
         });
-
 
     };
 

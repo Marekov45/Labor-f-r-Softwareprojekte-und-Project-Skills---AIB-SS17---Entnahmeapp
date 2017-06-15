@@ -34,7 +34,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.activity_login);
-                listImpl.requestAllGatheredPrimers(uobj.getUsername(),uobj.getPassword());
+                Toast.makeText(LaborGui.this, "Erfolgreich ausgeloggt", Toast.LENGTH_SHORT).show();
             }
 
         });
