@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by SimonHauck-GamingPC on 23.04.2017.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PrimerTube {
+public class PrimerTube{
 
 //    private LocalDateTime takeOutDate;
 //    private LocalDateTime putBackDate;
@@ -132,4 +132,6 @@ public class PrimerTube {
     public void setTaken(boolean taken) {
         this.taken = taken;
     }
+
+
 }

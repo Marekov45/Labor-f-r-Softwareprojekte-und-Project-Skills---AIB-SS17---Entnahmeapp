@@ -8,4 +8,12 @@
             android:text="Popup window"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/textView"/>
+    <TextView
+            android:text="Primername"
+            android:layout_width="386dp"
+            android:layout_height="wrap_content" android:id="@+id/textView4" android:textSize="24sp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView5" android:textSize="24sp"/>
 </LinearLayout>
