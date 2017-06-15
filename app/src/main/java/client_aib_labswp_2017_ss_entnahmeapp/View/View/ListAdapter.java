@@ -1,14 +1,12 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
@@ -16,7 +14,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,6 +27,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     Context context;
     ListImpl listImpl;
     User user;
+    static final int MAXPOSITIONINCARRIER=32;
 //    View rowView;
 
     public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl) {
@@ -68,7 +67,10 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
 
         final PrimerTube primerTube = primerTubes.get(position);
         final ViewHolder holder = (ViewHolder) view.getTag();
-        holder.txtPos.setText(String.valueOf(position));
+
+
+        holder.txtPos.setText(String.valueOf((position%32)+1));
+
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
@@ -99,6 +101,8 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             }
         }
         holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
+
+
 
 //        primerTubeIndex++;
 //        if(primerTubeIndex>= pickLists.get(listIndex).getPickList().size()){

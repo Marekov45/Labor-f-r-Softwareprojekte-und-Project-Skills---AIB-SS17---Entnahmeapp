@@ -60,7 +60,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         final PrimerTube primerTube = primerTubes.get(position);
         final ListAdapterLastSanger.ViewHolder holder = (ListAdapterLastSanger.ViewHolder) view.getTag();
 
-        holder.txtPos.setText(String.valueOf(position));
+        holder.txtPos.setText(String.valueOf((position%32)+1));
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
