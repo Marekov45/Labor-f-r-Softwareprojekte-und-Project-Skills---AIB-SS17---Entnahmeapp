@@ -18,7 +18,7 @@ public class Pop extends AppCompatActivity{
     private TextView primerName;
     private TextView shownName;
     private TubesArray tubesArray;
-    private long position;
+    private int position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,13 +26,13 @@ public class Pop extends AppCompatActivity{
         setContentView(R.layout.popupwindow);
 
 //        tubesArray = getIntent().getParcelableExtra("TUBES");
-        position = getIntent().getParcelableExtra("POSITION");
+//        position = getIntent().getParcelableExtra("POSITION");
 
 
         primerName=(TextView) findViewById(R.id.textView4);
         shownName=(TextView) findViewById(R.id.textView5);
 //        shownName.setText(tubesArray.getPrimertubes().get(position).getName());
-System.out.println(position);
+//          System.out.println(position);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

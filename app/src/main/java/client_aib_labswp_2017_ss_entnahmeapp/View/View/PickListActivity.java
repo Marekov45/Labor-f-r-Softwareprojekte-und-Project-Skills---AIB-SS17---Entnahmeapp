@@ -173,7 +173,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
                     Intent intentPopUp = new Intent(PickListActivity.this, Pop.class);
 //                    intentPopUp.putExtra("TUBES", tubesArray);
-                    intentPopUp.putExtra("POSITION",position-1);
+//                    intentPopUp.putExtra("POSITION",position);
                     startActivity(intentPopUp);
 
                     Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();

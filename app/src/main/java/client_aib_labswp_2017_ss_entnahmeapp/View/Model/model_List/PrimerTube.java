@@ -27,9 +27,10 @@ public class PrimerTube{
     private String manufacturer;
     private long objectID;
 
+    private String currentLocation;
     private boolean taken;
 
-    public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer) {
+    public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer, String currentLocation) {
         this.objectID=objectID;
         this.primerTubeID = primerTubeID;
         this.primerUID = primerUID;
@@ -38,7 +39,16 @@ public class PrimerTube{
         this.storageLocation = storageLocation;
         this.returnToStorage = returnToStorage;
         this.manufacturer = manufacturer;
+        this.currentLocation = currentLocation;
         taken = false;
+    }
+
+    public String getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
     public PrimerTube() {
