@@ -140,33 +140,7 @@ public class ListImpl {
         });
     }
 
-    public void takePrimer(long id, String name, String password) {
-        Call<Void> call = listAPI.takePrimer(id, name, password);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    cObserver.onResponseSuccess(null, ResponseCode.TAKEPRIMER);
-                } else {
-                    try {
-                        System.out.println(response.code());
-                        System.out.println(response.errorBody().string());
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    cObserver.onResponseError();
-                }
-            }
-
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                t.printStackTrace();
-                cObserver.onResponseFailure();
-            }
-        });
-    }
 
     public void requestLastSangerList(String name, String password){
         Call<List<PickList>> call= listAPI.getLastProcessedSanger(name, password);

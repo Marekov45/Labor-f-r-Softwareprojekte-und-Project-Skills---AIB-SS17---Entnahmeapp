@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -26,11 +27,12 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     private List<PickList> pickLists;
     Context context;
     ListImpl listImpl;
+    PrimerImpl primerImpl;
     User user;
     static final int MAXPOSITIONINCARRIER=32;
 //    View rowView;
 
-    public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl) {
+    public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, primerTubes);
         this.context = context;
         this.primerTubes = primerTubes;
@@ -38,6 +40,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         this.vg = vg;
         this.user = user;
         this.listImpl = listImpl;
+        this.primerImpl = primerImpl;
     }
 
     //Hold views of the listView to improve its scrolling performance
@@ -80,7 +83,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             @Override
             public void onClick(View v) {
                 System.out.println(position);
-                listImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
+                primerImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
 //                remove(getItem(position));
 //
 //                notifyDataSetChanged();

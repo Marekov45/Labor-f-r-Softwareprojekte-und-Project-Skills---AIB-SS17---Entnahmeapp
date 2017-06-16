@@ -15,6 +15,7 @@ import android.os.Bundle;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
@@ -37,6 +38,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private ListImpl listImpl;
+    private PrimerImpl primerImpl;
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
@@ -53,6 +55,8 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
+        primerImpl = new PrimerImpl();
+        primerImpl.setCObserver(this);
 
         scanButton = (Button) findViewById(R.id.scan);
         bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
@@ -168,7 +172,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
             }
         });
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl, primerImpl);
         listView.setAdapter(adapter);
 
     }

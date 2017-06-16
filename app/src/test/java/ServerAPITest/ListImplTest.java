@@ -1,6 +1,7 @@
 package ServerAPITest;
 
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,11 +16,13 @@ import static org.junit.Assert.*;
 public class ListImplTest {
 
     private ListImpl listImpl;
+    private PrimerImpl primerImpl;
 
     @Before
     public void setUp() throws Exception {
 
         listImpl = new ListImpl();
+        primerImpl = new PrimerImpl();
     }
 
     @After
@@ -99,7 +102,7 @@ public class ListImplTest {
         //-----------------------------------------------------------------
         //with gathered Primer
         try {
-            listImpl.takePrimer(0,"mustermann","1234");
+            primerImpl.takePrimer(0,"mustermann","1234");
             listImpl.requestAllGatheredPrimers("mustermann", "1234");
         }catch (AssertionError e){
             assertFalse(false);
@@ -112,7 +115,7 @@ public class ListImplTest {
     @Test
     public void requestGatheredPrimers() throws Exception {
         try {
-            listImpl.takePrimer(0,"mustermann","1234");
+            primerImpl.takePrimer(0,"mustermann","1234");
             listImpl.requestGatheredPrimers("0","mustermann", "1234");
         }catch (AssertionError e){
             assertFalse(false);
@@ -125,7 +128,7 @@ public class ListImplTest {
     public void takePrimer() throws Exception {
 
         try {
-            listImpl.takePrimer(0,"mustermann","1234");
+            primerImpl.takePrimer(0,"mustermann","1234");
         }catch (AssertionError e){
             assertFalse(false);
         }catch (Exception e){
