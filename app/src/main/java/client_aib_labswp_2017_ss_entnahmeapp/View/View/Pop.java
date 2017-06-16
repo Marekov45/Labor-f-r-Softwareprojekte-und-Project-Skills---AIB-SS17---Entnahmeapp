@@ -65,8 +65,6 @@ public class Pop extends AppCompatActivity{
         tube = getIntent().getParcelableExtra("TUBE");
         positionGiven = getIntent().getIntExtra("POSITION", 0);
         int position = positionGiven -1;
-        System.out.println(position);
-
 
 
         shownName.setText(tube.getName());
