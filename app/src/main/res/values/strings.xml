@@ -36,5 +36,13 @@
     <string name="btnShowList">Liste anzeigen</string>
     <string name="btnLogoutLastSanger">Logout</string>
     <string name="btnShowListLastSanger">Liste anzeigen</string>
+    <string name="tvdetails">Primer Details</string>
+    <string name="tvPrimerName">Primername:</string>
+    <string name="tvPrimerTubeID">Primertube-ID:</string>
+    <string name="tvLOT">LOT:</string>
+    <string name="tvManufacturer">Hersteller:</string>
+    <string name="tvNote">Bemerkung:</string>
+    <string name="btnSubmit">Bestätigen</string>
+
 
 </resources>
