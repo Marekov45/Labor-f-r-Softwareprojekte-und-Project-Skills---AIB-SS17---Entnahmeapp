@@ -51,18 +51,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
 
-
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (id != -1) {
-//                    startActivity(new Intent(PickListActivity.this, Pop.class));
-//                    Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
-
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
 
@@ -171,6 +159,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                     Intent intentPopUp = new Intent(PickListActivity.this, Pop.class);
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
                     intentPopUp.putExtra("POSITION",position);
+                    intentPopUp.putExtra("USER",uobj);
                     startActivity(intentPopUp);
 
                     Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();

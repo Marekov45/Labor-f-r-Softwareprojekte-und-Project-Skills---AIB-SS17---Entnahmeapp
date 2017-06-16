@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.TextView;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import org.w3c.dom.Text;
 
@@ -29,7 +30,7 @@ public class Pop extends AppCompatActivity{
 
     private Button submit;
 
-
+    private User uobj;
     private int positionGiven;
     private PrimerTube tube;
 
@@ -60,6 +61,7 @@ public class Pop extends AppCompatActivity{
         shownNote=(TextView) findViewById(R.id.tvNoteActTube);
         submit=(Button) findViewById(R.id.btnSubmit);
 
+        uobj = getIntent().getParcelableExtra("USER");
         tube = getIntent().getParcelableExtra("TUBE");
         positionGiven = getIntent().getIntExtra("POSITION", 0);
         int position = positionGiven -1;
