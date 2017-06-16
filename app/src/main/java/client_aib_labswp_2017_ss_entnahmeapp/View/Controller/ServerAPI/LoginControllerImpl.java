@@ -1,6 +1,5 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginAPI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import retrofit2.Call;
 import retrofit2.Callback;
