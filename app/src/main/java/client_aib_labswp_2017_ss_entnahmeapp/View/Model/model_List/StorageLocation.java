@@ -1,10 +1,13 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by SimonHauckLaptop on 27.04.2017.
  */
-public class StorageLocation {
+public class StorageLocation implements Parcelable{
 
     private int tower;
     private int box;
@@ -22,6 +25,25 @@ public class StorageLocation {
 
     public StorageLocation() {
     }
+
+    protected StorageLocation(Parcel in) {
+        tower = in.readInt();
+        box = in.readInt();
+        row = in.readInt();
+        objectID = in.readLong();
+    }
+
+    public static final Creator<StorageLocation> CREATOR = new Creator<StorageLocation>() {
+        @Override
+        public StorageLocation createFromParcel(Parcel in) {
+            return new StorageLocation(in);
+        }
+
+        @Override
+        public StorageLocation[] newArray(int size) {
+            return new StorageLocation[size];
+        }
+    };
 
     /**
      * @return String representation of {@link StorageLocation} onject.
@@ -69,5 +91,18 @@ public class StorageLocation {
 
     public void setObjectID(long objectID) {
         this.objectID = objectID;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(tower);
+        dest.writeInt(box);
+        dest.writeInt(row);
+        dest.writeLong(objectID);
     }
 }
