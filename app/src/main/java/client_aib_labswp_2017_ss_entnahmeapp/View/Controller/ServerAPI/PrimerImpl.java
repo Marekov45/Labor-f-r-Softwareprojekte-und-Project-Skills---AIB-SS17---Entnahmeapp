@@ -1,6 +1,8 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerStatus;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +53,37 @@ public class PrimerImpl {
             }
         });
     }
+
+    public void removeAndGetNewPrimer(long id, String name, String password, PrimerStatus primerStatus) {
+        Call<PrimerTube> call = primerAPI.removeAngGetNewPrimer(id, name, password, primerStatus);
+        call.enqueue(new Callback<PrimerTube>() {
+            @Override
+            public void onResponse(Call<PrimerTube> call, Response<PrimerTube> response) {
+                if(response.isSuccessful()){
+                    PrimerTube primerTube = response.body();
+                    cObserver.onResponseSuccess(primerTube, ResponseCode.REMOVEANDREPLACEPRIMER);
+                }else{
+                    try {
+                        System.out.println(response.code());
+                        System.out.println(response.errorBody().string());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrimerTube> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+    }
+
+
+
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

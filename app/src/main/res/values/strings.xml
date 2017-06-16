@@ -11,8 +11,8 @@
     <string name="spinner_prompt">Wähle eine GUI</string>
     <string-array name="gui_array">
         <item>Bitte Ansicht wählen</item>
-        <item>Labor(Tracking)</item>
-        <item>Labor(zuletzt bearbeitet)</item>
+        <item>Labor Primer-Tracking</item>
+        <item>Labor letzte Roboterliste)</item>
         <item>Lager Entnahme</item>
         <item>Lager Rückgabe</item>
     </string-array>
@@ -41,8 +41,9 @@
     <string name="tvPrimerTubeID">Primertube-ID:</string>
     <string name="tvLOT">LOT:</string>
     <string name="tvManufacturer">Hersteller:</string>
-    <string name="tvNote">Bemerkung:</string>
-    <string name="btnSubmit">Bestätigen</string>
+
+    <string name="tvNote">Nachricht:</string>
+    <string name="btnSubmit">Neuen Primer anfordern</string>
 
 
 </resources>

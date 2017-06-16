@@ -116,7 +116,13 @@
                     android:layout_width="382dp"
                     android:layout_height="wrap_content" android:id="@+id/tvManufacturerActTube" android:textSize="24sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+
         </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="20dp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -134,11 +140,13 @@
                     android:layout_width="366dp"
                     android:layout_height="wrap_content" android:id="@+id/tvNote" android:textSize="24sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
-            <TextView
-                    android:text="Platzhalter Dropdown Bemerkung"
-                    android:layout_width="382dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvNoteActTube" android:textSize="24sp"
-                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+            <EditText
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:ems="10"
+                    android:id="@+id/editText" android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -147,16 +155,28 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="275dp">
+
+            >
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             <Button
                     android:text="@string/btnSubmit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btnSubmit" android:layout_weight="1"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSubmit"
+                    android:layout_weight="1"
+                    android:layout_marginRight="40dp"
+                    />
+            <Button
+                    android:text="Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"/>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

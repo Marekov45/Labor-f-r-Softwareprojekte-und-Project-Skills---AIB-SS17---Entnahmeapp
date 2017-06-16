@@ -11,7 +11,8 @@ public enum ResponseCode {
     COMPLETEGATHEREDLIST,
     GATHEREDLIST,
     TAKEPRIMER,
-    LASTSANGER;
+    LASTSANGER,
+    REMOVEANDREPLACEPRIMER;
 
 
     private ResponseCode(){}
