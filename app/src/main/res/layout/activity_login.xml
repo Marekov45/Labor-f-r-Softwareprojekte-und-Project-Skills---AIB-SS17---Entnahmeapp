@@ -26,7 +26,8 @@
             android:layout_height="wrap_content" android:id="@+id/textView3" android:gravity="center_vertical|center_horizontal"
             android:layout_gravity="center_vertical|center_horizontal"
             android:textColor="@color/cast_intro_overlay_background_color" android:textSize="30sp"
-            android:layout_margin="0dp" android:layout_marginBottom="100dp" android:layout_marginTop="40dp"/>
+            android:layout_margin="0dp" android:layout_marginBottom="100dp" android:layout_marginTop="40dp"
+            android:textStyle="normal|bold"/>
     <LinearLayout
             android:id="@+id/login_form"
             android:layout_width="299dp"
@@ -37,6 +38,7 @@
 
         <android.support.design.widget.TextInputLayout
                 android:gravity="center_horizontal"
+
                 android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
 
             <EditText
@@ -47,7 +49,8 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_width="match_parent" android:layout_marginBottom="10dp"/>
+
+                    android:layout_width="match_parent" android:layout_marginBottom="10dp" android:textSize="24sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -64,7 +67,7 @@
                     android:maxLines="1"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_height="40dp" android:layout_width="match_parent"
-                    android:layout_marginBottom="30dp"/>
+                    android:layout_marginBottom="30dp" android:textSize="24sp"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -76,10 +79,11 @@
                 android:popupBackground="@color/wallet_bright_foreground_holo_dark"
                 android:backgroundTint="@color/colorAccent"
                 android:background="@color/wallet_dim_foreground_disabled_holo_dark"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:contentDescription="@string/spinner_prompt"
                 tools:listitem="your_list_item"
-                android:layout_marginBottom="@dimen/cast_libraries_material_featurehighlight_inner_margin"/>
+                android:layout_marginBottom="@dimen/cast_libraries_material_featurehighlight_inner_margin"
+                />
 
         <TextView
                 android:text="Bitte Ansicht auswählen!"
@@ -91,12 +95,12 @@
         <Button
                 android:id="@+id/sign_in_button"
                 style="@android:style/TextAppearance.Material.Small"
-                android:layout_width="wrap_content"
+                android:layout_width="119dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" android:elevation="0dp"
-                android:visibility="visible" android:layout_marginBottom="5dp"/>
+                android:visibility="visible" android:layout_marginBottom="5dp" android:textSize="24sp"/>
 
     </LinearLayout>
 </LinearLayout>
