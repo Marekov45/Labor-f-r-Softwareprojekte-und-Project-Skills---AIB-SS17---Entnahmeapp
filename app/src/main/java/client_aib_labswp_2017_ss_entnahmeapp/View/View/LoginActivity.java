@@ -10,12 +10,9 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginAPI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginControllerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
-
-import static client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode.*;
 
 /**
  * A login screen that offers login via email/password.
@@ -80,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 startActivity(intentLetzte);
                 break;
             case 3:
-                Intent intentEntnahme = new Intent(LoginActivity.this, PrimerList.class);
+                Intent intentEntnahme = new Intent(LoginActivity.this, PickListActivity.class);
                 intentEntnahme.putExtra("USER",user);
                 startActivity(intentEntnahme);
                 break;

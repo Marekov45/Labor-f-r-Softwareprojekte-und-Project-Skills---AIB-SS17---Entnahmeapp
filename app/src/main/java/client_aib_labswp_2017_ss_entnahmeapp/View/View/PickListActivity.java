@@ -3,6 +3,7 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +16,7 @@ import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.TubesArray;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -26,7 +28,7 @@ import java.util.List;
 /**
  *
  */
-public class PrimerList extends AppCompatActivity implements CustomObserver {
+public class PickListActivity extends AppCompatActivity implements CustomObserver {
 
 
     private TextView txtResult;
@@ -39,11 +41,12 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
+    private TubesArray tubesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.primerlist);
+        setContentView(R.layout.activity_picklist);
         uobj = getIntent().getParcelableExtra("USER");
 
         listView = (ListView) findViewById(R.id.listv);
@@ -51,16 +54,16 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         listView.addHeaderView(headerView);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (id != -1) {
-                    startActivity(new Intent(PrimerList.this, Pop.class));
-                    Toast.makeText(PrimerList.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (id != -1) {
+//                    startActivity(new Intent(PickListActivity.this, Pop.class));
+//                    Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
 
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
@@ -73,7 +76,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.navigateUpFromSameTask(PrimerList.this);
+                NavUtils.navigateUpFromSameTask(PickListActivity.this);
             }
         });
 
@@ -83,7 +86,7 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PrimerList.this, ScanActivity.class);
+                Intent intent = new Intent(PickListActivity.this, ScanActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
@@ -155,12 +158,29 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     private void receivePrimerList(Object o) {
 //        System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        List<PickList> pickLists = (List<PickList>) o;
+        final List<PickList> pickLists = (List<PickList>) o;
 
-        List<PrimerTube> tubes = new ArrayList<>();
+        final List<PrimerTube> tubes = new ArrayList<>();
         for (PickList pickList : pickLists) {
             tubes.addAll(pickList.getPickList());
         }
+
+//        tubesArray = new TubesArray((ArrayList<PrimerTube>) tubes);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (id != -1) {
+
+                    Intent intentPopUp = new Intent(PickListActivity.this, Pop.class);
+//                    intentPopUp.putExtra("TUBES", tubesArray);
+//                    intentPopUp.putExtra("POSITION",position);
+                    startActivity(intentPopUp);
+
+                    Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
@@ -176,4 +196,5 @@ public class PrimerList extends AppCompatActivity implements CustomObserver {
     public void onResponseFailure() {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
     }
+
 }

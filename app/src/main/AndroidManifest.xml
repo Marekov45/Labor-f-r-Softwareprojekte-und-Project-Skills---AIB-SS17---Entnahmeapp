@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PrimerList"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_login"
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
@@ -54,6 +54,7 @@
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
