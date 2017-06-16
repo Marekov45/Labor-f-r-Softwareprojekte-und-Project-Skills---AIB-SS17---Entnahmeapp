@@ -16,7 +16,6 @@ import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
-import client_aib_labswp_2017_ss_entnahmeapp.View.Model.TubesArray;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -41,7 +40,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
-    private TubesArray tubesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,15 +163,14 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
             tubes.addAll(pickList.getPickList());
         }
 
-//        tubesArray = new TubesArray((ArrayList<PrimerTube>) tubes);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
-
+                    PrimerTube actualTube = tubes.get(position-1);
                     Intent intentPopUp = new Intent(PickListActivity.this, Pop.class);
-//                    intentPopUp.putExtra("TUBES", tubesArray);
-//                    intentPopUp.putExtra("POSITION",position);
+                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
+                    intentPopUp.putExtra("POSITION",position);
                     startActivity(intentPopUp);
 
                     Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();

@@ -1,5 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.test.DemoResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,7 +12,7 @@ import java.util.Date;
  * Created by SimonHauck-GamingPC on 23.04.2017.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PrimerTube{
+public class PrimerTube implements Parcelable{
 
 //    private LocalDateTime takeOutDate;
 //    private LocalDateTime putBackDate;
@@ -42,6 +44,31 @@ public class PrimerTube{
         this.currentLocation = currentLocation;
         taken = false;
     }
+
+    protected PrimerTube(Parcel in) {
+        primerTubeID = in.readString();
+        primerUID = in.readString();
+        name = in.readString();
+        lotNr = in.readString();
+        storageLocation = in.readParcelable(StorageLocation.class.getClassLoader());
+        returnToStorage = in.readByte() != 0;
+        manufacturer = in.readString();
+        objectID = in.readLong();
+        currentLocation = in.readString();
+        taken = in.readByte() != 0;
+    }
+
+    public static final Creator<PrimerTube> CREATOR = new Creator<PrimerTube>() {
+        @Override
+        public PrimerTube createFromParcel(Parcel in) {
+            return new PrimerTube(in);
+        }
+
+        @Override
+        public PrimerTube[] newArray(int size) {
+            return new PrimerTube[size];
+        }
+    };
 
     public String getCurrentLocation() {
         return currentLocation;
@@ -144,4 +171,22 @@ public class PrimerTube{
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(primerTubeID);
+        dest.writeString(primerUID);
+        dest.writeString(name);
+        dest.writeString(lotNr);
+        dest.writeParcelable(storageLocation, flags);
+        dest.writeByte((byte) (returnToStorage ? 1 : 0));
+        dest.writeString(manufacturer);
+        dest.writeLong(objectID);
+        dest.writeString(currentLocation);
+        dest.writeByte((byte) (taken ? 1 : 0));
+    }
 }
