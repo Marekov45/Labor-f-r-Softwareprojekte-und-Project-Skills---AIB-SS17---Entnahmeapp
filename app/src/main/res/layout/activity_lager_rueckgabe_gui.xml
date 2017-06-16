@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_lager_rueckgabe_gui"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui">
+
+
+    <TextView
+            android:text="Primer-Rückgabe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" android:textSize="30sp"
+            android:textColor="@color/cast_expanded_controller_background_color"
+            android:layout_alignBottom="@+id/imageView" android:layout_centerHorizontal="true"
+    />
+    <Button
+            android:text="Entnommene Primer "
+            android:layout_height="wrap_content" android:id="@+id/entnommene_anzeigen"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentLeft="true" android:layout_marginTop="30dp"
+            android:layout_gravity="fill_vertical" android:textSize="14sp"
+            android:background="@color/wallet_bright_foreground_holo_dark" android:layout_width="wrap_content"
+            style="@android:style/Widget.DeviceDefault.Button.Small" android:layout_alignStart="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"/>
+    <Button
+            android:text="Scan"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan"
+            android:textColor="@color/cast_expanded_controller_background_color" android:layout_alignTop="@+id/search"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView2" android:layout_marginTop="30dp" android:textSize="24sp"
+            android:layout_width="150dp"
+            android:layout_toRightOf="@+id/textView2"/>
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" android:background="?attr/colorControlHighlight"
+            android:gravity="bottom|center_vertical" android:layout_toEndOf="@+id/imageView"
+            android:layout_alignBottom="@+id/logout"
+            android:layout_below="@+id/scan" android:layout_marginTop="10dp">
+
+        <TableRow android:gravity="top" android:layout_gravity="top">
+            <TextView android:text="Primer"
+                      android:layout_column="1"
+                      android:layout_weight="1"
+                      android:textStyle="bold" android:textSize="24sp" android:layout_width="match_parent"
+                      android:layout_height="match_parent" android:gravity="top|center"
+                      android:textColor="@color/cast_expanded_controller_background_color"/>
+            <TextView android:text="PrimerTubeID"
+                      android:layout_column="1"
+                      android:layout_weight="1" android:textStyle="bold" android:textSize="24sp"
+                      android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
+                      android:textColor="@color/cast_expanded_controller_background_color">
+            </TextView>
+            <TextView android:text="LOT#"
+                      android:layout_width="match_parent"
+                      android:layout_column="2"
+                      android:layout_weight="1" android:textStyle="bold" android:textSize="24sp"
+                      android:layout_height="match_parent" android:gravity="center"
+                      android:textColor="@color/cast_expanded_controller_background_color">
+            </TextView>
+            <TextView
+                    android:text="Lagerkoordinate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:textStyle="bold"
+                    android:textSize="24sp" android:layout_weight="1" android:gravity="center"
+                    android:textColor="@color/cast_expanded_controller_background_color"/>
+            <TextView
+                    android:text="Bemerkung"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal"
+                    android:textStyle="normal|bold" android:textSize="24sp"
+                    android:textColor="@color/cast_expanded_controller_background_color"/>
+        </TableRow>
+
+        <ScrollView android:layout_height="531dp" android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal">
+            <TableLayout android:id="@+id/primer_table"
+                         android:layout_width="fill_parent"
+                         android:layout_height="fill_parent" android:layout_gravity="center_vertical">
+            </TableLayout>
+        </ScrollView>
+    </TableLayout>
+    <Button
+            android:text="Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp" android:id="@+id/logout"
+            android:textColor="@color/cast_expanded_controller_background_color"
+            android:layout_marginStart="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+
+    <ImageView
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" app:srcCompat="@drawable/cegat3"
+            android:id="@+id/imageView"
+            android:layout_width="150dp" android:layout_height="120dp" android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" android:layout_marginTop="16dp"
+            android:layout_gravity="left" android:layout_margin="20dp"/>
+
+</RelativeLayout>

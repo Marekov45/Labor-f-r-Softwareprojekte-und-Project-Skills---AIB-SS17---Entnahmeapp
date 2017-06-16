@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:weightSum="1" android:background="@android:color/white"
+            android:layout_alignParentStart="true">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cast_expanded_controller_ad_container_white_stripe_color" android:layout_marginTop="10dp">
+            <ImageView
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop" app:srcCompat="@drawable/cegat4"
+                    android:id="@+id/imageView"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" android:layout_width="210dp" android:layout_height="130dp" android:layout_marginLeft="10dp"/>
+            <TextView
+                    android:text="@string/tvPrimerEntnahme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tvLastProcessedList" android:textSize="44sp"
+                    android:textColor="@color/cast_expanded_controller_background_color"
+                    android:layout_alignBottom="@+id/imageView" android:layout_centerHorizontal="true"
+                    android:textAlignment="center" android:gravity="center"
+                    android:background="@android:color/white" android:textAllCaps="false"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="59dp" android:weightSum="1" android:background="@android:color/white">
+            <RadioGroup
+                    android:id="@+id/listGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/line0"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+                <RadioButton
+                        android:text="@string/radioRoboter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioRoboter" android:layout_weight="1"
+                        android:checked="true"/>
+                <RadioButton
+                        android:text="@string/radioManuell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioManuell" android:layout_weight="1"
+                />
+                <RadioButton
+                        android:text="@string/radioExtra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioExtra" android:layout_weight="1"
+                        />
+                <RadioButton
+                        android:text="@string/radioAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioAll" android:layout_weight="1"
+                        />
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/bListeAnzeigen"
+                        android:gravity="center"
+                        android:text="@string/bListeAnzeigen"
+                        android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+                        android:layout_marginStart="73dp" android:layout_weight="1" android:background="?attr/colorControlHighlight"
+                        android:textColor="@android:color/black" android:textStyle="normal|bold"
+                        android:textAlignment="center" />
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="690dp" android:weightSum="1" android:background="?attr/colorControlHighlight">
+
+            <ListView
+                    android:id="@+id/listv"
+                    android:layout_width="match_parent"
+                    android:layout_height="670dp">
+
+
+            </ListView>
+
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:background="@android:color/white">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="87dp">
+                <Button
+                        android:text="Primer scannen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/scan"
+                        android:layout_alignBaseline="@+id/button6" android:layout_alignBottom="@+id/button6"
+                        android:layout_weight="1" android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"/>
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnLogout"
+                        android:layout_marginBottom="0dp" android:layout_alignParentBottom="true"
+                        android:layout_alignEnd="@+id/button6"
+                        android:textAlignment="center" android:layout_weight="1"
+                        android:textColor="@android:color/black" android:textStyle="normal|bold"
+                        android:text="@string/btnLogout"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

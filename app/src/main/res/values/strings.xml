@@ -1,16 +1,40 @@
 <resources>
     <string name="app_name">aib_labswp_2017_ss_entnahmeapp</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_labor">Labor</string>
     <string name="title_activity_primerlist">Liste</string>string>
     <!-- Strings related to login -->
     <string name="prompt_email">Benutzername</string>
     <color name="blue">#505fa3</color>
     <string name="prompt_password">Passwort</string>
-    <string name="action_sign_in">Liste laden</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="action_sign_in">Login</string>
+    <string name="spinner_prompt">Wähle eine GUI</string>
+    <string-array name="gui_array">
+        <item>Bitte Ansicht wählen</item>
+        <item>Labor(Tracking)</item>
+        <item>Labor(zuletzt bearbeitet)</item>
+        <item>Lager Entnahme</item>
+        <item>Lager Rückgabe</item>
+    </string-array>
+    <string name="bListeAnzeigen">Liste anzeigen</string>
+
+    <string name="radioRoboter">Roboterliste</string>
+    <string name="radioManuell">Manuelle Liste</string>
+    <string name="radioExtra">Sonderliste</string>
+    <string name="radioAll">Alle Listen</string>
+
+    <string name="descriptionTake">Primer-Entnahme</string>
+
+    <string name="tvPosition">Pos</string>
+    <string name="tvPrimername">Primer</string>
+    <string name="tvPimerKoordinate">Lagerkoordinate</string>
+    <string name="tvDestination">Zielort</string>
+    <string name="btnTakeOut">Entnehmen</string>
+    <string name="btnLogout">Logout</string>
+    <string name="tvPrimerEntnahme">Primer-Entnahme</string>
+    <string name="tvLastProcessedList">Aktuelle Roboter-Liste</string>
+    <string name="btnShowList">Liste anzeigen</string>
+    <string name="btnLogoutLastSanger">Logout</string>
+    <string name="btnShowListLastSanger">Liste anzeigen</string>
+
 </resources>
