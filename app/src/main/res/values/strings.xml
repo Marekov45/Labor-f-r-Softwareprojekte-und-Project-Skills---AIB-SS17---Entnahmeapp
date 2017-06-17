@@ -12,7 +12,7 @@
     <string-array name="gui_array">
         <item>Bitte Ansicht wählen</item>
         <item>Labor Primer-Tracking</item>
-        <item>Labor letzte Roboterliste</item>
+        <item>Labor Letzte Roboterliste</item>
         <item>Lager Entnahme</item>
         <item>Lager Rückgabe</item>
     </string-array>
