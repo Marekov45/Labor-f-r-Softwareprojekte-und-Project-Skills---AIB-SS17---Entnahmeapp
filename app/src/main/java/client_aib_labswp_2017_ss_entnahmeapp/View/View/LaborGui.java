@@ -3,6 +3,7 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LaborGui extends AppCompatActivity implements CustomObserver {
+public class LaborGui extends AppCompatActivity implements CustomObserver, SearchView.OnQueryTextListener {
 
 
     private Button logoutButton;
@@ -29,19 +30,18 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
     private User uobj;
     private ListView listView;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labor_gui);
-         uobj = getIntent().getParcelableExtra("USER");
+        uobj = getIntent().getParcelableExtra("USER");
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
         listView = (ListView) findViewById(R.id.list);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_tracking, listView, false);
         listView.addHeaderView(headerView);
         view = (SearchView) findViewById(R.id.search);
-        view.setQueryHint("Primername/Primerart");
         logoutButton = (Button) findViewById(R.id.logout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,9 +53,17 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
         });
 
 
-        listImpl.requestAllGatheredPrimers(uobj.getUsername(),uobj.getPassword());
+        listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
+        listView.setTextFilterEnabled(true);
+        setupSearchView();
     }
 
+    private void setupSearchView() {
+        view.setIconifiedByDefault(false);
+        view.setOnQueryTextListener(this);
+        view.setSubmitButtonEnabled(true);
+        view.setQueryHint("Primername");
+    }
 
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
@@ -70,7 +78,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
     }
 
     private void receiveAllGatheredList(Object o) {
-      //  System.out.println(o.toString());
+        //  System.out.println(o.toString());
         Toast.makeText(this, "SuccessALLGATHEREDPRIMERS", Toast.LENGTH_SHORT).show();
         List<PrimerTube> tubes = (List<PrimerTube>) o;
         ListAdapterLabor adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
@@ -92,5 +100,20 @@ public class LaborGui extends AppCompatActivity implements CustomObserver {
     @Override
     public void onResponseFailure() {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (TextUtils.isEmpty(newText)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(newText);
+        }
+        return true;
     }
 }

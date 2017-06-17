@@ -4,25 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
-import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Marvin on 17.06.2017.
  */
-public class ListAdapterLabor extends ArrayAdapter<PrimerTube> {
+public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filterable {
     private int vg;
     private List<PrimerTube> primerTubes;
-    private List<PickList> pickLists;
+    private List<PrimerTube> filteredTubes;
     Context context;
     ListImpl listImpl;
     User user;
@@ -46,28 +43,80 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> {
         public Spinner txtBemerkung;
     }
 
+    public Filter getFilter() {
+        return new Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<PrimerTube> results = new ArrayList<PrimerTube>();
+                if (filteredTubes == null)
+                    filteredTubes = primerTubes;
+                if (constraint != null) {
+                    if (filteredTubes != null && filteredTubes.size() > 0) {
+                        for (final PrimerTube tube : filteredTubes) {
+                            if (tube.getName().toLowerCase()
+                                    .contains(constraint.toString()))
+                                results.add(tube);
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                primerTubes = (ArrayList<PrimerTube>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return primerTubes.size();
+    }
+
+
+    public PrimerTube getItem(int position) {
+        return primerTubes.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
+        ViewHolder viewholder;
+
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(vg, parent, false);
-            ListAdapterLabor.ViewHolder viewholder = new ListAdapterLabor.ViewHolder();
-            viewholder.txtPrimer = (TextView) view.findViewById(R.id.primerTxtView);
-            viewholder.txtPrimerTube = (TextView) view.findViewById(R.id.primerTubeTxtView);
-            viewholder.txtLOT = (TextView) view.findViewById(R.id.lotTxtView);
-            viewholder.txtLocation = (TextView) view.findViewById(R.id.locationTxtView);
-            view.setTag(viewholder);
+            convertView=LayoutInflater.from(context).inflate(R.layout.rowlayout_tracking, parent, false);
+            viewholder = new  ViewHolder();
+            viewholder.txtPrimer = (TextView) convertView.findViewById(R.id.primerTxtView);
+            viewholder.txtPrimerTube = (TextView) convertView.findViewById(R.id.primerTubeTxtView);
+            viewholder.txtLOT = (TextView) convertView.findViewById(R.id.lotTxtView);
+            viewholder.txtLocation = (TextView) convertView.findViewById(R.id.locationTxtView);
+            convertView.setTag(viewholder);
 
         }
 
-        final PrimerTube primerTube = primerTubes.get(position);
-        final ListAdapterLabor.ViewHolder holder = (ListAdapterLabor.ViewHolder) view.getTag();
-
+      //  final PrimerTube primerTube = primerTubes.get(position);
+        else {
+            viewholder = (ViewHolder) convertView.getTag();
+        }
        // holder.txtPos.setText(String.valueOf((position%32)+1));
-        holder.txtPrimer.setText(primerTube.getName());
-        holder.txtPrimerTube.setText(primerTube.getPrimerTubeID());
-        holder.txtLOT.setText(primerTube.getLotNr());
+        viewholder.txtPrimer.setText(primerTubes.get(position).getName());
+        viewholder.txtPrimerTube.setText(primerTubes.get(position).getPrimerTubeID());
+        viewholder.txtLOT.setText(primerTubes.get(position).getLotNr());
 
         //PickList pickListFinal = null;
        // int postitioncounter = position;
@@ -78,12 +127,12 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> {
         //        break;
         //    }
        // }
-        holder.txtLocation.setText(primerTube.getCurrentLocation());
-        holder.txtBemerkung = (Spinner) view.findViewById(R.id.bemerkungSpinner);
+        viewholder.txtLocation.setText(primerTubes.get(position).getCurrentLocation());
+        viewholder.txtBemerkung = (Spinner) convertView.findViewById(R.id.bemerkungSpinner);
           ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context,android.R.layout.simple_spinner_dropdown_item,items);
          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          holder.txtBemerkung.setAdapter(adapter);
+          viewholder.txtBemerkung.setAdapter(adapter);
 
-        return view;
+        return convertView;
     }
 }
