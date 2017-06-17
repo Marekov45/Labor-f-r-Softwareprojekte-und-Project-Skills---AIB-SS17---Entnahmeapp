@@ -41,9 +41,16 @@
     <string name="tvPrimerTubeID">Primertube-ID:</string>
     <string name="tvLOT">LOT:</string>
     <string name="tvManufacturer">Hersteller:</string>
+    <string name="tvReasonForNewPrimer">Grund für neuen Primer auswählen</string>
+
+
 
     <string name="tvNote">Nachricht:</string>
     <string name="btnSubmit">Neuen Primer anfordern</string>
-
+    <string name="radioempty">Primer leer</string>
+    <string name="radiobroken">Primertube kaputt</string>
+    <string name="radionotfound">Primer nicht auffindbar</string>
+    <string name="radionoinfo">Anderer Grund</string>
+    <string name="btnclose">Zurück</string>
 
 </resources>

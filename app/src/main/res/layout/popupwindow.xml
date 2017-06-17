@@ -120,16 +120,63 @@
         </LinearLayout>
         <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="2dp"
                 android:background="@android:color/white"
                 android:layout_marginTop="20dp"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+
+                android:text="@string/tvReasonForNewPrimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tvReasonForNewPrimer" android:textSize="24sp"
+                android:layout_weight="1" android:textColor="@android:color/white"
+                android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="1" android:background="#d6d7d7">
+        <RadioGroup
+                android:id="@+id/reasonNewPrimerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line0"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" >
+            <RadioButton
+                    android:text="@string/radioempty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radioempty" android:layout_weight="1"
+                    android:checked="true"/>
+            <RadioButton
+                    android:text="@string/radiobroken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radiobroken" android:layout_weight="1"
+            />
+            <RadioButton
+                    android:text="@string/radionotfound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radionotfound" android:layout_weight="1"
+            />
+            <RadioButton
+                    android:text="@string/radionoinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radionoinfo" android:layout_weight="1"
+            />
+
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -141,12 +188,13 @@
                     android:layout_height="wrap_content" android:id="@+id/tvNote" android:textSize="24sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <EditText
-                    android:layout_width="370dp"
+                    android:layout_width="385dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text="Name"
                     android:ems="10"
-                    android:id="@+id/editText" android:layout_weight="1"/>
+                    android:id="@+id/editTextNote" android:layout_weight="1" android:hint="Nachricht eintragen"
+                    android:textColor="@android:color/white" android:singleLine="false"
+                    android:textColorHint="@android:color/white" android:textSize="22sp"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -154,7 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
 
             >
         <LinearLayout
@@ -170,10 +218,10 @@
                     android:layout_marginRight="40dp"
                     />
             <Button
-                    android:text="Button"
+                    android:text="@string/btnclose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button2"
+                    android:id="@+id/btnclose"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
 
