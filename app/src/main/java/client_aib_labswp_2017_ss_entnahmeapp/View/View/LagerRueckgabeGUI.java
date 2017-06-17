@@ -1,15 +1,10 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
@@ -23,7 +18,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LagerRueckgabeGUI extends AppCompatActivity {
+public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserver {
 
     private TextView txtResult;
     private Button scanButton;
@@ -32,13 +27,17 @@ public class LagerRueckgabeGUI extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private ListImpl listImpl;
+    User uobj;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lager_rueckgabe_gui);
-        final User uobj = getIntent().getParcelableExtra("USER");
+
+        listImpl = new ListImpl();
+        listImpl.setCObserver(this);
+        uobj = getIntent().getParcelableExtra("USER");
         logoutButton = (Button) findViewById(R.id.logout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,24 +51,24 @@ public class LagerRueckgabeGUI extends AppCompatActivity {
         scanButton = (Button) findViewById(R.id.scan);
         entnommene_anzeigen = (Button) findViewById(R.id.entnommene_anzeigen);
 
-/**
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
-        }
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LagerRueckgabeGUI.this, ScanActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
+//        }
+//        scanButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LagerRueckgabeGUI.this, ScanActivity.class);
+//                startActivityForResult(intent, REQUEST_CODE);
+//            }
+//        });
 
         entnommene_anzeigen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
             }
-        });**/
+        });
 
 
     }
@@ -90,36 +89,28 @@ public class LagerRueckgabeGUI extends AppCompatActivity {
         }
     }
 
-}
-/**
+
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
-            case LIST:
-            case COMPLETELIST:
-                receivePrimerList(o);
-                break;
-            case TAKEPRIMER:
-                takePrimer(o);
+            case COMPLETEGATHEREDLIST:
+                receiveGatheredPrimerList(o);
                 break;
         }
     }
 
-    private void takePrimer(Object o) {
-    }
-
-    private void receivePrimerList(Object o) {
+    private void receiveGatheredPrimerList(Object o) {
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        List<PickList> pickLists = (List<PickList>) o;
+        List<PrimerTube> listGatheredPrimer= (List<PrimerTube>) o;
 
         List<PrimerTube> tubes = new ArrayList<>();
-        for(PickList pickList: pickLists){
-            tubes.addAll(pickList.getPickList());
+        for (PrimerTube primertubes : listGatheredPrimer) {
+            tubes.add(primertubes);
         }
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists);
-        listView.setAdapter(adapter);
+//        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout, R.id.txtPos, tubes, pickLists);
+//        listView.setAdapter(adapter);
 
     }
 
@@ -130,4 +121,6 @@ public class LagerRueckgabeGUI extends AppCompatActivity {
 
     @Override
     public void onResponseFailure() {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();**/
+        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+    }
+}
