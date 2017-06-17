@@ -112,13 +112,6 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        /**
-        if (TextUtils.isEmpty(newText)) {
-            listView.clearTextFilter();
-        } else {
-            listView.setFilterText(newText);
-        }
-         **/
         return false;
 
     }
