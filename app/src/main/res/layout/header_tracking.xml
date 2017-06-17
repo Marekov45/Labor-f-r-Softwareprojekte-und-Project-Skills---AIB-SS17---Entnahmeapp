@@ -13,7 +13,7 @@
                 android:text="Primer"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
-                android:layout_width="wrap_content"/>
+                android:layout_width="wrap_content" android:gravity="center"/>
         <TextView
                 android:layout_column="1"
                 android:padding="10dp"
@@ -29,7 +29,7 @@
                 android:text="LOT#"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
-        />
+                android:gravity="center"/>
         <TextView
                 android:layout_column="3"
                 android:padding="10dp"
@@ -47,13 +47,5 @@
                 android:textStyle="bold"
                 android:background="#c0c0c0"
         />
-        <TextView
-                android:layout_column="5"
-                android:padding="10dp"
-                android:text="Zielort"
-                android:layout_span="2"
-                android:textStyle="bold"
-                android:background="#c0c0c0"
-              />
     </TableRow>
 </TableLayout>
