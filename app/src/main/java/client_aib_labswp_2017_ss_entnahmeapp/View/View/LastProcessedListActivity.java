@@ -1,14 +1,13 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
@@ -73,11 +72,26 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
 
-        List<PrimerTube> tubes = new ArrayList<>();
+        final List<PrimerTube> tubes = new ArrayList<>();
         for (PickList pickList : pickLists) {
             tubes.addAll(pickList.getPickList());
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (id != -1) {
+                    PrimerTube actualTube = tubes.get(position-1);
+                    Intent intentPopUp = new Intent(LastProcessedListActivity.this, Pop.class);
+                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
+                    intentPopUp.putExtra("POSITION",position);
+                    intentPopUp.putExtra("USER",uobj);
+                    startActivity(intentPopUp);
 
+                    Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         ListAdapterLastSanger adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
     }

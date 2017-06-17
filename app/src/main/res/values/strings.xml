@@ -51,6 +51,8 @@
     <string name="radiobroken">Primertube kaputt</string>
     <string name="radionotfound">Primer nicht auffindbar</string>
     <string name="radionoinfo">Anderer Grund</string>
-    <string name="btnclose">Zurück</string>
+    <string name="checkBoxNewPrimer">Neuen Primer anfordern</string>
+
+    <string name="btnclose">OK</string>
 
 </resources>

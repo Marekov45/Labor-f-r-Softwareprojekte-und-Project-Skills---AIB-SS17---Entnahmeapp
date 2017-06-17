@@ -21,7 +21,7 @@ public interface PrimerAPI {
     Call<Void> sendLocation(@Path("id") long id, @Path("username") String username, @Path("password") String password, @Body String location);
 
     @PUT("/app/remove/replace/{id}/{username}/{password}")
-    Call<PrimerTube> removeAngGetNewPrimer(@Path("id") long id, @Path("username") String username, @Path("password") String password, @Body PrimerStatus primerstatus);
+    Call<PrimerTube> removeAndGetNewPrimer(@Path("id") long id, @Path("username") String username, @Path("password") String password, @Body PrimerStatus primerstatus);
 
     @PUT("/app/remove/{id}/{username}/{password}")
     Call<Void> removePrimer(@Path("id") long id, @Path("username") String username, @Path("password") String password, @Body PrimerStatus primerstatus);

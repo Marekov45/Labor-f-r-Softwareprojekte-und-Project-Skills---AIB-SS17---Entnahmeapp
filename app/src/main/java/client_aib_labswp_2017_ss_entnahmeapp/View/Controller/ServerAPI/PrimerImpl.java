@@ -55,7 +55,7 @@ public class PrimerImpl {
     }
 
     public void removeAndGetNewPrimer(long id, String name, String password, PrimerStatus primerStatus) {
-        Call<PrimerTube> call = primerAPI.removeAngGetNewPrimer(id, name, password, primerStatus);
+        Call<PrimerTube> call = primerAPI.removeAndGetNewPrimer(id, name, password, primerStatus);
         call.enqueue(new Callback<PrimerTube>() {
             @Override
             public void onResponse(Call<PrimerTube> call, Response<PrimerTube> response) {
