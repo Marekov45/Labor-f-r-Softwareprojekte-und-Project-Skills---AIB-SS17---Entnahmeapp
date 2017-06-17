@@ -43,7 +43,7 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         public Spinner txtBemerkung;
     }
 
-    public Filter getFilter() {
+ /**   public Filter getFilter() {
         return new Filter() {
 
             @Override
@@ -92,7 +92,7 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
     public long getItemId(int position) {
         return position;
     }
-
+**/
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

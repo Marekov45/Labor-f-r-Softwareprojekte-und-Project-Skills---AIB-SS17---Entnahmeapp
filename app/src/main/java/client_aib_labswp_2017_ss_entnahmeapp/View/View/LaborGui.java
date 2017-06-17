@@ -86,9 +86,11 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     }
 
     private void receiveGatheredList(Object o) {
-        System.out.println(o.toString());
-
+       // System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        List<PrimerTube> tubes = (List<PrimerTube>) o;
+        ListAdapterLabor adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
+        listView.setAdapter(adapter);
 
     }
 
@@ -104,16 +106,20 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+        listImpl.requestGatheredPrimers(query,uobj.getUsername(),uobj.getPassword());
+        return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        /**
         if (TextUtils.isEmpty(newText)) {
             listView.clearTextFilter();
         } else {
             listView.setFilterText(newText);
         }
-        return true;
+         **/
+        return false;
+
     }
 }
