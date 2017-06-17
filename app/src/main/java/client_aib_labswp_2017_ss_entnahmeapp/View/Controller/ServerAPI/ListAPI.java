@@ -20,10 +20,10 @@ public interface ListAPI {
     Call<List<PickList>> getAllPicklists(@Path("username") String username, @Path("password") String password);
 
     @GET("/app/gatheredPrimer/{username}/{password}")
-    Call <List<PrimerTube>> getAllGatheredPrimers(@Path("username") String username, @Path("password") String password);
-
+    Call <List<PrimerTube>> getAllGatheredPrimerTubes(@Path("username") String username, @Path("password") String password);
+ 
     @GET("/app/search/gatheredPrimer/{name}/{username}/{password}")
-    Call <List<PrimerTube>> getGatheredPrimers(@Path("name") String name, @Path("username") String username, @Path("password") String password);
+    Call <List<PrimerTube>> getGatheredPrimerTubes(@Path("name") String name, @Path("username") String username, @Path("password") String password);
 
     @GET("/app/sanger/{username}/{password}")
     Call<List<PickList>> getLastProcessedSanger(@Path("username") String username, @Path("password") String password);

@@ -87,7 +87,7 @@ public class ListImpl {
     }
 
     public void requestAllGatheredPrimers(String name, String password) {
-        Call<List<PrimerTube>> call = listAPI.getAllGatheredPrimers(name, password);
+        Call<List<PrimerTube>> call = listAPI.getAllGatheredPrimerTubes(name, password);
         call.enqueue(new Callback<List<PrimerTube>>() {
             @Override
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
@@ -114,7 +114,7 @@ public class ListImpl {
     }
 
     public void requestGatheredPrimers(String name, String username, String password) {
-        Call<List<PrimerTube>> call = listAPI.getGatheredPrimers(name, username, password);
+        Call<List<PrimerTube>> call = listAPI.getGatheredPrimerTubes(name, username, password);
         call.enqueue(new Callback<List<PrimerTube>>() {
             @Override
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
