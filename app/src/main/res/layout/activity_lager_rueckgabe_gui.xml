@@ -10,7 +10,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui">
+        tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
 
 
     <TextView
@@ -45,8 +45,9 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/btn_gatheredPrimer">
         <ListView
+                android:id="@+id/listvGatheredPrimer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/listvGatheredPrimer"/>
+                android:layout_height="match_parent" />
     </LinearLayout>
     <Button
             android:text="Logout"
