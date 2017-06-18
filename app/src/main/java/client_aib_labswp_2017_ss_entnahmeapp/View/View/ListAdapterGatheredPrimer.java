@@ -25,21 +25,17 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     ListImpl listImpl;
     User user;
 
-    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl) {
-        super(context, vg, id, primerTubes);
+    public ListAdapterGatheredPrimer(Context context, int vg, int id, User user, ListImpl listImpl) {
+        super(context, vg, id);
 
         this.context = context;
-        this.primerTubes = primerTubes;
-        this.pickLists = pickLists;
         this.vg = vg;
         this.user = user;
         this.listImpl = listImpl;
     }
     static class ViewHolder{
-        public TextView txtPos;
-        public TextView txtPrimer;
-        public TextView txtStorageLocation;
-        public TextView txtDestination;
+        public TextView txtReturn_Primer;
+        public TextView txtReturn_StorageLocation;
     }
 
     @Override
@@ -48,33 +44,12 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(vg, parent, false);
-            ListAdapterLastSanger.ViewHolder viewholder = new ListAdapterLastSanger.ViewHolder();
-            viewholder.txtPos = (TextView) view.findViewById(R.id.txtPos);
-            viewholder.txtPrimer = (TextView) view.findViewById(R.id.txtPrimer);
-            viewholder.txtStorageLocation = (TextView) view.findViewById(R.id.txtStorageLocation);
-            viewholder.txtDestination = (TextView) view.findViewById(R.id.txtDestination);
+            ListAdapterGatheredPrimer.ViewHolder viewholder = new ListAdapterGatheredPrimer.ViewHolder();
+            viewholder.txtReturn_Primer = (TextView) view.findViewById(R.id.txtReturn_Primer);
+            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtReturn_StorageLocation);
             view.setTag(viewholder);
 
         }
-
-        final PrimerTube primerTube = primerTubes.get(position);
-        final ListAdapterLastSanger.ViewHolder holder = (ListAdapterLastSanger.ViewHolder) view.getTag();
-
-        holder.txtPos.setText(String.valueOf((position%32)+1));
-        holder.txtPrimer.setText(primerTube.getName());
-        holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
-
-        PickList pickListFinal = null;
-        int postitioncounter = position;
-        for (PickList pickList : pickLists) {
-            postitioncounter = postitioncounter - pickList.getPickList().size();
-            if (postitioncounter < 0) {
-                pickListFinal = pickList;
-                break;
-            }
-        }
-
-
         return view;
     }
 }
