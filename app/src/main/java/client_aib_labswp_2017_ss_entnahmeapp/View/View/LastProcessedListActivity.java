@@ -86,13 +86,19 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         if (requestCode == REQUEST_POPUP) {
             if (resultCode == Activity.RESULT_OK) {
                 PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
+                PrimerTube actualtube = data.getParcelableExtra("ACTUALTUBE");
                 int positionForReplacement = data.getIntExtra("POSITION", 0);
                 NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
-                if(tubeNew!=null){
+                if(tubeNew!=null&&newLocation==null){
                     adapter.changeRow(tubeNew, positionForReplacement);
                 }
-                if(newLocation!=null){
+                if(newLocation!=null&&tubeNew==null){
+                    adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
                     System.out.println("eine neue position"+newLocation.getNewLocation().toString());
+                }
+                if(tubeNew==null&&newLocation==null){
+
+
                 }
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
                 System.out.println("good");

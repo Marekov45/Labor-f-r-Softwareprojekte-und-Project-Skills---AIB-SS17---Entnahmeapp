@@ -93,7 +93,8 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(newTube==null&&textNewPosition.equals("")){
+                NewLocation location = new NewLocation(textNewPosition.getText().toString());
+                if(newTube==null&&location.getNewLocation().toString().equals("")){
                     finish();
                 }else{
                     if(newTube!=null&&textNewPosition.getText().equals("")){
@@ -104,8 +105,10 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                         finish();
                     }else if(newTube==null&&!textNewPosition.getText().equals("")){
                         final Intent intentNewPostition = new Intent();
-                        NewLocation location = new NewLocation(textNewPosition.getText().toString());
+                        location = new NewLocation(textNewPosition.getText().toString());
                         intentNewPostition.putExtra("NEWLOCATION", (Parcelable) location);
+                        intentNewPostition.putExtra("ACTUALTUBE", (Parcelable) tube);
+                        intentNewPostition.putExtra("POSITION", positionGiven);
                         setResult(Activity.RESULT_OK, intentNewPostition);
                         finish();
 
@@ -113,8 +116,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
                         intentNewTube.putExtra("POSITION", positionGiven);
-                        NewLocation location = new NewLocation(textNewPosition.getText().toString());
-                        intentNewTube.putExtra("NEWLOCATION", (Parcelable) location);
+                        location = new NewLocation(textNewPosition.getText().toString());
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
                     }
@@ -124,6 +126,9 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         });
 
         btnNewPosition = (Button) findViewById(R.id.btnNewPosition);
+        btnNewPosition.setEnabled(false);
+        checkIfNewLocationEmpty();
+
         btnNewPosition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +165,34 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         });
 
 
+    }
+
+
+    private void checkIfNewLocationEmpty(){
+        textNewPosition.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s.toString().trim().length() == 0) {
+                    btnNewPosition.setEnabled(false);
+                } else {
+                    btnNewPosition.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().trim().length() == 0) {
+                    btnNewPosition.setEnabled(false);
+                } else {
+                    btnNewPosition.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 
