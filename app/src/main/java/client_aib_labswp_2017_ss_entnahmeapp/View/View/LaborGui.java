@@ -92,6 +92,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
             case GATHEREDLIST:
                 receiveGatheredList(o);
                 break;
+
         }
     }
 

@@ -118,6 +118,15 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        setNewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                primerImpl.sendLocation(tube.getObjectID(),uobj.getUsername(),uobj.getPassword(),newLocation.getText().toString());
+            }
+        });
+
+
+
 
     }
 
@@ -182,12 +191,17 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             case REMOVEANDREPLACEPRIMER:
                 receiveNewPrimer(o);
                 break;
+            case SENDLOCATION:
+                sendNewLocation(o);
         }
     }
 
     private void receiveNewPrimer(Object o) {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         newTube = (PrimerTube) o;
+    }
+    private void sendNewLocation(Object o) {
+        Toast.makeText(this, "New Location has been set", Toast.LENGTH_SHORT).show();
     }
 
     private int chooseReason() {
