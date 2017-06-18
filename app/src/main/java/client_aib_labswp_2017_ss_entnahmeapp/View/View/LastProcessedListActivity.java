@@ -100,7 +100,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LastProcessedListActivity.this, Pop.class);
+                    Intent intentPopUp = new Intent(LastProcessedListActivity.this, PopSanger.class);
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
                     intentPopUp.putExtra("POSITION", position);
                     intentPopUp.putExtra("USER", uobj);

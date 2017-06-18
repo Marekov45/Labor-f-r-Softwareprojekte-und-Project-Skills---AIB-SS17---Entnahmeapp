@@ -57,6 +57,11 @@
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
+        <activity
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopSanger"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
+                android:theme="@style/AppTheme.CustomTheme">
+        </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
                   android:theme="@style/AppTheme.NoActionBar">

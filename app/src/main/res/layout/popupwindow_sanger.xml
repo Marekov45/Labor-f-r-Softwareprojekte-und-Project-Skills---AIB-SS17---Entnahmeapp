@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@color/colorPrimaryDark">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="@string/tvdetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/tvdetails" android:layout_weight="1"
+                    android:textSize="30sp" android:textStyle="normal|bold" android:textColor="@android:color/white"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="@string/tvPrimerName"
+                    android:layout_width="366dp"
+                    android:layout_height="match_parent" android:id="@+id/tvPrimerName" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="382dp"
+                    android:layout_height="match_parent" android:id="@+id/tvNameActTube" android:textSize="24sp"
+                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+
+                    android:text="@string/tvPrimerTubeID"
+                    android:layout_width="366dp"
+                    android:layout_height="match_parent" android:id="@+id/tvPrimerTubeID" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="382dp"
+                    android:layout_height="match_parent" android:id="@+id/tvIDActTube" android:textSize="24sp"
+                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+
+                    android:text="@string/tvLOT"
+                    android:layout_width="366dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvLOT" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="382dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvLOTActTube" android:textSize="24sp"
+                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+
+                    android:text="@string/tvManufacturer"
+                    android:layout_width="366dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvManufacturer" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="382dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvManufacturerActTube" android:textSize="24sp"
+                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+
+                android:text="@string/tvReasonForNewPrimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tvReasonForNewPrimer" android:textSize="24sp"
+                android:layout_weight="1" android:textColor="@android:color/white"
+                android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="1" android:background="#d6d7d7">
+        <RadioGroup
+                android:id="@+id/reasonNewPrimerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/line0"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" >
+            <RadioButton
+                    android:text="@string/radioempty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radioempty" android:layout_weight="1"
+                    android:checked="true"/>
+            <RadioButton
+                    android:text="@string/radiobroken"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radiobroken" android:layout_weight="1"
+            />
+            <RadioButton
+                    android:text="@string/radionotfound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radionotfound" android:layout_weight="1"
+            />
+            <RadioButton
+                    android:text="@string/radionoinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/radionoinfo" android:layout_weight="1"
+            />
+
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+
+                    android:text="@string/tvNote"
+                    android:layout_width="366dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvNote" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <EditText
+                    android:layout_width="385dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextNote" android:layout_weight="1" android:hint="Nachricht eintragen"
+                    android:textColor="@android:color/white" android:singleLine="false"
+                    android:textColorHint="@android:color/white" android:textSize="22sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+
+            >
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="@string/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnSubmit"
+                    android:layout_weight="1"
+                    android:layout_marginRight="40dp"
+                    />
+            <Button
+                    android:text="@string/btnclose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnclose"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+

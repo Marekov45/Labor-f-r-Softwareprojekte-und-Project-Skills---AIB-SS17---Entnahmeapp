@@ -64,17 +64,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         holder.txtPos.setText(String.valueOf((position % 32) + 1));
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
-
-        PickList pickListFinal = null;
-        int postitioncounter = position;
-        for (PickList pickList : pickLists) {
-            postitioncounter = postitioncounter - pickList.getPickList().size();
-            if (postitioncounter < 0) {
-                pickListFinal = pickList;
-                break;
-            }
-        }
-        holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
+        holder.txtDestination.setText(primerTube.getCurrentLocation());
 
         return view;
     }
