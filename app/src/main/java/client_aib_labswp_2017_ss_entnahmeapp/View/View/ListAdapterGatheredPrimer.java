@@ -45,8 +45,8 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(vg, parent, false);
             ListAdapterGatheredPrimer.ViewHolder viewholder = new ListAdapterGatheredPrimer.ViewHolder();
-            viewholder.txtReturn_Primer = (TextView) view.findViewById(R.id.txtReturn_Primer);
-            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtReturn_StorageLocation);
+            viewholder.txtReturn_Primer= (TextView) view.findViewById(R.id.txtPrimerLastGathered);
+            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtStorageLocationLastGathered);
             view.setTag(viewholder);
 
         }
