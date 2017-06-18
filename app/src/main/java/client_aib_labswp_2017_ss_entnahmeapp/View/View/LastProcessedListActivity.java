@@ -12,6 +12,7 @@ import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
@@ -31,6 +32,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
     private RadioGroup listGroup;
     public static final int REQUEST_POPUP = 300;
     ListAdapterLastSanger adapter;
+    PrimerImpl primerImpl;
 
 
     @Override
@@ -41,6 +43,9 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         uobj = getIntent().getParcelableExtra("USER");
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
+
+        primerImpl= new PrimerImpl();
+        primerImpl.setCObserver(this);
 
         listView = (ListView) findViewById(R.id.listvLastSanger);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_last_sanger, listView, false);
@@ -111,7 +116,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
 
             }
         });
-        adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl, primerImpl);
         listView.setAdapter(adapter);
     }
 
