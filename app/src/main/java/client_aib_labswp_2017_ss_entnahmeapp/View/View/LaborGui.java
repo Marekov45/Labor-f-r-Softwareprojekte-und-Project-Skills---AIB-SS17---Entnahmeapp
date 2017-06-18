@@ -1,15 +1,14 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
-
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
+import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
@@ -17,6 +16,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.Re
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,10 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     private ListImpl listImpl;
     private User uobj;
     private ListView listView;
+    public static final int REQUEST_CODE = 100;
+    public static final int PERMISSION_REQUEST = 200;
+    public static final int REQUEST_POPUP=300;
+    ListAdapterLabor adapter;
 
 
     @Override
@@ -54,15 +58,29 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
 
         listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
-        listView.setTextFilterEnabled(true);
+
         setupSearchView();
     }
 
     private void setupSearchView() {
-        view.setIconifiedByDefault(false);
+        // view.setIconifiedByDefault(false);
         view.setOnQueryTextListener(this);
         view.setSubmitButtonEnabled(true);
         view.setQueryHint("Primername");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==REQUEST_POPUP){
+            if(resultCode== Activity.RESULT_OK){
+                PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
+                int positionForReplacement = data.getIntExtra("POSITION",0);
+                adapter.changeRow(tubeNew, positionForReplacement);
+                System.out.println("good");
+            }else {
+
+            }
+        }
     }
 
     @Override
@@ -74,22 +92,40 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
             case GATHEREDLIST:
                 receiveGatheredList(o);
                 break;
+
         }
     }
 
     private void receiveAllGatheredList(Object o) {
         //  System.out.println(o.toString());
         Toast.makeText(this, "SuccessALLGATHEREDPRIMERS", Toast.LENGTH_SHORT).show();
-        List<PrimerTube> tubes = (List<PrimerTube>) o;
-        ListAdapterLabor adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
+        final List<PrimerTube> tubes = (List<PrimerTube>) o;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (id != -1) {
+                    PrimerTube actualTube = tubes.get(position-1);
+                    Intent intentPopUp = new Intent(LaborGui.this, PopTracking.class);
+                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
+                    intentPopUp.putExtra("POSITION",position);
+                    intentPopUp.putExtra("USER",uobj);
+                    startActivityForResult(intentPopUp, REQUEST_POPUP);
+
+                    Toast.makeText(LaborGui.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+         adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
         listView.setAdapter(adapter);
     }
 
     private void receiveGatheredList(Object o) {
-       // System.out.println(o.toString());
+        // System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        List<PrimerTube> tubes = (List<PrimerTube>) o;
-        ListAdapterLabor adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
+        final List<PrimerTube> tubes = (List<PrimerTube>) o;
+
+         adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
         listView.setAdapter(adapter);
 
     }
