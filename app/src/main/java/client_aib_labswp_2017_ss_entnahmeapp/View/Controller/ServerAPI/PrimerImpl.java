@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI;
 
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.Location;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 import retrofit2.Call;
@@ -15,7 +16,7 @@ import java.io.IOException;
  * Created by User on 16.06.2017.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://10.0.2.2:8080/";
+    private final String BASE_URL = "http://192.168.0.103:8080/";
 
 //    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssX").create();
 
@@ -54,6 +55,9 @@ public class PrimerImpl {
         });
     }
 
+    public void sendLocation(long id, String name, String password, String location) {
+        Call<Void> call = primerAPI.sendLocation(id,name,password,location);
+    }
     public void removeAndGetNewPrimer(long id, String name, String password, PrimerStatus primerStatus) {
         Call<PrimerTube> call = primerAPI.removeAndGetNewPrimer(id, name, password, primerStatus);
         call.enqueue(new Callback<PrimerTube>() {
