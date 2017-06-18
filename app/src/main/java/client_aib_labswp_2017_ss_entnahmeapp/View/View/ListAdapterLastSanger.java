@@ -35,7 +35,8 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         this.user = user;
         this.listImpl = listImpl;
     }
-    static class ViewHolder{
+
+    static class ViewHolder {
         public TextView txtPos;
         public TextView txtPrimer;
         public TextView txtStorageLocation;
@@ -43,7 +44,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,7 +61,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         final PrimerTube primerTube = primerTubes.get(position);
         final ListAdapterLastSanger.ViewHolder holder = (ListAdapterLastSanger.ViewHolder) view.getTag();
 
-        holder.txtPos.setText(String.valueOf((position%32)+1));
+        holder.txtPos.setText(String.valueOf((position % 32) + 1));
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
@@ -76,5 +77,20 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
 
         return view;
+    }
+
+    public void changeRow(PrimerTube newTube, int positionForReplacement) {
+        getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
+        getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
+        getItem(positionForReplacement - 1).setPutBackDate(newTube.getPutBackDate());
+        getItem(positionForReplacement - 1).setPrimerTubeID(newTube.getPrimerTubeID());
+        getItem(positionForReplacement - 1).setPrimerUID(newTube.getPrimerUID());
+        getItem(positionForReplacement - 1).setName(newTube.getName());
+        getItem(positionForReplacement - 1).setLotNr(newTube.getLotNr());
+        getItem(positionForReplacement - 1).setManufacturer(newTube.getManufacturer());
+        getItem(positionForReplacement - 1).setCurrentLocation(newTube.getCurrentLocation());
+        getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
+        getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
+        notifyDataSetChanged();
     }
 }

@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
@@ -15,6 +16,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.Re
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
     private ListView listView;
     private ListImpl listImpl;
     private RadioGroup listGroup;
+    public static final int REQUEST_POPUP = 300;
+    ListAdapterLastSanger adapter;
 
 
     @Override
@@ -68,6 +72,21 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_POPUP) {
+            if (resultCode == Activity.RESULT_OK) {
+                PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
+                int positionForReplacement = data.getIntExtra("POSITION", 0);
+                adapter.changeRow(tubeNew, positionForReplacement);
+//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
+                System.out.println("good");
+            } else {
+//                System.out.println("tube ist null");
+            }
+        }
+    }
+
     private void receiveLastSangerList(Object o) {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
@@ -80,19 +99,19 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
-                    PrimerTube actualTube = tubes.get(position-1);
+                    PrimerTube actualTube = tubes.get(position - 1);
                     Intent intentPopUp = new Intent(LastProcessedListActivity.this, Pop.class);
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
-                    intentPopUp.putExtra("POSITION",position);
-                    intentPopUp.putExtra("USER",uobj);
-                    startActivity(intentPopUp);
+                    intentPopUp.putExtra("POSITION", position);
+                    intentPopUp.putExtra("USER", uobj);
+                    startActivityForResult(intentPopUp, REQUEST_POPUP);
 
                     Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        ListAdapterLastSanger adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
         listView.setAdapter(adapter);
     }
 
