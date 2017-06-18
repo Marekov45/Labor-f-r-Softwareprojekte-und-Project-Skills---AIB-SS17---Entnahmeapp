@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
@@ -13,6 +14,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImp
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.StorageLocation;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.test.DemoResponse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +32,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     ListImpl listImpl;
     PrimerImpl primerImpl;
     User user;
-    static final int MAXPOSITIONINCARRIER=32;
+    static final int MAXPOSITIONINCARRIER = 32;
 //    View rowView;
 
     public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
@@ -43,6 +46,21 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         this.primerImpl = primerImpl;
     }
 
+    public void changeRow(PrimerTube newTube, int positionForReplacement) {
+        getItem(positionForReplacement-1).setObjectID(newTube.getObjectID());
+        getItem(positionForReplacement-1).setTakeOutDate(newTube.getTakeOutDate());
+        getItem(positionForReplacement-1).setPutBackDate(newTube.getPutBackDate());
+        getItem(positionForReplacement-1).setPrimerTubeID(newTube.getPrimerTubeID());
+        getItem(positionForReplacement-1).setPrimerUID(newTube.getPrimerUID());
+        getItem(positionForReplacement-1).setName(newTube.getName());
+        getItem(positionForReplacement-1).setLotNr(newTube.getLotNr());
+        getItem(positionForReplacement-1).setManufacturer(newTube.getManufacturer());
+        getItem(positionForReplacement-1).setCurrentLocation(newTube.getCurrentLocation());
+        getItem(positionForReplacement-1).setStorageLocation(newTube.getStorageLocation());
+        getItem(positionForReplacement-1).setReturnToStorage(newTube.isReturnToStorage());
+        notifyDataSetChanged();
+    }
+
     //Hold views of the listView to improve its scrolling performance
     static class ViewHolder {
         public TextView txtPos;
@@ -52,32 +70,40 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         public Button manualScan;
     }
 
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-        View view = convertView;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+//        View view = convertView;
+        ViewHolder viewholder;
         if (convertView == null) {
+            viewholder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(vg, parent, false);
-            ViewHolder viewholder = new ViewHolder();
-            viewholder.txtPos = (TextView) view.findViewById(R.id.txtPos);
-            viewholder.txtPrimer = (TextView) view.findViewById(R.id.txtPrimer);
-            viewholder.txtStorageLocation = (TextView) view.findViewById(R.id.txtStorageLocation);
-            viewholder.txtDestination = (TextView) view.findViewById(R.id.txtDestination);
-            view.setTag(viewholder);
+            convertView = inflater.inflate(vg, parent, false);
 
+            viewholder.txtPos = (TextView) convertView.findViewById(R.id.txtPos);
+            viewholder.txtPrimer = (TextView) convertView.findViewById(R.id.txtPrimer);
+            viewholder.txtStorageLocation = (TextView) convertView.findViewById(R.id.txtStorageLocation);
+            viewholder.txtDestination = (TextView) convertView.findViewById(R.id.txtDestination);
+            convertView.setTag(viewholder);
+//            convertView.setTag(getItem(position));
+            convertView.setTag(viewholder);
+
+        } else {
+            // View is being recycled, retrieve the viewHolder object from tag
+            viewholder = (ViewHolder) convertView.getTag();
         }
+
 
 //        System.out.println(position);
 
         final PrimerTube primerTube = primerTubes.get(position);
-        final ViewHolder holder = (ViewHolder) view.getTag();
+        final ViewHolder holder = (ViewHolder) convertView.getTag();
 
 
-        holder.txtPos.setText(String.valueOf((position%32)+1));
+        holder.txtPos.setText(String.valueOf((position % 32) + 1));
 
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
 
-        holder.manualScan = (Button) view.findViewById(R.id.btnTakePrimer);
+        holder.manualScan = (Button) convertView.findViewById(R.id.btnTakePrimer);
 
         holder.manualScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +116,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             }
         });
 
-        if(primerTube.isTaken()){
+        if (primerTube.isTaken()) {
             holder.manualScan.setEnabled(false);
         }
 
@@ -106,14 +132,13 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
 
 
-
 //        primerTubeIndex++;
 //        if(primerTubeIndex>= pickLists.get(listIndex).getPickList().size()){
 //            primerTubeIndex = 0;
 //            listIndex++;
 //        }
 
-        return view;
+        return convertView;
     }
 
 }

@@ -1,7 +1,10 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -43,7 +46,7 @@ public class Pop extends AppCompatActivity implements CustomObserver {
     private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
-
+    private PrimerTube newTube;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +95,15 @@ public class Pop extends AppCompatActivity implements CustomObserver {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(newTube==null){
+                    finish();
+                }else{
+                    final Intent intentNewTube = new Intent();
+                    intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                    intentNewTube.putExtra("POSITION", positionGiven);
+                    setResult(Activity.RESULT_OK, intentNewTube);
+                    finish();
+                }
             }
         });
 
@@ -120,6 +131,7 @@ public class Pop extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
                 primerImpl.removeAndGetNewPrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
+
             }
         });
 
@@ -165,7 +177,7 @@ public class Pop extends AppCompatActivity implements CustomObserver {
 
     private void receiveNewPrimer(Object o) {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        PrimerTube primerTube = (PrimerTube) o;
+        newTube = (PrimerTube) o;
     }
 
     private int chooseReason() {

@@ -1,11 +1,13 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.test;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by User on 09.06.2017.
  */
-public class DemoResponse {
+public class DemoResponse implements Parcelable{
 
     @SerializedName("hour")
     public int hour;
@@ -29,6 +31,31 @@ public class DemoResponse {
     public int monthvalue;
     @SerializedName("chronology")
     public Chronology chronology;
+
+    protected DemoResponse(Parcel in) {
+        hour = in.readInt();
+        minute = in.readInt();
+        second = in.readInt();
+        nano = in.readInt();
+        dayofyear = in.readInt();
+        dayofweek = in.readString();
+        month = in.readString();
+        dayofmonth = in.readInt();
+        year = in.readInt();
+        monthvalue = in.readInt();
+    }
+
+    public static final Creator<DemoResponse> CREATOR = new Creator<DemoResponse>() {
+        @Override
+        public DemoResponse createFromParcel(Parcel in) {
+            return new DemoResponse(in);
+        }
+
+        @Override
+        public DemoResponse[] newArray(int size) {
+            return new DemoResponse[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -121,6 +148,25 @@ public class DemoResponse {
 
     public void setChronology(Chronology chronology) {
         this.chronology = chronology;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(hour);
+        dest.writeInt(minute);
+        dest.writeInt(second);
+        dest.writeInt(nano);
+        dest.writeInt(dayofyear);
+        dest.writeString(dayofweek);
+        dest.writeString(month);
+        dest.writeInt(dayofmonth);
+        dest.writeInt(year);
+        dest.writeInt(monthvalue);
     }
 
     public static class Chronology {

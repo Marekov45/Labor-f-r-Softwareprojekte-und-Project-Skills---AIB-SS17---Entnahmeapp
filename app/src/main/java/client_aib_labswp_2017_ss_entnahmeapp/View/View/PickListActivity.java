@@ -1,8 +1,10 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
@@ -37,12 +39,13 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     private Button bListeAnzeigen;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
+    public static final int REQUEST_POPUP=300;
     private ListImpl listImpl;
     private PrimerImpl primerImpl;
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
-
+    ListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +129,17 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 });
             }
         }
+        if(requestCode==REQUEST_POPUP){
+            if(resultCode== Activity.RESULT_OK){
+                PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
+                int positionForReplacement = data.getIntExtra("POSITION",0);
+                adapter.changeRow(tubeNew, positionForReplacement);
+//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
+                System.out.println("good");
+            }else {
+//                System.out.println("tube ist null");
+            }
+        }
     }
 
     @Override
@@ -164,7 +178,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
                     intentPopUp.putExtra("POSITION",position);
                     intentPopUp.putExtra("USER",uobj);
-                    startActivity(intentPopUp);
+                    startActivityForResult(intentPopUp, REQUEST_POPUP);
 
                     Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
@@ -172,7 +186,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
             }
         });
 
-        ListAdapter adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl, primerImpl);
+        adapter = new ListAdapter(this, R.layout.rowlayout_picklist, R.id.txtPos, tubes, pickLists, uobj, listImpl, primerImpl);
         listView.setAdapter(adapter);
 
     }
