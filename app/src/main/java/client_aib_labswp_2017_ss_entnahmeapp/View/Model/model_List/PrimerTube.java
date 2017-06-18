@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 /**
- * Created by SimonHauck-GamingPC on 23.04.2017.
+ *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PrimerTube implements Parcelable{

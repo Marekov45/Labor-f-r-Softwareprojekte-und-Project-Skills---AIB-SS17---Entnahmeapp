@@ -14,6 +14,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObs
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -74,6 +75,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             case LASTSANGER:
                 receiveLastSangerList(o);
                 break;
+
         }
     }
 
@@ -83,7 +85,13 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             if (resultCode == Activity.RESULT_OK) {
                 PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
                 int positionForReplacement = data.getIntExtra("POSITION", 0);
-                adapter.changeRow(tubeNew, positionForReplacement);
+                NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
+                if(tubeNew!=null){
+                    adapter.changeRow(tubeNew, positionForReplacement);
+                }
+                if(newLocation!=null){
+                    System.out.println("eine neue position"+newLocation.getNewLocation().toString());
+                }
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
                 System.out.println("good");
             } else {

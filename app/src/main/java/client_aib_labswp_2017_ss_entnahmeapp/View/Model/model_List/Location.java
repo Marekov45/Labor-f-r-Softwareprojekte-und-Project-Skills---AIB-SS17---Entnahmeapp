@@ -1,7 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List;
 
 /**
- * Created by SHauck on 12.05.2017.
+ *
  */
 public class Location  {
 

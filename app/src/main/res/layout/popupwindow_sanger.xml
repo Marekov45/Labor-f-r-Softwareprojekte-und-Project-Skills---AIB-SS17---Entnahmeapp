@@ -49,29 +49,7 @@
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp">
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
 
-                    android:text="@string/tvPrimerTubeID"
-                    android:layout_width="366dp"
-                    android:layout_height="match_parent" android:id="@+id/tvPrimerTubeID" android:textSize="24sp"
-                    android:layout_weight="1" android:textColor="@android:color/white"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="382dp"
-                    android:layout_height="match_parent" android:id="@+id/tvIDActTube" android:textSize="24sp"
-                    android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
-        </LinearLayout>
-    </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -93,7 +71,9 @@
                     android:layout_width="382dp"
                     android:layout_height="wrap_content" android:id="@+id/tvLOTActTube" android:textSize="24sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
+
         </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -107,16 +87,15 @@
                 android:layout_height="match_parent">
             <TextView
 
-                    android:text="@string/tvManufacturer"
+                    android:text="@string/tvCurrentLocation"
                     android:layout_width="366dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvManufacturer" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvCurrentLocation" android:textSize="24sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <TextView
                     android:text="TextView"
                     android:layout_width="382dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvManufacturerActTube" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvActLocation" android:textSize="24sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
-
         </LinearLayout>
         <View
                 android:layout_width="match_parent"
@@ -124,6 +103,48 @@
                 android:background="@android:color/white"
                 android:layout_marginTop="20dp"/>
     </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+
+                    android:text="@string/tvNewPosition"
+                    android:layout_width="366dp"
+                    android:layout_height="wrap_content" android:id="@+id/tvNewPosition" android:textSize="24sp"
+                    android:layout_weight="1" android:textColor="@android:color/white"/>
+            <EditText
+                    android:layout_width="385dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editNewPosition" android:layout_weight="1" android:hint="Position eingeben"
+                    android:textColor="@android:color/white" android:singleLine="false"
+                    android:textColorHint="@android:color/white" android:textSize="22sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="@string/btnNewPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/btnNewPosition"/>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

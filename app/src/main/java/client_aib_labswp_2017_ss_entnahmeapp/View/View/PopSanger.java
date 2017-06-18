@@ -15,9 +15,11 @@ import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+import org.w3c.dom.Text;
 
 /**
  * Created by User on 11.06.2017.
@@ -26,12 +28,10 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
 
     private TextView primerName;
     private TextView shownName;
-    private TextView primerID;
-    private TextView shownID;
+
     private TextView primerLOT;
     private TextView shownLOT;
-    private TextView primerManufacturer;
-    private TextView shownManufacturer;
+    private TextView shownLocation;
     private TextView primerNote;
     private EditText message;
 
@@ -39,7 +39,8 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     private Button btnGoBack;
     private RadioGroup reasonforNewPrimerGroup;
     private RadioButton radioEmpty;
-
+    private EditText textNewPosition;
+    private Button btnNewPosition;
     private User uobj;
     private int positionGiven;
     private PrimerTube tube;
@@ -57,7 +58,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .69));
+        getWindow().setLayout((int) (width * .8), (int) (height * .75));
 
         primerImpl = new PrimerImpl();
         primerImpl = new PrimerImpl();
@@ -65,15 +66,16 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
 
         primerName = (TextView) findViewById(R.id.tvPrimerName);
         shownName = (TextView) findViewById(R.id.tvNameActTube);
-        primerID = (TextView) findViewById(R.id.tvPrimerTubeID);
-        shownID = (TextView) findViewById(R.id.tvIDActTube);
+
         primerLOT = (TextView) findViewById(R.id.tvLOT);
         shownLOT = (TextView) findViewById(R.id.tvLOTActTube);
-        primerManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
-        shownManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
+
+        shownLocation = (TextView) findViewById(R.id.tvActLocation);
         primerNote = (TextView) findViewById(R.id.tvNote);
         reasonforNewPrimerGroup = (RadioGroup) findViewById(R.id.reasonNewPrimerGroup);
 
+
+        textNewPosition = (EditText) findViewById(R.id.editNewPosition);
         message = (EditText) findViewById(R.id.editTextNote);
         submit = (Button) findViewById(R.id.btnSubmit);
         btnGoBack=(Button) findViewById(R.id.btnclose);
@@ -85,25 +87,49 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
 
 
         shownName.setText(tube.getName());
-        shownID.setText(tube.getPrimerTubeID());
         shownLOT.setText(tube.getLotNr());
-        shownManufacturer.setText(tube.getManufacturer());
+        shownLocation.setText(tube.getCurrentLocation());
         submit.setEnabled(true);
-
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(newTube==null){
+                if(newTube==null&&textNewPosition.equals("")){
                     finish();
                 }else{
-                    final Intent intentNewTube = new Intent();
-                    intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-                    intentNewTube.putExtra("POSITION", positionGiven);
-                    setResult(Activity.RESULT_OK, intentNewTube);
-                    finish();
+                    if(newTube!=null&&textNewPosition.getText().equals("")){
+                        final Intent intentNewTube = new Intent();
+                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                        intentNewTube.putExtra("POSITION", positionGiven);
+                        setResult(Activity.RESULT_OK, intentNewTube);
+                        finish();
+                    }else if(newTube==null&&!textNewPosition.getText().equals("")){
+                        final Intent intentNewPostition = new Intent();
+                        NewLocation location = new NewLocation(textNewPosition.getText().toString());
+                        intentNewPostition.putExtra("NEWLOCATION", (Parcelable) location);
+                        setResult(Activity.RESULT_OK, intentNewPostition);
+                        finish();
+
+                    }else if(newTube!=null && !textNewPosition.getText().equals("")){
+                        final Intent intentNewTube = new Intent();
+                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                        intentNewTube.putExtra("POSITION", positionGiven);
+                        NewLocation location = new NewLocation(textNewPosition.getText().toString());
+                        intentNewTube.putExtra("NEWLOCATION", (Parcelable) location);
+                        setResult(Activity.RESULT_OK, intentNewTube);
+                        finish();
+                    }
+
                 }
             }
         });
+
+//        btnNewPosition = (Button) findViewById(R.id.btnNewPosition);
+//        btnNewPosition.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         reasonforNewPrimerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

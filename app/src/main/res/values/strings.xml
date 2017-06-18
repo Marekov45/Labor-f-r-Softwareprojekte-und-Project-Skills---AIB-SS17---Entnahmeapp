@@ -53,6 +53,11 @@
     <string name="radionoinfo">Anderer Grund</string>
     <string name="checkBoxNewPrimer">Neuen Primer anfordern</string>
 
-    <string name="btnclose">OK</string>
+    <string name="btnclose">Fertig</string>
+
+    <string name="tvCurrentLocation">Aktuelle Position:</string>
+    <string name="tvNewPosition">Neue Position angeben:</string>
+    <string name="btnNewPosition">Neue Position senden</string>
+
 
 </resources>
