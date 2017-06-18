@@ -93,6 +93,14 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
+        List<PrimerTube> tubes = (List<PrimerTube>) o;
+
+//        final List<PrimerTube> gatheredtubes = new ArrayList<>();
+//        gatheredtubes.addAll(tubes);
+
+
+        ListAdapterGatheredPrimer adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl);
+        listView.setAdapter(adapter);
     }
 
 
