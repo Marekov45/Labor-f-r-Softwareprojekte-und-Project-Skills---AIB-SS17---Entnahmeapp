@@ -79,6 +79,8 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         }
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_POPUP) {

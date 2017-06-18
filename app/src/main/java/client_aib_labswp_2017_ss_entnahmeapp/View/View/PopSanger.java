@@ -123,13 +123,13 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
             }
         });
 
-//        btnNewPosition = (Button) findViewById(R.id.btnNewPosition);
-//        btnNewPosition.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        btnNewPosition = (Button) findViewById(R.id.btnNewPosition);
+        btnNewPosition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), textNewPosition.getText().toString());
+            }
+        });
 
         reasonforNewPrimerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -196,7 +196,14 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
             case REMOVEANDREPLACEPRIMER:
                 receiveNewPrimer(o);
                 break;
+            case SENDLOCATION:
+                sendNewLocation();
+                break;
         }
+    }
+    private void sendNewLocation() {
+        Toast.makeText(this, "SuccessLocationSent", Toast.LENGTH_SHORT).show();
+
     }
 
     private void receiveNewPrimer(Object o) {
