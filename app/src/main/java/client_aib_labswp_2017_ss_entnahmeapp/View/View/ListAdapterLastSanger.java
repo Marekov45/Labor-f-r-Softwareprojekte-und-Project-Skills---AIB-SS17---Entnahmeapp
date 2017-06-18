@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -24,8 +26,10 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
     Context context;
     ListImpl listImpl;
     User user;
+    PrimerImpl primerImpl;
 
-    public ListAdapterLastSanger(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl) {
+
+    public ListAdapterLastSanger(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, primerTubes);
 
         this.context = context;
@@ -34,6 +38,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         this.vg = vg;
         this.user = user;
         this.listImpl = listImpl;
+        this.primerImpl = primerImpl;
     }
 
     static class ViewHolder {
@@ -41,6 +46,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         public TextView txtPrimer;
         public TextView txtStorageLocation;
         public TextView txtDestination;
+        public Button manualScan;
     }
 
     @Override
@@ -54,6 +60,22 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
             viewholder.txtPrimer = (TextView) view.findViewById(R.id.txtPrimer);
             viewholder.txtStorageLocation = (TextView) view.findViewById(R.id.txtStorageLocation);
             viewholder.txtDestination = (TextView) view.findViewById(R.id.txtDestination);
+
+            viewholder.manualScan = (Button) view.findViewById(R.id.btnTakePrimer);
+
+            checkIfPrimerIsTaken(viewholder, position);
+            viewholder.manualScan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println(position);
+
+                    primerImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
+//                remove(getItem(position));
+//
+//                notifyDataSetChanged();
+                }
+            });
+
             view.setTag(viewholder);
 
         }
@@ -65,8 +87,18 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
         holder.txtDestination.setText(primerTube.getCurrentLocation());
-
         return view;
+    }
+
+    private void checkIfPrimerIsTaken(ViewHolder viewholder, int position) {
+        final PrimerTube primerTube = primerTubes.get(position);
+        if(primerTube.getTakeOutDate()==null){
+            viewholder.manualScan.setEnabled(true);
+            notifyDataSetChanged();
+        }else {
+            viewholder.manualScan.setEnabled(false);
+        }
+
     }
 
     public void changeRow(PrimerTube newTube, int positionForReplacement) {
@@ -81,6 +113,8 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         getItem(positionForReplacement - 1).setCurrentLocation(newTube.getCurrentLocation());
         getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
         getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
+
+
         notifyDataSetChanged();
     }
 }
