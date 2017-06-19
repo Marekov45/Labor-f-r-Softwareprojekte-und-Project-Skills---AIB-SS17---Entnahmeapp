@@ -33,6 +33,8 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     private ListImpl listImpl;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
+    List<PrimerTube> tubes;
+    Barcode barcode;
     User uobj;
 
 
@@ -92,8 +94,17 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     private void receiveGatheredPrimerList(Object o) {
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-
-        List<PrimerTube> tubes = (List<PrimerTube>) o;
+        tubes = (List<PrimerTube>) o;
+/**
+        for (PrimerTube x : tubes) {
+            if(txtResult.equals(x.getStorageLocation()) ){
+            x.setTaken(false);
+            }
+                if(PrimerTube.isReturnToStorage() == false){
+                    Intent intent = new Intent (LagerRueckgabeGUI.this, PopupWarning.class);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
+            }**/
 
 //        final List<PrimerTube> gatheredtubes = new ArrayList<>();
 //        gatheredtubes.addAll(tubes);
@@ -107,8 +118,9 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            barcode = null;
             if (data != null) {
-                final Barcode barcode = data.getParcelableExtra("barcode");
+                barcode = data.getParcelableExtra("barcode");
                 txtResult.post(new Runnable() {
                     @Override
                     public void run() {

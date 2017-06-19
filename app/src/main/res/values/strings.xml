@@ -59,5 +59,10 @@
     <string name="tvNewPosition">Neue Position angeben:</string>
     <string name="btnNewPosition">Neue Position senden</string>
 
+    <string name="removeWarning">Hinweis</string>
+    <string name="removeMessage">Diesen Primer bitte entsorgen!</string>
+
+    <string name="btnconfirmwarning">OK</string>
+
 
 </resources>
