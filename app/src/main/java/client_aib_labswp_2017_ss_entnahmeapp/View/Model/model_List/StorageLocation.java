@@ -5,7 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by SimonHauckLaptop on 27.04.2017.
+ *
  */
 public class StorageLocation implements Parcelable{
 

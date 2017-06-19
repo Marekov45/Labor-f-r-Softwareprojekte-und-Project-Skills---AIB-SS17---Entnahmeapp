@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by lschl on 09.05.2017.
+ *
  */
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class PickList {

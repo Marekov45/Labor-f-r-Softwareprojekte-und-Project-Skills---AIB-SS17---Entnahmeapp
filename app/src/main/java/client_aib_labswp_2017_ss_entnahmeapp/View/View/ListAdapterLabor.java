@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
@@ -23,7 +24,7 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
     Context context;
     ListImpl listImpl;
     User user;
-    private String[] items = {"keine Bemerkung", "nicht auffindbar","beschädigt"};
+
 
     public ListAdapterLabor(Context context, int vg, int id, List<PrimerTube> primerTubes, User user, ListImpl listImpl) {
         super(context, vg, id, primerTubes);
@@ -35,12 +36,43 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         this.user = user;
         this.listImpl = listImpl;
     }
+
+    public void changeRow(PrimerTube newTube, int positionForReplacement) {
+        getItem(positionForReplacement-1).setObjectID(newTube.getObjectID());
+        getItem(positionForReplacement-1).setTakeOutDate(newTube.getTakeOutDate());
+        getItem(positionForReplacement-1).setPutBackDate(newTube.getPutBackDate());
+        getItem(positionForReplacement-1).setPrimerTubeID(newTube.getPrimerTubeID());
+        getItem(positionForReplacement-1).setPrimerUID(newTube.getPrimerUID());
+        getItem(positionForReplacement-1).setName(newTube.getName());
+        getItem(positionForReplacement-1).setLotNr(newTube.getLotNr());
+        getItem(positionForReplacement-1).setManufacturer(newTube.getManufacturer());
+        getItem(positionForReplacement-1).setCurrentLocation(newTube.getCurrentLocation());
+        getItem(positionForReplacement-1).setStorageLocation(newTube.getStorageLocation());
+        getItem(positionForReplacement-1).setReturnToStorage(newTube.isReturnToStorage());
+        notifyDataSetChanged();
+    }
+
+    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation){
+        getItem(positionForNewLocation -1).setObjectID(tube.getObjectID());
+        getItem(positionForNewLocation-1).setTakeOutDate(tube.getTakeOutDate());
+        getItem(positionForNewLocation-1).setPutBackDate(tube.getPutBackDate());
+        getItem(positionForNewLocation-1).setPrimerTubeID(tube.getPrimerTubeID());
+        getItem(positionForNewLocation-1).setPrimerUID(tube.getPrimerUID());
+        getItem(positionForNewLocation-1).setName(tube.getName());
+        getItem(positionForNewLocation-1).setLotNr(tube.getLotNr());
+        getItem(positionForNewLocation-1).setManufacturer(tube.getManufacturer());
+        getItem(positionForNewLocation-1).setCurrentLocation(newlocation.getNewLocation());
+        getItem(positionForNewLocation-1).setStorageLocation(tube.getStorageLocation());
+        getItem(positionForNewLocation-1).setReturnToStorage(tube.isReturnToStorage());
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder{
         public TextView txtPrimer;
         public TextView txtPrimerTube;
         public TextView txtLOT;
         public TextView txtLocation;
-        public Spinner txtBemerkung;
+
     }
 
  /**   public Filter getFilter() {
@@ -128,10 +160,7 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         //    }
        // }
         viewholder.txtLocation.setText(primerTubes.get(position).getCurrentLocation());
-        viewholder.txtBemerkung = (Spinner) convertView.findViewById(R.id.bemerkungSpinner);
-          ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context,android.R.layout.simple_spinner_dropdown_item,items);
-         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          viewholder.txtBemerkung.setAdapter(adapter);
+
 
         return convertView;
     }

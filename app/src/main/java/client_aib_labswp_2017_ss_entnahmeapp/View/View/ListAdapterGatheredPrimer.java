@@ -20,18 +20,18 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
 
     private int vg;
     private List<PrimerTube> primerTubes;
-    private List<PickList> pickLists;
     Context context;
     ListImpl listImpl;
     User user;
 
-    public ListAdapterGatheredPrimer(Context context, int vg, int id, User user, ListImpl listImpl) {
-        super(context, vg, id);
+    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> tubes, User user, ListImpl listImpl) {
+        super(context, vg, id, tubes);
 
         this.context = context;
         this.vg = vg;
         this.user = user;
         this.listImpl = listImpl;
+        this.primerTubes=tubes;
     }
     static class ViewHolder{
         public TextView txtReturn_Primer;
@@ -39,18 +39,25 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(vg, parent, false);
             ListAdapterGatheredPrimer.ViewHolder viewholder = new ListAdapterGatheredPrimer.ViewHolder();
-            viewholder.txtReturn_Primer = (TextView) view.findViewById(R.id.txtReturn_Primer);
-            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtReturn_StorageLocation);
+            viewholder.txtReturn_Primer= (TextView) view.findViewById(R.id.txtPrimerLastGathered);
+            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtStorageLocationLastGathered);
             view.setTag(viewholder);
 
         }
+        final PrimerTube primerTube = primerTubes.get(position);
+        final ListAdapterGatheredPrimer.ViewHolder holder = (ListAdapterGatheredPrimer.ViewHolder) view.getTag();
+
+        holder.txtReturn_Primer.setText(primerTube.getName());
+        holder.txtReturn_StorageLocation.setText(primerTube.getStorageLocation().toString());
         return view;
     }
+
+
 }
 

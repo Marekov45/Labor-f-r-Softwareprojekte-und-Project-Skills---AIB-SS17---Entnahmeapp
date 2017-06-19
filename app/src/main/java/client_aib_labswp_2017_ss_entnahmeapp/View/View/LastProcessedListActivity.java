@@ -12,7 +12,9 @@ import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -31,6 +33,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
     private RadioGroup listGroup;
     public static final int REQUEST_POPUP = 300;
     ListAdapterLastSanger adapter;
+    PrimerImpl primerImpl;
 
 
     @Override
@@ -41,6 +44,9 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         uobj = getIntent().getParcelableExtra("USER");
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
+
+        primerImpl= new PrimerImpl();
+        primerImpl.setCObserver(this);
 
         listView = (ListView) findViewById(R.id.listvLastSanger);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_last_sanger, listView, false);
@@ -69,16 +75,31 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             case LASTSANGER:
                 receiveLastSangerList(o);
                 break;
+
         }
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_POPUP) {
             if (resultCode == Activity.RESULT_OK) {
                 PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
+                PrimerTube actualtube = data.getParcelableExtra("ACTUALTUBE");
                 int positionForReplacement = data.getIntExtra("POSITION", 0);
-                adapter.changeRow(tubeNew, positionForReplacement);
+                NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
+                if(tubeNew!=null&&newLocation==null){
+                    adapter.changeRow(tubeNew, positionForReplacement);
+                }
+                if(newLocation!=null&&tubeNew==null){
+                    adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
+                    System.out.println("eine neue position"+newLocation.getNewLocation().toString());
+                }
+                if(tubeNew==null&&newLocation==null){
+
+
+                }
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
                 System.out.println("good");
             } else {
@@ -111,7 +132,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
 
             }
         });
-        adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl);
+        adapter = new ListAdapterLastSanger(this, R.layout.rowlayout_last_sanger, R.id.txtPos, tubes, pickLists, uobj, listImpl, primerImpl);
         listView.setAdapter(adapter);
     }
 
