@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
 
@@ -48,6 +49,21 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         getItem(positionForReplacement-1).setCurrentLocation(newTube.getCurrentLocation());
         getItem(positionForReplacement-1).setStorageLocation(newTube.getStorageLocation());
         getItem(positionForReplacement-1).setReturnToStorage(newTube.isReturnToStorage());
+        notifyDataSetChanged();
+    }
+
+    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation){
+        getItem(positionForNewLocation -1).setObjectID(tube.getObjectID());
+        getItem(positionForNewLocation-1).setTakeOutDate(tube.getTakeOutDate());
+        getItem(positionForNewLocation-1).setPutBackDate(tube.getPutBackDate());
+        getItem(positionForNewLocation-1).setPrimerTubeID(tube.getPrimerTubeID());
+        getItem(positionForNewLocation-1).setPrimerUID(tube.getPrimerUID());
+        getItem(positionForNewLocation-1).setName(tube.getName());
+        getItem(positionForNewLocation-1).setLotNr(tube.getLotNr());
+        getItem(positionForNewLocation-1).setManufacturer(tube.getManufacturer());
+        getItem(positionForNewLocation-1).setCurrentLocation(newlocation.getNewLocation());
+        getItem(positionForNewLocation-1).setStorageLocation(tube.getStorageLocation());
+        getItem(positionForNewLocation-1).setReturnToStorage(tube.isReturnToStorage());
         notifyDataSetChanged();
     }
 

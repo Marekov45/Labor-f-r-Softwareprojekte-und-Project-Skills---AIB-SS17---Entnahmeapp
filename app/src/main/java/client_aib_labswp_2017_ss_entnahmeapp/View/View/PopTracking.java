@@ -15,6 +15,7 @@ import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Model.NewLocation;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
@@ -78,14 +79,34 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (newTube == null) {
+                NewLocation location = new NewLocation(newLocation.getText().toString());
+                if (newTube == null && location.getNewLocation().toString().equals("")) {
                     finish();
                 } else {
-                    final Intent intentNewTube = new Intent();
-                    intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-                    intentNewTube.putExtra("POSITION", positionGiven);
-                    setResult(Activity.RESULT_OK, intentNewTube);
-                    finish();
+                    if (newTube != null && newLocation.getText().equals("")) {
+                        final Intent intentNewTube = new Intent();
+                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                        intentNewTube.putExtra("POSITION", positionGiven);
+                        setResult(Activity.RESULT_OK, intentNewTube);
+                        finish();
+                    } else if (newTube == null && !newLocation.getText().equals("")) {
+                        final Intent intentNewPostition = new Intent();
+                        location = new NewLocation(newLocation.getText().toString());
+                        intentNewPostition.putExtra("NEWLOCATION", (Parcelable) location);
+                        intentNewPostition.putExtra("ACTUALTUBE", (Parcelable) tube);
+                        intentNewPostition.putExtra("POSITION", positionGiven);
+                        setResult(Activity.RESULT_OK, intentNewPostition);
+                        finish();
+
+                    } else if (newTube != null && !newLocation.getText().equals("")) {
+                        final Intent intentNewTube = new Intent();
+                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                        intentNewTube.putExtra("POSITION", positionGiven);
+                        location = new NewLocation(newLocation.getText().toString());
+                        setResult(Activity.RESULT_OK, intentNewTube);
+                        finish();
+                    }
+
                 }
             }
         });
@@ -121,11 +142,9 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         setNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                primerImpl.sendLocation(tube.getObjectID(),uobj.getUsername(),uobj.getPassword(),newLocation.getText().toString());
+                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), newLocation.getText().toString());
             }
         });
-
-
 
 
     }
@@ -192,7 +211,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
                 receiveNewPrimer(o);
                 break;
             case SENDLOCATION:
-                sendNewLocation(o);
+                sendNewLocation();
         }
     }
 
@@ -200,7 +219,8 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         newTube = (PrimerTube) o;
     }
-    private void sendNewLocation(Object o) {
+
+    private void sendNewLocation() {
         Toast.makeText(this, "New Location has been set", Toast.LENGTH_SHORT).show();
     }
 
@@ -220,7 +240,6 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         }
         return 0;
     }
-
 
 
     private PrimerStatus createPrimerStatus() {
