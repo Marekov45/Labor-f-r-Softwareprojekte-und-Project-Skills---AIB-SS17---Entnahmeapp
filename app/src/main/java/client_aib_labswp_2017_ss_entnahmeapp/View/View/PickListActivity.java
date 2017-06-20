@@ -137,7 +137,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 int positionForReplacement = data.getIntExtra("POSITION",0);
                 adapter.changeRow(tubeNew, positionForReplacement);
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-                System.out.println("good");
+//                System.out.println("good");
             }else {
 //                System.out.println("tube ist null");
             }
@@ -159,6 +159,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
     private void takePrimer(Object o) {
         Toast.makeText(this, "Primer has been taken", Toast.LENGTH_SHORT).show();
+
     }
 
     private void receivePrimerList(Object o) {

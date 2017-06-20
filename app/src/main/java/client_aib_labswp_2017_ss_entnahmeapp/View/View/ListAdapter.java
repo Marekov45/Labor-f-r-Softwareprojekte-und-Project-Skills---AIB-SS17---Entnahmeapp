@@ -31,7 +31,6 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     PrimerImpl primerImpl;
     User user;
     static final int MAXPOSITIONINCARRIER = 32;
-//    View rowView;
 
     public ListAdapter(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, primerTubes);
@@ -45,11 +44,15 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     }
 
     public void checkBarcodeWithPrimer(Barcode barcode) {
-        if (barcode.displayValue.equals(primerTubes.get(0).getPrimerTubeID().toString())) {
-            System.out.println("great");
-            primerImpl.takePrimer(primerTubes.get(0).getObjectID(), user.getUsername(), user.getPassword());
-        }
 
+        for (PrimerTube primertube : primerTubes) {
+            if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
+                primerImpl.takePrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
+                primertube.setTaken(true);
+                notifyDataSetChanged();
+            }
+        }
+        Toast.makeText(context, "Kein Primer mit dieser PrimerTubeID zu entnehmen.", Toast.LENGTH_SHORT).show();
     }
 
     public void changeRow(PrimerTube newTube, int positionForReplacement) {
@@ -64,6 +67,8 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         getItem(positionForReplacement - 1).setCurrentLocation(newTube.getCurrentLocation());
         getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
         getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
+        newTube.setTaken(false);
+        getItem(positionForReplacement-1).setTaken(false);
         notifyDataSetChanged();
     }
 
@@ -79,7 +84,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-//        View view = convertView;
+
         ViewHolder viewholder;
         if (convertView == null) {
             viewholder = new ViewHolder();
@@ -92,21 +97,9 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             viewholder.txtDestination = (TextView) convertView.findViewById(R.id.txtDestination);
             viewholder.checkEntnommen = (CheckBox) convertView.findViewById(R.id.checkEntnommen);
 
-//            if (primerTubes.get(position).getTakeOutDate() != null || primerTubes.get(position).isTaken()) {
-//                viewholder.checkEntnommen.setChecked(true);
-//            }
-//            convertView.setTag(viewholder);
-//            convertView.setTag(getItem(position));
             convertView.setTag(viewholder);
 
         }
-//        else {
-        // View is being recycled, retrieve the viewHolder object from tag
-//            viewholder = (ViewHolder) convertView.getTag();
-//        }
-
-
-//        System.out.println(position);
 
         final PrimerTube primerTube = primerTubes.get(position);
         final ViewHolder holder = (ViewHolder) convertView.getTag();
@@ -125,11 +118,10 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
                 System.out.println(position);
                 primerImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
                 getItem(position).setTaken(true);
-
-//                remove(getItem(position));
                 notifyDataSetChanged();
             }
         });
+
 
         if (getItem(position).isTaken()) {
             holder.checkEntnommen.setChecked(true);
@@ -149,13 +141,6 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
             }
         }
         holder.txtDestination.setText(pickListFinal.getDestination().getLocationName());
-
-
-//        primerTubeIndex++;
-//        if(primerTubeIndex>= pickLists.get(listIndex).getPickList().size()){
-//            primerTubeIndex = 0;
-//            listIndex++;
-//        }
 
         return convertView;
     }
