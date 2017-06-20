@@ -121,12 +121,14 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra("barcode");
-                txtResult.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        txtResult.setText(barcode.displayValue);
-                    }
-                });
+                System.out.println(barcode.displayValue);
+                adapter.checkBarcodeWithPrimer(barcode);
+//                txtResult.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        txtResult.setText(barcode.displayValue);
+//                    }
+//                });
             }
         }
         if(requestCode==REQUEST_POPUP){

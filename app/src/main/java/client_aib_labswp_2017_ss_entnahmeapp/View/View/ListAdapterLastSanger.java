@@ -62,21 +62,6 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
             viewholder.txtStorageLocation = (TextView) view.findViewById(R.id.txtStorageLocation);
             viewholder.txtDestination = (TextView) view.findViewById(R.id.txtDestination);
 
-            viewholder.manualScan = (Button) view.findViewById(R.id.btnTakePrimer);
-
-            checkIfPrimerIsTaken(viewholder, position);
-            viewholder.manualScan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    System.out.println(position);
-
-                    primerImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
-//                remove(getItem(position));
-//
-//                notifyDataSetChanged();
-                }
-            });
-
             view.setTag(viewholder);
 
         }
@@ -89,17 +74,6 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
         holder.txtDestination.setText(primerTube.getCurrentLocation());
         return view;
-    }
-
-    private void checkIfPrimerIsTaken(ViewHolder viewholder, int position) {
-        final PrimerTube primerTube = primerTubes.get(position);
-        if(primerTube.getTakeOutDate()==null){
-            viewholder.manualScan.setEnabled(true);
-            notifyDataSetChanged();
-        }else {
-            viewholder.manualScan.setEnabled(false);
-        }
-
     }
 
     public void changeRow(PrimerTube newTube, int positionForReplacement) {
