@@ -38,7 +38,7 @@ public class Warning extends AppCompatActivity implements CustomObserver {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.warning_returnprimer);
+        setContentView(R.layout.popupwarning);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -92,5 +92,4 @@ public class Warning extends AppCompatActivity implements CustomObserver {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
     }
 }
-}
-}
+
