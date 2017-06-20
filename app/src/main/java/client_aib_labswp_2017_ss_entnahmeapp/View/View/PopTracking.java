@@ -72,7 +72,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         positionGiven = getIntent().getIntExtra("POSITION", 0);
         final int position = positionGiven - 1;
         actualLocation.setText(tube.getCurrentLocation());
-        submit.setEnabled(false);
+        submit.setEnabled(true);
         setNewLocation.setEnabled(false);
         checkIfNewLocationEmpty();
 

@@ -59,5 +59,12 @@
     <string name="tvNewPosition">Neue Position angeben:</string>
     <string name="btnNewPosition">Neue Position senden</string>
 
+    <!-- Strings related only to tracking -->
+    <string name="descriptionTracking">Primer-Tracking</string>
+    <string name="hintSearchPrimer">Primername</string>
+    <string name="headerPrimer">Primer</string>
+    <string name="headerPrimerTube">PrimerTubeID</string>
+    <string name="headerLOT">LOT#</string>
+    <string name="headerLocation">Standort/Roboter</string>
 
 </resources>
