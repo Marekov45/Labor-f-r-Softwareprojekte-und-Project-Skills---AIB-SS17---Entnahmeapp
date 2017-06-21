@@ -1,8 +1,10 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +16,7 @@ import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
@@ -31,11 +34,14 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     private Button showGatheredPrimer;
     private ListView listView;
     private ListImpl listImpl;
+    private  PrimerImpl primerImpl;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
+    public static final int REQUEST_POPUP = 300;
     List<PrimerTube> tubes;
     Barcode barcode;
     User uobj;
+    ListAdapterGatheredPrimer adapter;
 
 
     @Override
@@ -46,6 +52,8 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         uobj = getIntent().getParcelableExtra("USER");
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
+        primerImpl = new PrimerImpl();
+        primerImpl.setCObserver(this);
 
         listView = (ListView) findViewById(R.id.listvGatheredPrimer);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_gathered_primer, listView, false);
@@ -82,54 +90,73 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                final Barcode barcode = data.getParcelableExtra("barcode");
+                System.out.println(barcode.displayValue);
+                adapter.checkBarcodeWithPrimer(barcode);
+
+            }
+        }
+    //    if(requestCode==REQUEST_POPUP){
+    //        if(resultCode== Activity.RESULT_OK){
+   //             PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
+    //            int positionForReplacement = data.getIntExtra("POSITION",0);
+    //            adapter.changeRow(tubeNew, positionForReplacement);
+//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
+//                System.out.println("good");
+     //       }else {
+//                System.out.println("tube ist null");
+      //      }
+        }
+
+
+    @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case COMPLETEGATHEREDLIST:
                 receiveGatheredPrimerList(o);
                 break;
+            case RETURNPRIMER:
+                returnPrimer(o);
+                break;
         }
     }
 
+    private void returnPrimer(Object o) {
+        Toast.makeText(this, "Primer has been returned to storage", Toast.LENGTH_SHORT).show();
+
+    }
 
     private void receiveGatheredPrimerList(Object o) {
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        tubes = (List<PrimerTube>) o;
-/**
-        for (PrimerTube x : tubes) {
-            if(txtResult.equals(x.getStorageLocation()) ){
-            x.setTaken(false);
-            }
-                if(PrimerTube.isReturnToStorage() == false){
-                    Intent intent = new Intent (LagerRueckgabeGUI.this, PopupWarning.class);
-                    startActivityForResult(intent, REQUEST_CODE);
+       final List<PrimerTube> tubes = (List<PrimerTube>) o;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (id != -1) {
+                    PrimerTube actualTube = tubes.get(position - 1);
+                    Intent intentPopUp = new Intent(LagerRueckgabeGUI.this, PopupWarning.class);
+                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
+                    intentPopUp.putExtra("POSITION", position);
+                    intentPopUp.putExtra("USER", uobj);
+                    startActivityForResult(intentPopUp, REQUEST_POPUP);
+
+                    Toast.makeText(LagerRueckgabeGUI.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
-            }**/
 
-//        final List<PrimerTube> gatheredtubes = new ArrayList<>();
-//        gatheredtubes.addAll(tubes);
+            }
+        });
 
 
-        ListAdapterGatheredPrimer adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl);
+         adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);
         listView.setAdapter(adapter);
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            barcode = null;
-            if (data != null) {
-                barcode = data.getParcelableExtra("barcode");
-                txtResult.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        txtResult.setText(barcode.displayValue);
-                    }
-                });
-            }
-        }
-    }
+
 
     @Override
     public void onResponseError() {

@@ -6,11 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.List;
 /**
@@ -22,9 +25,10 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     private List<PrimerTube> primerTubes;
     Context context;
     ListImpl listImpl;
+    PrimerImpl primerImpl;
     User user;
 
-    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> tubes, User user, ListImpl listImpl) {
+    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> tubes, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, tubes);
 
         this.context = context;
@@ -32,11 +36,24 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         this.user = user;
         this.listImpl = listImpl;
         this.primerTubes=tubes;
+        this.primerImpl = primerImpl;
     }
     static class ViewHolder{
         public TextView txtReturn_Primer;
         public TextView txtReturn_StorageLocation;
     }
+    public void checkBarcodeWithPrimer(Barcode barcode) {
+
+        for (PrimerTube primertube : primerTubes) {
+            if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
+                primerImpl.returnPrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
+                primertube.setTaken(false);
+                notifyDataSetChanged();
+            }
+        }
+
+    }
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

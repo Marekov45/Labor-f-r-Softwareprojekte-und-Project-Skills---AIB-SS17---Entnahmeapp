@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by User on 16.06.2017.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.0.103:8080/";
 
 //    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssX").create();
 
@@ -34,6 +34,34 @@ public class PrimerImpl {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     cObserver.onResponseSuccess(null, ResponseCode.TAKEPRIMER);
+                } else {
+                    try {
+                        System.out.println(response.code());
+                        System.out.println(response.errorBody().string());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+    }
+
+    public void returnPrimer(long id, String name, String password) {
+        Call<Void> call = primerAPI.returnPrimer(id, name, password);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    cObserver.onResponseSuccess(null, ResponseCode.RETURNPRIMER);
                 } else {
                     try {
                         System.out.println(response.code());
