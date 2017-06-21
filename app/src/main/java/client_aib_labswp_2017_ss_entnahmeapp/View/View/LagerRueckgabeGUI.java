@@ -133,7 +133,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
        final List<PrimerTube> tubes = (List<PrimerTube>) o;
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      /**  listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
@@ -148,7 +148,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
                 }
 
             }
-        });
+        }); **/
 
 
          adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);

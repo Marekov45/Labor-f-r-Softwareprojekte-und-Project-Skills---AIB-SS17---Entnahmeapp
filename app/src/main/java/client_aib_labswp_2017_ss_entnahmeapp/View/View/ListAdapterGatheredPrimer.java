@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
@@ -41,13 +42,14 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     static class ViewHolder{
         public TextView txtReturn_Primer;
         public TextView txtReturn_StorageLocation;
+        public CheckBox checkZurueckgegeben;
     }
     public void checkBarcodeWithPrimer(Barcode barcode) {
 
         for (PrimerTube primertube : primerTubes) {
             if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
                 primerImpl.returnPrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
-                primertube.setTaken(false);
+                primertube.setTaken(true);
                 notifyDataSetChanged();
             }
         }
@@ -57,22 +59,33 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View view = convertView;
+        ViewHolder viewholder;
         if (convertView == null) {
+            viewholder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(vg, parent, false);
-            ListAdapterGatheredPrimer.ViewHolder viewholder = new ListAdapterGatheredPrimer.ViewHolder();
-            viewholder.txtReturn_Primer= (TextView) view.findViewById(R.id.txtPrimerLastGathered);
-            viewholder.txtReturn_StorageLocation = (TextView) view.findViewById(R.id.txtStorageLocationLastGathered);
-            view.setTag(viewholder);
+            convertView = inflater.inflate(vg, parent, false);
+
+            viewholder.txtReturn_Primer= (TextView) convertView.findViewById(R.id.txtPrimerLastGathered);
+            viewholder.txtReturn_StorageLocation = (TextView) convertView.findViewById(R.id.txtStorageLocationLastGathered);
+            viewholder.checkZurueckgegeben = (CheckBox) convertView.findViewById(R.id.checkZurueck);
+            convertView.setTag(viewholder);
 
         }
+
         final PrimerTube primerTube = primerTubes.get(position);
-        final ListAdapterGatheredPrimer.ViewHolder holder = (ListAdapterGatheredPrimer.ViewHolder) view.getTag();
+        final ViewHolder holder = (ViewHolder) convertView.getTag();
+
 
         holder.txtReturn_Primer.setText(primerTube.getName());
         holder.txtReturn_StorageLocation.setText(primerTube.getStorageLocation().toString());
-        return view;
+        if (getItem(position).isTaken()) {
+            holder.checkZurueckgegeben.setChecked(true);
+
+        } else {
+            holder.checkZurueckgegeben.setChecked(false);
+
+        }
+        return convertView;
     }
 
 
