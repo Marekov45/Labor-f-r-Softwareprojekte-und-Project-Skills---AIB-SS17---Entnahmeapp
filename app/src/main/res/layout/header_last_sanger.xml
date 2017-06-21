@@ -43,14 +43,6 @@
                 android:background="#c0c0c0"
 
         />
-        <TextView
-                android:layout_column="4"
-                android:padding="10dp"
-                android:layout_span="2"
-                android:text="Man. Entn."
-                android:textStyle="bold"
-                android:background="#c0c0c0"
-        />
     </TableRow>
 
 </TableLayout>

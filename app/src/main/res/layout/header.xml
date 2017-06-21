@@ -29,7 +29,7 @@
         <TextView
                 android:layout_column="2"
                 android:padding="10dp"
-                android:layout_span="4"
+                android:layout_span="5"
                 android:text="Lagerkoordinate"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
@@ -38,7 +38,7 @@
                 android:layout_column="3"
                 android:padding="10dp"
                 android:text="Zielort"
-                android:layout_span="3"
+                android:layout_span="2"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
 
@@ -46,7 +46,14 @@
         <TextView
                 android:layout_column="4"
                 android:padding="10dp"
-                android:layout_span="2"
+                android:text="entnommen"
+                android:layout_span="3"
+                android:textStyle="bold"
+                android:background="#c0c0c0"/>
+        <TextView
+                android:layout_column="5"
+                android:padding="10dp"
+                android:layout_span="3"
                 android:text="Man. Entn."
                 android:textStyle="bold"
                 android:background="#c0c0c0"

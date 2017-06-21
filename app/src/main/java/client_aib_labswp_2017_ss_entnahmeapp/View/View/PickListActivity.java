@@ -121,12 +121,14 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra("barcode");
-                txtResult.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        txtResult.setText(barcode.displayValue);
-                    }
-                });
+                System.out.println(barcode.displayValue);
+                adapter.checkBarcodeWithPrimer(barcode);
+//                txtResult.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        txtResult.setText(barcode.displayValue);
+//                    }
+//                });
             }
         }
         if(requestCode==REQUEST_POPUP){
@@ -135,7 +137,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 int positionForReplacement = data.getIntExtra("POSITION",0);
                 adapter.changeRow(tubeNew, positionForReplacement);
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-                System.out.println("good");
+//                System.out.println("good");
             }else {
 //                System.out.println("tube ist null");
             }
@@ -157,6 +159,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
     private void takePrimer(Object o) {
         Toast.makeText(this, "Primer has been taken", Toast.LENGTH_SHORT).show();
+
     }
 
     private void receivePrimerList(Object o) {

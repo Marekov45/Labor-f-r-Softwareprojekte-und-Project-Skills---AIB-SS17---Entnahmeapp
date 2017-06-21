@@ -1,4 +1,5 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.View;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -32,7 +33,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     private ListView listView;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
-    public static final int REQUEST_POPUP=300;
+    public static final int REQUEST_POPUP = 300;
     ListAdapterLabor adapter;
 
 
@@ -56,37 +57,33 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
             }
 
         });
-
-
         listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
-
         setupSearchView();
     }
 
     private void setupSearchView() {
-        // view.setIconifiedByDefault(false);
         view.setOnQueryTextListener(this);
         view.setSubmitButtonEnabled(true);
-        view.setQueryHint("Primername");
+        view.setQueryHint(getString(R.string.hintSearchPrimer));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==REQUEST_POPUP){
-            if(resultCode== Activity.RESULT_OK){
-                PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
+        if (requestCode == REQUEST_POPUP) {
+            if (resultCode == Activity.RESULT_OK) {
+                PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
                 PrimerTube actualtube = data.getParcelableExtra("ACTUALTUBE");
-                int positionForReplacement = data.getIntExtra("POSITION",0);
+                int positionForReplacement = data.getIntExtra("POSITION", 0);
                 NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
-                if(tubeNew!=null&&newLocation==null){
+                if (tubeNew != null && newLocation == null) {
                     adapter.changeRow(tubeNew, positionForReplacement);
                 }
-                if(newLocation!=null&&tubeNew==null){
+                if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
-                    System.out.println("eine neue position"+newLocation.getNewLocation().toString());
+                    System.out.println("eine neue position" + newLocation.getNewLocation().toString());
                 }
                 System.out.println("good");
-            }else {
+            } else {
 
             }
         }
@@ -113,11 +110,11 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
-                    PrimerTube actualTube = tubes.get(position-1);
+                    PrimerTube actualTube = tubes.get(position - 1);
                     Intent intentPopUp = new Intent(LaborGui.this, PopTracking.class);
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
-                    intentPopUp.putExtra("POSITION",position);
-                    intentPopUp.putExtra("USER",uobj);
+                    intentPopUp.putExtra("POSITION", position);
+                    intentPopUp.putExtra("USER", uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
                     Toast.makeText(LaborGui.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
@@ -125,7 +122,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
             }
         });
-         adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
+        adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
         listView.setAdapter(adapter);
     }
 
@@ -134,7 +131,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         final List<PrimerTube> tubes = (List<PrimerTube>) o;
 
-         adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
+        adapter = new ListAdapterLabor(this, R.layout.rowlayout_tracking, R.id.txtPos, tubes, uobj, listImpl);
         listView.setAdapter(adapter);
 
     }
@@ -151,7 +148,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        listImpl.requestGatheredPrimers(query,uobj.getUsername(),uobj.getPassword());
+        listImpl.requestGatheredPrimers(query, uobj.getUsername(), uobj.getPassword());
         return true;
     }
 

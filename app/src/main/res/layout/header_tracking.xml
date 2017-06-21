@@ -10,7 +10,7 @@
                 android:layout_column="0"
                 android:padding="10dp"
                 android:layout_span="3"
-                android:text="Primer"
+                android:text="@string/headerPrimer"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
                 android:layout_width="wrap_content" android:layout_marginLeft="60dp"/>
@@ -18,7 +18,7 @@
                 android:layout_column="1"
                 android:padding="10dp"
                 android:layout_span="2"
-                android:text="PrimerTubeID"
+                android:text="@string/headerPrimerTube"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
         />
@@ -26,14 +26,14 @@
                 android:layout_column="2"
                 android:padding="10dp"
                 android:layout_span="2"
-                android:text="LOT#"
+                android:text="@string/headerLOT"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
                 android:gravity="center" android:layout_marginRight="15dp"/>
         <TextView
                 android:layout_column="3"
                 android:padding="10dp"
-                android:text="Standort/Roboter"
+                android:text="@string/headerLocation"
                 android:layout_span="2"
                 android:textStyle="bold"
                 android:background="#c0c0c0"
