@@ -143,7 +143,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
                     intentPopUp.putExtra("USER", uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
-                  //  Toast.makeText(LagerRueckgabeGUI.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                  
                 }
 
             }
