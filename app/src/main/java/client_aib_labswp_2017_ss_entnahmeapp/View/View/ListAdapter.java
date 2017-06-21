@@ -123,7 +123,7 @@ public class ListAdapter extends ArrayAdapter<PrimerTube> {
         });
 
 
-        if (getItem(position).isTaken()) {
+        if (getItem(position).isTaken() || getItem(position).getTakeOutDate() != null) {
             holder.checkEntnommen.setChecked(true);
             holder.manualScan.setEnabled(false);
         } else {

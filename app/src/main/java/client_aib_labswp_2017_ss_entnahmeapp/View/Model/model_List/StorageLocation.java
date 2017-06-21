@@ -46,11 +46,11 @@ public class StorageLocation implements Parcelable{
     };
 
     /**
-     * @return String representation of {@link StorageLocation} onject.
+     * @return String representation of {@link StorageLocation} object.
      */
     @Override
     public String toString() {
-        return "Tower: " + tower + "; Box" + box + "; Column: " + column + "; Row: " + row;
+        return "T: " + tower + "; B: " + box + "; Col: " + column + "; Row: " + row;
     }
 
     public int getTower() {
