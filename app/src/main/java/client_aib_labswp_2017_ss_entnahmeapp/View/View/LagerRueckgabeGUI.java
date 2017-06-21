@@ -130,7 +130,6 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     }
 
     private void receiveGatheredPrimerList(Object o) {
-        System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
        final List<PrimerTube> tubes = (List<PrimerTube>) o;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,13 +137,13 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LagerRueckgabeGUI.this, PopupWarning.class);
+                    Intent intentPopUp = new Intent(LagerRueckgabeGUI.this, PopReturn.class);
                     intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
                     intentPopUp.putExtra("POSITION", position);
                     intentPopUp.putExtra("USER", uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
-                    Toast.makeText(LagerRueckgabeGUI.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(LagerRueckgabeGUI.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }

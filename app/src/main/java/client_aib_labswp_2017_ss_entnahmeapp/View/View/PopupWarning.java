@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
@@ -30,6 +32,7 @@ public class PopupWarning extends AppCompatActivity implements CustomObserver {
     private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
+    private ListImpl listImpl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,17 +45,26 @@ public class PopupWarning extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .69));
+        getWindow().setLayout((int) (width * .8), (int) (height * .32));
 
-        primerImpl = new PrimerImpl();
-        primerImpl = new PrimerImpl();
-        primerImpl.setCObserver(this);
 
+
+        listImpl = new ListImpl();
+        listImpl.setCObserver(this);
+
+        uobj = getIntent().getParcelableExtra("USER");
         removeWarning = (TextView) findViewById(R.id.removeWarning);
         removeMessage = (TextView) findViewById(R.id.removeMessage);
 
         btnconfirmwarning = (Button) findViewById(R.id.btn_confirmwarning);
 
+
+        btnconfirmwarning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
@@ -60,7 +72,7 @@ public class PopupWarning extends AppCompatActivity implements CustomObserver {
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
-            case REMOVEANDREPLACEPRIMER:
+            case REMOVEPRIMER:
                 removePrimer(o);
                 break;
         }
@@ -68,12 +80,7 @@ public class PopupWarning extends AppCompatActivity implements CustomObserver {
 
 
     private void removePrimer(Object o) {
-        System.out.println(o.toString());
         Toast.makeText(this, "Primer wurde entsorgt", Toast.LENGTH_SHORT).show();
-
-        List<PrimerTube> tubes = (List<PrimerTube>) o;
-        tubes.remove(o);
-
     }
 
 
