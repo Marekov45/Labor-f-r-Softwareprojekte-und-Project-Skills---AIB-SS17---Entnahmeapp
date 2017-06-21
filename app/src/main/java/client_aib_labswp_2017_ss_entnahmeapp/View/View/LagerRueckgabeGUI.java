@@ -38,10 +38,10 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     public static final int REQUEST_POPUP = 300;
-    List<PrimerTube> tubes;
-    Barcode barcode;
-    User uobj;
-    ListAdapterGatheredPrimer adapter;
+//    List<PrimerTube> tubes;
+//    Barcode barcode;
+    private User uobj;
+    private ListAdapterGatheredPrimer adapter;
 
 
     @Override
@@ -150,8 +150,10 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         });
 
 
-         adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);
+        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);
+//        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);
         listView.setAdapter(adapter);
+//        listView.setAdapter(adapter);
     }
 
 

@@ -56,7 +56,6 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
 
     }
 
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewholder;

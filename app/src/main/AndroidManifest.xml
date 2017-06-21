@@ -8,7 +8,7 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/cegat"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
@@ -50,34 +50,41 @@
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopSanger"
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity
                 android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopTracking"
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
 
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopReturn"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
-                  android:theme="@style/AppTheme.NoActionBar">
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopupWarning"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
+                  android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                  android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

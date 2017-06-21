@@ -2,7 +2,6 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.View;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
