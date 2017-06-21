@@ -14,11 +14,14 @@ import android.view.View;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.CustomObserver;
+import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Model.model_List.PrimerTube;
+
+import java.util.List;
 
 
 /**
@@ -31,12 +34,15 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     private Button btnClose;
     private RadioGroup reasonforRemovalGroup;
     private RadioButton radioEmpty;
-
+    private ListImpl listImpl;
     private User uobj;
     private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
+    private EditText message;
+    private ListView listView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,18 +55,22 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .26));
+        getWindow().setLayout((int) (width * .8), (int) (height * .32));
+
 
         primerImpl = new PrimerImpl();
-        primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
+        listImpl = new ListImpl();
+        listImpl.setCObserver(this);
+        listView = (ListView) findViewById(R.id.listvGatheredPrimer);
+        message = (EditText) findViewById(R.id.etxtMessage);
 
 
         reasonforRemovalGroup = (RadioGroup) findViewById(R.id.reasonRemovalGroup);
 
 
         btnDelete = (Button) findViewById(R.id.btnRemove);
-        btnClose = (Button) findViewById(R.id.btnclose);
+        btnClose = (Button) findViewById(R.id.bttnclose);
 
         uobj = getIntent().getParcelableExtra("USER");
         tube = getIntent().getParcelableExtra("TUBE");
@@ -81,6 +91,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
                 switch (checkedId) {
                     case R.id.rbtnNoReason:
                         btnDelete.setEnabled(false);
+                        break;
                     case R.id.rbtnempty:
                     case R.id.rbtnbroken:
                     case R.id.rbtnspoiled:
@@ -95,9 +106,6 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
                 primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
-            //    Intent myIntent = new Intent(PopReturn.this, PopupWarning.class);
-                //  myIntent.putExtra("key", value); //Optional parameters
-            //    PopReturn.this.startActivity(myIntent);
             }
         });
 
@@ -113,6 +121,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
                 break;
         }
     }
+
 
     private void removePrimer(Object o) {
         Toast.makeText(this, "Primer has been removed", Toast.LENGTH_SHORT).show();
@@ -138,8 +147,13 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
 
     private PrimerStatus createPrimerStatus() {
         PrimerStatus status = new PrimerStatus("", 0);
-        status.setMessage("");
-        status.setStatusCode(chooseReason());
+        if (message.getText().toString().matches("")) {
+            status.setMessage("");
+            status.setStatusCode(chooseReason());
+        } else {
+            status.setMessage(message.getText().toString());
+            status.setStatusCode(chooseReason());
+        }
         return status;
     }
 

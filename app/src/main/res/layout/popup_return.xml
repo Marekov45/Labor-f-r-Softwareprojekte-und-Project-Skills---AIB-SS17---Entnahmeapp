@@ -62,7 +62,30 @@
     </LinearLayout>
 
 
-<View
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="Nachricht:"
+                    android:layout_width="366dp"
+                    android:layout_height="wrap_content" android:id="@+id/textView" android:layout_weight="1"
+                    android:textSize="24sp" android:textColor="@android:color/white" android:layout_marginTop="10dp"/>
+            <EditText
+                    android:layout_width="385dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/etxtMessage" android:layout_weight="1" android:layout_marginTop="10dp"
+                    android:hint="Nachricht eintragen" android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white" android:textSize="24sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
 android:layout_width="match_parent"
 android:layout_height="2dp"
 android:background="@android:color/white"
@@ -92,7 +115,7 @@ android:layout_marginTop="20dp"/>
                     android:text="Schließen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btnclose"
+                    android:id="@+id/bttnclose"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
 

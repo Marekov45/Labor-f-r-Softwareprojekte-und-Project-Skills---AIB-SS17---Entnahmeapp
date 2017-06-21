@@ -67,12 +67,12 @@
                 android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
-        <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopupWarning"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
-                android:theme="@style/AppTheme.CustomTheme">
-        </activity>
+
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopReturn"
+                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopupWarning"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
