@@ -42,7 +42,7 @@ public class PopupWarning extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .69));
+        getWindow().setLayout((int) (width * .8), (int) (height * .32));
 
         primerImpl = new PrimerImpl();
         primerImpl = new PrimerImpl();

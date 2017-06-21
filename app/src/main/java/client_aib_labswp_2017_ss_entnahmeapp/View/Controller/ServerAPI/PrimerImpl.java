@@ -137,6 +137,33 @@ public class PrimerImpl {
         });
     }
 
+    public void removePrimer(long id, String name, String password, PrimerStatus primerStatus) {
+        Call<Void> call = primerAPI.removePrimer(id, name, password, primerStatus);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    cObserver.onResponseSuccess(null, ResponseCode.REMOVEPRIMER);
+                }else{
+                    try {
+                        System.out.println(response.code());
+                        System.out.println(response.errorBody().string());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    cObserver.onResponseError();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+                cObserver.onResponseFailure();
+            }
+        });
+    }
+
 
 
     public void setCObserver(CustomObserver customObserver) {
