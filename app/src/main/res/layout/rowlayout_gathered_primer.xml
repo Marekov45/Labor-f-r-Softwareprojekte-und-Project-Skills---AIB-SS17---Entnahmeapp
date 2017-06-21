@@ -23,6 +23,14 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/checkZurueck" android:layout_column="2" android:layout_span="1"
                 android:clickable="false" android:layout_height="wrap_content"/>
+        <Button
+                android:id="@+id/btnReturnPrimer"
+                android:layout_column="5"
+                android:padding="10dp" android:text="@string/btnReturnPrimer"
+                android:layout_span="3"
+                android:background="@android:color/white" android:layout_width="0dp"
+                android:layout_marginRight="10dp" android:layout_marginTop="0dp" android:layout_marginBottom="10dp"
+        />
     </TableRow>
 
 </TableLayout>

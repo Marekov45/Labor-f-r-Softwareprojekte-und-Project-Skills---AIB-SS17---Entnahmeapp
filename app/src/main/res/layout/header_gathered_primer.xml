@@ -31,6 +31,14 @@
                 android:layout_height="wrap_content" android:id="@+id/textView4" android:textStyle="normal|bold"
                 android:layout_column="2" android:layout_span="1" android:padding="10dp"
                 android:layout_marginRight="10dp" android:gravity="center"/>
+        <TextView
+                android:layout_column="3"
+                android:padding="10dp"
+                android:layout_span="3"
+                android:text="Man. Rückgabe."
+                android:textStyle="bold"
+                android:background="#c0c0c0"
+        />
     </TableRow>
 
 </TableLayout>

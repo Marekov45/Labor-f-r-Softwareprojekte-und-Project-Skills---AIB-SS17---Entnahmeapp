@@ -72,4 +72,7 @@
     <string name="removeMessage">Diesen Primer bitte entsorgen!</string>
 
     <string name="btnconfirmwarning">OK</string>
+    <string name="btnReturnPrimer">Primer zurücklegen</string>
+
+
 </resources>

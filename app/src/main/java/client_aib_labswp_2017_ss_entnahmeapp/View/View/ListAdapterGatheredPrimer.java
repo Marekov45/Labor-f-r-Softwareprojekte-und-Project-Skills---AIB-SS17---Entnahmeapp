@@ -4,10 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
@@ -43,6 +40,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         public TextView txtReturn_Primer;
         public TextView txtReturn_StorageLocation;
         public CheckBox checkZurueckgegeben;
+        public Button returnPrimer;
     }
     public void checkBarcodeWithPrimer(Barcode barcode) {
 
@@ -67,6 +65,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
             viewholder.txtReturn_Primer= (TextView) convertView.findViewById(R.id.txtPrimerLastGathered);
             viewholder.txtReturn_StorageLocation = (TextView) convertView.findViewById(R.id.txtStorageLocationLastGathered);
             viewholder.checkZurueckgegeben = (CheckBox) convertView.findViewById(R.id.checkZurueck);
+            viewholder.returnPrimer = (Button) convertView.findViewById(R.id.btnReturnPrimer);
             convertView.setTag(viewholder);
 
         }
@@ -74,14 +73,26 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         final PrimerTube primerTube = primerTubes.get(position);
         final ViewHolder holder = (ViewHolder) convertView.getTag();
 
+        holder.returnPrimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                primerImpl.returnPrimer(primerTube.getObjectID(), user.getUsername(), user.getPassword());
+                primerTube.setTaken(true);
+//                System.out.println("Primer zurückgelegt"+primerTube.getName());
+                notifyDataSetChanged();
+            }
+        });
+
 
         holder.txtReturn_Primer.setText(primerTube.getName());
         holder.txtReturn_StorageLocation.setText(primerTube.getStorageLocation().toString());
         if (getItem(position).isTaken()) {
             holder.checkZurueckgegeben.setChecked(true);
+            holder.returnPrimer.setEnabled(false);
 
         } else {
             holder.checkZurueckgegeben.setChecked(false);
+            holder.returnPrimer.setEnabled(true);
 
         }
         return convertView;
