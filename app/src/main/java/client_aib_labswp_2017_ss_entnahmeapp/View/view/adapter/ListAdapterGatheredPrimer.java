@@ -80,7 +80,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         holder.returnPrimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!primerTube.isReturnToStorage()){
+                if (primerTube.isReturnToStorage()==false){
                     Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
                 }else {
                     primerImpl.returnPrimer(primerTube.getObjectID(), user.getUsername(), user.getPassword());
