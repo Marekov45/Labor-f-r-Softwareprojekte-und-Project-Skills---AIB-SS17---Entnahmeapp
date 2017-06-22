@@ -13,15 +13,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.PickListActivity"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_login"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_login"
                 android:screenOrientation="portrait"
@@ -33,57 +33,57 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.ScanActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.scan.ScanActivity"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_login"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LaborGui"
                 android:configChanges="orientation"
                 android:label="@string/title_activity_labor"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.Pop"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.PickListActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopPicklist"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.PickListActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopSanger"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopSanger"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LastProcessedListActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity
-                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopTracking"
-                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LaborGui"
+                android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopTracking"
+                android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LaborGui"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.CustomTheme">
         </activity>
 
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopReturn"
-                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopReturn"
+                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.CustomTheme">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.PopupWarning"
-                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI"
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopupWarning"
+                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.View.LastProcessedListActivity"
-                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.View.LoginActivity"
+        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LastProcessedListActivity"
+                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>

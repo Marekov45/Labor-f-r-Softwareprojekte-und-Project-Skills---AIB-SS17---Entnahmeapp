@@ -1,11 +1,9 @@
 package ServerAPITest;
 
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginAPI;
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.LoginControllerImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.LoginControllerImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import retrofit2.Call;
 
 import static org.junit.Assert.*;
 

@@ -1,9 +1,8 @@
 package ServerAPITest;
 
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.ListImpl;
-import client_aib_labswp_2017_ss_entnahmeapp.View.Controller.ServerAPI.PrimerImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
+import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
-        tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.View.LagerRueckgabeGUI">
+        tools:context="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI">
 
 
     <LinearLayout
