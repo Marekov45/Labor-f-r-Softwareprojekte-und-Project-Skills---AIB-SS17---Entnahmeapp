@@ -15,7 +15,7 @@ import java.io.IOException;
  * Created by User on 16.06.2017.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.137.1:8080/";
 
 //    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssX").create();
 

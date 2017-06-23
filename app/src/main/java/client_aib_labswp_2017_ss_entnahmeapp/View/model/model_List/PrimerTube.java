@@ -23,7 +23,7 @@ public class PrimerTube implements Parcelable{
     private String name;
     private String lotNr;
     private StorageLocation storageLocation;
-    private static boolean returnToStorage;
+    private boolean returnToStorage;
     private String manufacturer;
     private long objectID;
 
@@ -100,7 +100,7 @@ public class PrimerTube implements Parcelable{
         return storageLocation;
     }
 
-    public static boolean isReturnToStorage() {
+    public boolean isReturnToStorage() {
         return returnToStorage;
     }
 
