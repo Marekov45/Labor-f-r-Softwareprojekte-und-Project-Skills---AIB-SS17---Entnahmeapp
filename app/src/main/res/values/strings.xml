@@ -66,6 +66,8 @@
     <string name="headerPrimerTube">PrimerTubeID</string>
     <string name="headerLOT">LOT#</string>
     <string name="headerLocation">Standort/Roboter</string>
+    <string name="btnList">Liste anzeigen</string>
+    <string name="checkBoxAdvSearch">Erweiterte Suche</string>
 
     <!-- Strings related only to rueckgabe -->
     <string name="removeWarning">Hinweis</string>

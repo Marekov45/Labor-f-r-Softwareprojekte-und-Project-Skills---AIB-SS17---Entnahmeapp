@@ -25,14 +25,17 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
 
     private Button logoutButton;
+    private Button listButton;
+    private CheckBox searchBox;
     private SearchView view;
+    private boolean wildcardSearch;
     private ListImpl listImpl;
     private User uobj;
     private ListView listView;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     public static final int REQUEST_POPUP = 300;
-    public static final int REQUEST_POPUP_SEARCH=400;
+    public static final int REQUEST_POPUP_SEARCH = 400;
     private ListAdapterLabor adapter;
 
 
@@ -44,6 +47,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
         listView = (ListView) findViewById(R.id.list);
+        wildcardSearch = false;
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_tracking, listView, false);
         listView.addHeaderView(headerView);
         view = (SearchView) findViewById(R.id.search);
@@ -56,7 +60,27 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
             }
 
         });
-        listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
+        listButton = (Button) findViewById(R.id.btnShowListAll);
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
+            }
+        });
+        searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
+        searchBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    wildcardSearch = true;
+                    Toast.makeText(LaborGui.this, "Suche mit Platzhalter aktiviert", Toast.LENGTH_SHORT).show();
+                } else {
+                    wildcardSearch = false;
+                }
+            }
+        });
+
+        //  listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
         setupSearchView();
     }
 
@@ -80,8 +104,8 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
                 if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
                 }
-            } else if (resultCode == REQUEST_POPUP_SEARCH){
-                if (resultCode==Activity.RESULT_OK){
+            } else if (resultCode == REQUEST_POPUP_SEARCH) {
+                if (resultCode == Activity.RESULT_OK) {
                     PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
                     PrimerTube tubeactualSearch = data.getParcelableExtra("ACTUALTUBE");
                     int positionForReplacementSearch = data.getIntExtra("POSITION", 0);
@@ -141,8 +165,8 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(id!=-1){
-                    PrimerTube actualTubeSearch = tubesSearch.get(position-1);
+                if (id != -1) {
+                    PrimerTube actualTubeSearch = tubesSearch.get(position - 1);
                     Intent intentpopUpSearch = new Intent(LaborGui.this, PopTracking.class);
                     intentpopUpSearch.putExtra("TUBE", (Parcelable) actualTubeSearch);
                     intentpopUpSearch.putExtra("POSITION", position);
@@ -167,7 +191,12 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        listImpl.requestGatheredPrimers(query, uobj.getUsername(), uobj.getPassword());
+        if (wildcardSearch) {
+            listImpl.requestGatheredPrimers(query + "%", uobj.getUsername(), uobj.getPassword());
+        } else {
+            listImpl.requestGatheredPrimers(query, uobj.getUsername(), uobj.getPassword());
+        }
+
         return true;
     }
 
@@ -176,3 +205,4 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         return false;
     }
 }
+
