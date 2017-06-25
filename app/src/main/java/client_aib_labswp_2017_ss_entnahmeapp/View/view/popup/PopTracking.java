@@ -90,12 +90,12 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
                     } else if (newTube == null && !newLocation.getText().equals("")) {
-                        final Intent intentNewPostition = new Intent();
+                        final Intent intentNewPosition = new Intent();
                         location = new NewLocation(newLocation.getText().toString());
-                        intentNewPostition.putExtra("NEWLOCATION", (Parcelable) location);
-                        intentNewPostition.putExtra("ACTUALTUBE", (Parcelable) tube);
-                        intentNewPostition.putExtra("POSITION", positionGiven);
-                        setResult(Activity.RESULT_OK, intentNewPostition);
+                        intentNewPosition.putExtra("NEWLOCATION", (Parcelable) location);
+                        intentNewPosition.putExtra("ACTUALTUBE", (Parcelable) tube);
+                        intentNewPosition.putExtra("POSITION", positionGiven);
+                        setResult(Activity.RESULT_OK, intentNewPosition);
                         finish();
 
                     } else if (newTube != null && !newLocation.getText().equals("")) {

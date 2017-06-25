@@ -68,6 +68,7 @@
     <string name="headerLocation">Standort/Roboter</string>
     <string name="btnList">Liste anzeigen</string>
     <string name="checkBoxAdvSearch">Erweiterte Suche</string>
+    <string name="AdvSearchMessage">Suche mit Platzhalter aktiviert</string>
 
     <!-- Strings related only to rueckgabe -->
     <string name="removeWarning">Hinweis</string>
@@ -75,6 +76,17 @@
 
     <string name="btnconfirmwarning">OK</string>
     <string name="btnReturnPrimer">Primer zurücklegen</string>
+
+<!-- Strings related to most classes -->
+    <string name="logoutMessage">Erfolgreich ausgeloggt</string>
+    <string name="restError">ResponseError</string>
+    <string name="restFailure">Failure</string>
+    <string name="intentNewTube">NEWTUBE</string>
+    <string name="intentActualTube">ACTUALTUBE</string>
+    <string name="intentPosition">POSITION</string>
+    <string name="intentNewLocation">NEWLOCATION</string>
+    <string name="intentTube">TUBE</string>
+    <string name="intentUser">USER</string>
 
 
 </resources>
