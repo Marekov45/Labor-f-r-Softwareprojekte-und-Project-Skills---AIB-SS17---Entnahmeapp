@@ -28,6 +28,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
 
 
     private Button logoutButton;
+    private Button listButton;
     private SearchView view;
     private ListImpl listImpl;
     private User uobj;
@@ -65,6 +66,13 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
                 Toast.makeText(LaborGui.this, R.string.logoutMessage, Toast.LENGTH_SHORT).show();
             }
 
+        });
+        listButton = (Button) findViewById(R.id.btnShowListAll);
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
+            }
         });
         searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
         searchBox.setOnClickListener(new View.OnClickListener() {
