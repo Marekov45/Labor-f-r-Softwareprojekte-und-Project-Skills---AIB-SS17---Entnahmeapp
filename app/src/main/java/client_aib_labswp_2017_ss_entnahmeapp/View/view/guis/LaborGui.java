@@ -32,7 +32,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     public static final int REQUEST_POPUP = 300;
-    public static final int REQUEST_POPUP_SEARCH=400;
+    public static final int REQUEST_POPUP_SEARCH = 400;
     private ListAdapterLabor adapter;
 
 
@@ -75,26 +75,28 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
                 int positionForReplacement = data.getIntExtra("POSITION", 0);
                 NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
                 if (tubeNew != null && newLocation == null) {
-                    adapter.changeRow(tubeNew, positionForReplacement);
+                    adapter.changeRow(tubeNew, positionForReplacement, newLocation);
                 }
                 if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
                 }
-            } else if (resultCode == REQUEST_POPUP_SEARCH){
-                if (resultCode==Activity.RESULT_OK){
-                    PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
-                    PrimerTube tubeactualSearch = data.getParcelableExtra("ACTUALTUBE");
-                    int positionForReplacementSearch = data.getIntExtra("POSITION", 0);
-                    NewLocation newLocationSearch = data.getParcelableExtra("NEWLOCATION");
-                    if (tubeNew != null && newLocationSearch == null) {
-                        adapter.changeRow(tubeNew, positionForReplacementSearch);
-                    }
-                    if (newLocationSearch != null && tubeNew == null) {
-                        adapter.changeCurrentLocation(tubeactualSearch, positionForReplacementSearch, newLocationSearch);
-                    }
-                }
-
             }
+
+        }
+        if (requestCode == REQUEST_POPUP_SEARCH) {
+            if (resultCode == Activity.RESULT_OK) {
+                PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
+                PrimerTube tubeactualSearch = data.getParcelableExtra("ACTUALTUBE");
+                int positionForReplacementSearch = data.getIntExtra("POSITION", 0);
+                NewLocation newLocationSearch = data.getParcelableExtra("NEWLOCATION");
+                if (tubeNew != null && newLocationSearch == null) {
+                    adapter.changeRow(tubeNew, positionForReplacementSearch, newLocationSearch);
+                }
+                if (newLocationSearch != null && tubeNew == null) {
+                    adapter.changeCurrentLocation(tubeactualSearch, positionForReplacementSearch, newLocationSearch);
+                }
+            }
+
         }
     }
 
@@ -141,8 +143,8 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(id!=-1){
-                    PrimerTube actualTubeSearch = tubesSearch.get(position-1);
+                if (id != -1) {
+                    PrimerTube actualTubeSearch = tubesSearch.get(position - 1);
                     Intent intentpopUpSearch = new Intent(LaborGui.this, PopTracking.class);
                     intentpopUpSearch.putExtra("TUBE", (Parcelable) actualTubeSearch);
                     intentpopUpSearch.putExtra("POSITION", position);

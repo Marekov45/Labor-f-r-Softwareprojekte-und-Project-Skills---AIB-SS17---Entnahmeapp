@@ -3,11 +3,14 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PickList;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,13 +20,14 @@ import java.util.List;
  */
 public class ListImpl {
 
-    private final String BASE_URL = "http://192.168.137.1:8080/";
+    private final String BASE_URL = "http://10.0.2.2:8080/";
 
-//    public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssX").create();
+    public static final Gson GSON = new GsonBuilder().setLenient().create();
 
     private Retrofit mRetrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GSON))
             .build();
     private ListAPI listAPI = mRetrofit.create(ListAPI.class);
     private CustomObserver cObserver;
