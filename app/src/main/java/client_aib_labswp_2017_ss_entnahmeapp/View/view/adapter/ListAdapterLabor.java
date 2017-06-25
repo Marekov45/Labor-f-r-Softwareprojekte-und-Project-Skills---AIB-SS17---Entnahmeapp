@@ -35,35 +35,6 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         this.listImpl = listImpl;
     }
 
-    public void changeRow(PrimerTube newTube, int positionForReplacement) {
-        getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
-        getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
-        getItem(positionForReplacement - 1).setPutBackDate(newTube.getPutBackDate());
-        getItem(positionForReplacement - 1).setPrimerTubeID(newTube.getPrimerTubeID());
-        getItem(positionForReplacement - 1).setPrimerUID(newTube.getPrimerUID());
-        getItem(positionForReplacement - 1).setName(newTube.getName());
-        getItem(positionForReplacement - 1).setLotNr(newTube.getLotNr());
-        getItem(positionForReplacement - 1).setManufacturer(newTube.getManufacturer());
-        getItem(positionForReplacement - 1).setCurrentLocation(newTube.getCurrentLocation());
-        getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
-        getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
-        notifyDataSetChanged();
-    }
-
-    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation) {
-        getItem(positionForNewLocation - 1).setObjectID(tube.getObjectID());
-        getItem(positionForNewLocation - 1).setTakeOutDate(tube.getTakeOutDate());
-        getItem(positionForNewLocation - 1).setPutBackDate(tube.getPutBackDate());
-        getItem(positionForNewLocation - 1).setPrimerTubeID(tube.getPrimerTubeID());
-        getItem(positionForNewLocation - 1).setPrimerUID(tube.getPrimerUID());
-        getItem(positionForNewLocation - 1).setName(tube.getName());
-        getItem(positionForNewLocation - 1).setLotNr(tube.getLotNr());
-        getItem(positionForNewLocation - 1).setManufacturer(tube.getManufacturer());
-        getItem(positionForNewLocation - 1).setCurrentLocation(newlocation.getNewLocation());
-        getItem(positionForNewLocation - 1).setStorageLocation(tube.getStorageLocation());
-        getItem(positionForNewLocation - 1).setReturnToStorage(tube.isReturnToStorage());
-        notifyDataSetChanged();
-    }
 
     static class ViewHolder {
         public TextView txtPrimer;
@@ -92,7 +63,6 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         else {
             viewholder = (ViewHolder) convertView.getTag();
         }
-        // holder.txtPos.setText(String.valueOf((position%32)+1));
         viewholder.txtPrimer.setText(primerTubes.get(position).getName());
         viewholder.txtPrimerTube.setText(primerTubes.get(position).getPrimerTubeID());
         viewholder.txtLOT.setText(primerTubes.get(position).getLotNr());
@@ -102,4 +72,36 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
 
         return convertView;
     }
+
+    public void changeRow(PrimerTube newTube, int positionForReplacement, NewLocation newLocation) {
+        getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
+        getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
+        getItem(positionForReplacement - 1).setPutBackDate(newTube.getPutBackDate());
+        getItem(positionForReplacement - 1).setPrimerTubeID(newTube.getPrimerTubeID());
+        getItem(positionForReplacement - 1).setPrimerUID(newTube.getPrimerUID());
+        getItem(positionForReplacement - 1).setName(newTube.getName());
+        getItem(positionForReplacement - 1).setLotNr(newTube.getLotNr());
+        getItem(positionForReplacement - 1).setManufacturer(newTube.getManufacturer());
+        getItem(positionForReplacement - 1).setCurrentLocation(newTube.getCurrentLocation());
+        getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
+        getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
+
+        notifyDataSetChanged();
+    }
+
+    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation) {
+        getItem(positionForNewLocation - 1).setObjectID(tube.getObjectID());
+        getItem(positionForNewLocation - 1).setTakeOutDate(tube.getTakeOutDate());
+        getItem(positionForNewLocation - 1).setPutBackDate(tube.getPutBackDate());
+        getItem(positionForNewLocation - 1).setPrimerTubeID(tube.getPrimerTubeID());
+        getItem(positionForNewLocation - 1).setPrimerUID(tube.getPrimerUID());
+        getItem(positionForNewLocation - 1).setName(tube.getName());
+        getItem(positionForNewLocation - 1).setLotNr(tube.getLotNr());
+        getItem(positionForNewLocation - 1).setManufacturer(tube.getManufacturer());
+        getItem(positionForNewLocation - 1).setCurrentLocation(newlocation.getNewLocation());
+        getItem(positionForNewLocation - 1).setStorageLocation(tube.getStorageLocation());
+        getItem(positionForNewLocation - 1).setReturnToStorage(tube.isReturnToStorage());
+        notifyDataSetChanged();
+    }
+
 }

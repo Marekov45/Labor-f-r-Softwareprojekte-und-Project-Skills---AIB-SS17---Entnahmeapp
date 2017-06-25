@@ -112,6 +112,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                         finish();
 
                     }else if(newTube!=null && !textNewPosition.getText().equals("")){
+
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
                         intentNewTube.putExtra("POSITION", positionGiven);
@@ -128,10 +129,12 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         btnNewPosition.setEnabled(false);
         checkIfNewLocationEmpty();
 
+        //TODO: bei anderen ändern
         btnNewPosition.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), textNewPosition.getText().toString());
+                NewLocation location = new NewLocation(textNewPosition.getText().toString());
+                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), location.getNewLocation());
             }
         });
 

@@ -99,12 +99,11 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
                         finish();
 
                     } else if (newTube != null && !newLocation.getText().equals("")) {
-                        Toast.makeText(v.getContext(), "Es können nicht beide Aufrufe auf einmal gestartet werden", Toast.LENGTH_SHORT).show();
-//                        final Intent intentNewTube = new Intent();
-//                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-//                        intentNewTube.putExtra("POSITION", positionGiven);
-//                        location = new NewLocation(newLocation.getText().toString());
-//                        setResult(Activity.RESULT_OK, intentNewTube);
+                        final Intent intentNewTube = new Intent();
+                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
+                        intentNewTube.putExtra("POSITION", positionGiven);
+                        location = new NewLocation(newLocation.getText().toString());
+                        setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
                     }
 
