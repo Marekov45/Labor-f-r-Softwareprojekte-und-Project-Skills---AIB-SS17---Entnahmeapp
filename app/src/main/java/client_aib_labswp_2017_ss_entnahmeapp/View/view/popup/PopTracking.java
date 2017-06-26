@@ -22,6 +22,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 
 
 /**
+ * {@link PopTracking} displays the popupwindow of a primer after it has been clicked in the list.
+ * It supports the replacement of primers and the change of their current location.
  * Created by Marvin on 18.06.2017.
  */
 public class PopTracking extends AppCompatActivity implements CustomObserver {
@@ -29,7 +31,6 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
     private TextView actualLocation;
     private EditText newLocation;
     private Button setNewLocation;
-    private TextView primerNote;
     private EditText message;
     private Button submit;
     private Button btnGoBack;
@@ -40,7 +41,13 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
 
-
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied.
+     *                           This value may be {@code null}.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +59,12 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
+        //Set the size of the popupwindow
         getWindow().setLayout((int) (width * .8), (int) (height * .69));
 
         primerImpl = new PrimerImpl();
-        primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
 
-        primerNote = (TextView) findViewById(R.id.txtMessage);
         newStatusGroup = (RadioGroup) findViewById(R.id.statusGroup);
         actualLocation = (TextView) findViewById(R.id.txtLocation);
         message = (EditText) findViewById(R.id.editTxtMessage);
@@ -66,42 +72,44 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         setNewLocation = (Button) findViewById(R.id.btnChangeLocation);
         submit = (Button) findViewById(R.id.btnNewPrimer);
         btnGoBack = (Button) findViewById(R.id.btnOK);
-
-        uobj = getIntent().getParcelableExtra("USER");
-        tube = getIntent().getParcelableExtra("TUBE");
-        positionGiven = getIntent().getIntExtra("POSITION", 0);
+        uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
+        tube = getIntent().getParcelableExtra(getString(R.string.intentTube));
+        positionGiven = getIntent().getIntExtra(getString(R.string.intentPosition), 0);
         final int position = positionGiven - 1;
         actualLocation.setText(tube.getCurrentLocation());
         submit.setEnabled(true);
         setNewLocation.setEnabled(false);
         checkIfNewLocationEmpty();
 
+
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NewLocation location = new NewLocation(newLocation.getText().toString());
+                //closes the popupwindow if nothing has been changed
                 if (newTube == null && location.getNewLocation().toString().equals("")) {
                     finish();
                 } else {
+                    //only replaces the primer
                     if (newTube != null && newLocation.getText().equals("")) {
                         final Intent intentNewTube = new Intent();
-                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-                        intentNewTube.putExtra("POSITION", positionGiven);
+                        intentNewTube.putExtra(getString(R.string.intentNewTube), (Parcelable) newTube);
+                        intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
+                        // only changes the current location
                     } else if (newTube == null && !newLocation.getText().equals("")) {
                         final Intent intentNewPosition = new Intent();
                         location = new NewLocation(newLocation.getText().toString());
-                        intentNewPosition.putExtra("NEWLOCATION", (Parcelable) location);
-                        intentNewPosition.putExtra("ACTUALTUBE", (Parcelable) tube);
-                        intentNewPosition.putExtra("POSITION", positionGiven);
+                        intentNewPosition.putExtra(getString(R.string.intentNewLocation), (Parcelable) location);
+                        intentNewPosition.putExtra(getString(R.string.intentActualTube), (Parcelable) tube);
+                        intentNewPosition.putExtra(getString(R.string.intentPosition), positionGiven);
                         setResult(Activity.RESULT_OK, intentNewPosition);
                         finish();
-
                     } else if (newTube != null && !newLocation.getText().equals("")) {
                         final Intent intentNewTube = new Intent();
-                        intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-                        intentNewTube.putExtra("POSITION", positionGiven);
+                        intentNewTube.putExtra(getString(R.string.intentNewTube), (Parcelable) newTube);
+                        intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
                         location = new NewLocation(newLocation.getText().toString());
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
@@ -110,20 +118,20 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
                 }
             }
         });
-
+        //enables or disables submit button depending on the radiobutton that is checked
         newStatusGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radioempty:
-                        message.setHint("Grund optional");
+                        message.setHint(getString(R.string.replacementHintOptional));
                         submit.setEnabled(true);
                         break;
                     case R.id.radiobroken:
                     case R.id.radionotfound:
                     case R.id.radionoinfo:
                         message.setText("");
-                        message.setHint("Grund zwingend nötig");
+                        message.setHint(getString(R.string.replacementHintRequired));
                         submit.setEnabled(false);
                         checkIfMessageEmpty();
                         break;
@@ -131,6 +139,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        // makes REST request for replacement of a primer if button has been clicked
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +148,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        //makes REST request for change of current location if button has been clicked
         setNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,7 +159,10 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
 
     }
 
-
+    /**
+     * Checks if message for the reason of a primer replacement is empty. If that is the case, the submit button
+     * is disabled, otherwise it is enabled.
+     */
     private void checkIfMessageEmpty() {
         message.addTextChangedListener(new TextWatcher() {
             @Override
@@ -177,6 +190,10 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         });
     }
 
+    /**
+     * Checks if message for the change of the current location is empty. If that is the case, the corresponding button
+     * is disabled, otherwise it is enabled.
+     */
     private void checkIfNewLocationEmpty() {
         newLocation.addTextChangedListener(new TextWatcher() {
             @Override
@@ -204,6 +221,13 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         });
     }
 
+    /**
+     * Calls one of two methods that either replaces the primer with a new one or notifies the user that the location
+     * has been changed, depending on the {@link ResponseCode} of the REST request.
+     *
+     * @param o    the response body for the corresponding REST request. It must not be {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
@@ -215,15 +239,29 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         }
     }
 
+    /**
+     * Notifies the user that the primer has been replaced.
+     *
+     * @param o the new {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
+     *          if there is no {@link PrimerTube} left.
+     */
     private void receiveNewPrimer(Object o) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
         newTube = (PrimerTube) o;
     }
 
+    /**
+     * Notifies the user that the current location has been changed.
+     */
     private void sendNewLocation() {
-        Toast.makeText(this, "New Location has been set", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.newLocationMessage, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Returns a statuscode based on the radiobutton that has been checked.
+     *
+     * @return the reason for the replacement of a primer
+     */
     private int chooseReason() {
 
         int selectedID = newStatusGroup.getCheckedRadioButtonId();
@@ -242,6 +280,11 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
     }
 
 
+    /**
+     * Sets the {@link PrimerStatus} for the replaced primer.
+     *
+     * @return the status of the replaced primer. The message of the status can be empty, if the statuscode is 1.
+     */
     private PrimerStatus createPrimerStatus() {
         PrimerStatus status = new PrimerStatus("", 0);
         if (message.getText().toString().matches("")) {
@@ -254,13 +297,19 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         return status;
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseError() {
-        Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseFailure() {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
     }
 }
