@@ -14,7 +14,7 @@
             android:layout_height="match_parent">
         <TextView
 
-                android:text="Entsorgungsgrund für aktuellen Primer auswählen"
+                android:text="Primer darf nicht zurückgelegt werden - Entsorgungsgrund für aktuellen Primer auswählen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/txtReasonforRemoval" android:textSize="24sp"
                 android:layout_weight="1" android:textColor="@android:color/white"
@@ -33,15 +33,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp" >
             <RadioButton
-                    android:text="keiner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/rbtnNoReason" android:layout_weight="1"
-                    android:checked="true"/>
-            <RadioButton
                     android:text="@string/radioempty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/rbtnempty" android:layout_weight="1"
-                    android:checked="false"/>
+                    android:checked="true"/>
             <RadioButton
                     android:text="@string/radiobroken"
                     android:layout_width="wrap_content"

@@ -3,6 +3,8 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.view.popup;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.*;
@@ -14,6 +16,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.Re
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
+import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterGatheredPrimer;
 
 
 /**
@@ -25,15 +28,16 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     private Button btnDelete;
     private Button btnClose;
     private RadioGroup reasonforRemovalGroup;
-    private RadioButton radioEmpty;
+//    private RadioButton radioEmpty;
     private ListImpl listImpl;
     private User uobj;
     private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
-    private PrimerTube newTube;
+    private PrimerTube tubeToRemove;
     private EditText message;
     private ListView listView;
+    private User userRemove;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +51,6 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width * .8), (int) (height * .32));
-
 
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
@@ -66,8 +69,10 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         uobj = getIntent().getParcelableExtra("USER");
         tube = getIntent().getParcelableExtra("TUBE");
         positionGiven = getIntent().getIntExtra("POSITION", 0);
+        tubeToRemove = getIntent().getParcelableExtra("PRIMERTUBETOREMOVE");
+        userRemove= getIntent().getParcelableExtra("USERREMOVE");
         final int position = positionGiven - 1;
-        btnDelete.setEnabled(false);
+        btnDelete.setEnabled(true);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,14 +85,17 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rbtnNoReason:
-                        btnDelete.setEnabled(false);
-                        break;
                     case R.id.rbtnempty:
+                        message.setHint("Grund optional");
+                        btnDelete.setEnabled(true);
+                        break;
                     case R.id.rbtnbroken:
                     case R.id.rbtnspoiled:
                     case R.id.rbtnnoinfo:
-                        btnDelete.setEnabled(true);
+                        message.setText("");
+                        message.setHint("Grund zwingend nötig");
+                        btnDelete.setEnabled(false);
+                        checkIfMessageEmpty();
                         break;
                 }
             }
@@ -96,11 +104,45 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
+
+                if (tube==null){
+                    primerImpl.removePrimer(tubeToRemove.getObjectID(), userRemove.getUsername(), userRemove.getPassword(), createPrimerStatus());
+
+                }else{
+                    primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
+                }
+                finish();
             }
         });
 
 
+    }
+
+    private void checkIfMessageEmpty() {
+        message.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s.toString().trim().length() == 0) {
+                    btnDelete.setEnabled(false);
+                } else {
+                    btnDelete.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().trim().length() == 0) {
+                    btnDelete.setEnabled(false);
+                } else {
+                    btnDelete.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 

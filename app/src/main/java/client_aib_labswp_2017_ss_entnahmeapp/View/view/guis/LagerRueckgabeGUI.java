@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.guis;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Parcelable;
@@ -34,12 +35,13 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     private Button showGatheredPrimer;
     private ListView listView;
     private ListImpl listImpl;
-    private  PrimerImpl primerImpl;
+    private PrimerImpl primerImpl;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     public static final int REQUEST_POPUP = 300;
     private User uobj;
     private ListAdapterGatheredPrimer adapter;
+    Context context;
 
 
     @Override
@@ -47,6 +49,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lager_rueckgabe_gui);
 
+        context = this;
         uobj = getIntent().getParcelableExtra("USER");
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
@@ -96,18 +99,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
 
             }
         }
-    //    if(requestCode==REQUEST_POPUP){
-    //        if(resultCode== Activity.RESULT_OK){
-   //             PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
-    //            int positionForReplacement = data.getIntExtra("POSITION",0);
-    //            adapter.changeRow(tubeNew, positionForReplacement);
-//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-//                System.out.println("good");
-     //       }else {
-//                System.out.println("tube ist null");
-      //      }
-        }
-
+    }
 
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
@@ -128,7 +120,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
 
     private void receiveGatheredPrimerList(Object o) {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-       final List<PrimerTube> tubes = (List<PrimerTube>) o;
+        final List<PrimerTube> tubes = (List<PrimerTube>) o;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,19 +131,15 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
                     intentPopUp.putExtra("POSITION", position);
                     intentPopUp.putExtra("USER", uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
-
-                  
                 }
 
             }
         });
 
 
-        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl,primerImpl);
+        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl, primerImpl, listView);
         listView.setAdapter(adapter);
     }
-
-
 
 
     @Override

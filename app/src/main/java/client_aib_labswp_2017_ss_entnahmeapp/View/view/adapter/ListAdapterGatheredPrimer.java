@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
+import client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI;
+import client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopReturn;
 import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.List;
@@ -24,8 +27,9 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     ListImpl listImpl;
     PrimerImpl primerImpl;
     User user;
+    ListView listView;
 
-    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> tubes, User user, ListImpl listImpl, PrimerImpl primerImpl) {
+    public ListAdapterGatheredPrimer(Context context, int vg, int id, List<PrimerTube> tubes, User user, ListImpl listImpl, PrimerImpl primerImpl, ListView listView) {
         super(context, vg, id, tubes);
 
         this.context = context;
@@ -34,6 +38,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         this.listImpl = listImpl;
         this.primerTubes=tubes;
         this.primerImpl = primerImpl;
+        this.listView = listView;
     }
     static class ViewHolder{
         public TextView txtReturn_Primer;
@@ -46,11 +51,19 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         for (PrimerTube primertube : primerTubes) {
             if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
                 if (!primertube.isReturnToStorage()){
-                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
+                    Intent intentPopup = new Intent(context, PopReturn.class);
+                    intentPopup.putExtra("USERREMOVE",user);
+                    intentPopup.putExtra("PRIMERTUBETOREMOVE", primertube);
+                    context.startActivity(intentPopup);
+//                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
+                    primerTubes.remove(primertube);
+                    notifyDataSetChanged();
                 }else{
                     primerImpl.returnPrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
                     primertube.setTaken(true);
                     notifyDataSetChanged();
+                    listView.setSelection(getPosition(primertube));
+
                 }
 
             }
@@ -80,8 +93,16 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         holder.returnPrimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (primerTube.isReturnToStorage()==false){
-                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
+                if (!primerTube.isReturnToStorage()){
+                    Intent intentPopup = new Intent(context, PopReturn.class);
+                    intentPopup.putExtra("USERREMOVE",user);
+
+                    intentPopup.putExtra("PRIMERTUBETOREMOVE", primerTube);
+                    context.startActivity(intentPopup);
+
+//                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
+                    primerTubes.remove(primerTube);
+                    notifyDataSetChanged();
                 }else {
                     primerImpl.returnPrimer(primerTube.getObjectID(), user.getUsername(), user.getPassword());
                     primerTube.setTaken(true);
