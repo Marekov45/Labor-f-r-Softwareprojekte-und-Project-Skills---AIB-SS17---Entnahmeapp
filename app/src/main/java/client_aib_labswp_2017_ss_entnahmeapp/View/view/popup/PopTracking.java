@@ -60,7 +60,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         int height = dm.heightPixels;
 
         //Set the size of the popupwindow
-        getWindow().setLayout((int) (width * .8), (int) (height * .69));
+        getWindow().setLayout((int) (width * .8), (int) (height * .65));
 
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);

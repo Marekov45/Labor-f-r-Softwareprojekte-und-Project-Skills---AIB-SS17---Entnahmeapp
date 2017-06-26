@@ -50,7 +50,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (height * .32));
+        getWindow().setLayout((int) (width * .8), (int) (height * .36));
 
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
