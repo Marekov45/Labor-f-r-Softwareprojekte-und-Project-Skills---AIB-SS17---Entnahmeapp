@@ -69,6 +69,9 @@
     <string name="btnList">Liste anzeigen</string>
     <string name="checkBoxAdvSearch">Erweiterte Suche</string>
     <string name="AdvSearchMessage">Suche mit Platzhalter aktiviert</string>
+    <string name="newLocationMessage">Neuer Standort wurde gesetzt</string>
+    <string name="replacementMessage">Primer wurde ersetzt</string>
+
 
     <!-- Strings related only to rueckgabe -->
     <string name="removeWarning">Hinweis</string>
@@ -87,6 +90,8 @@
     <string name="intentNewLocation">NEWLOCATION</string>
     <string name="intentTube">TUBE</string>
     <string name="intentUser">USER</string>
+    <string name="replacementHintRequired">Grund zwingend nötig</string>
+    <string name="replacementHintOptional">Grund optional</string>
 
 
 </resources>
