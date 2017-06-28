@@ -30,17 +30,19 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 public class PopTracking extends AppCompatActivity implements CustomObserver {
 
     private TextView actualLocation;
-    private EditText newLocation;
     private Button setNewLocation;
     private EditText message;
     private Button submit;
     private Button btnGoBack;
     private RadioGroup newStatusGroup;
+    private Spinner spinnerLocation;
+
     private User uobj;
     private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
+    String location;
 
     /**
      * Initializes the activity.
@@ -61,7 +63,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         int height = dm.heightPixels;
 
         //Set the size of the popupwindow
-        getWindow().setLayout((int) (width * .8), (int) (height * .65));
+        getWindow().setLayout((int) (width * .8), (int) (height * .66));
 
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
@@ -69,7 +71,76 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         newStatusGroup = (RadioGroup) findViewById(R.id.statusGroup);
         actualLocation = (TextView) findViewById(R.id.txtLocation);
         message = (EditText) findViewById(R.id.editTxtMessage);
-        newLocation = (EditText) findViewById(R.id.txtNewLocationTube);
+        spinnerLocation= (Spinner) findViewById(R.id.spinnerGuiWorkspace);
+        spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (spinnerLocation.getSelectedItemPosition()) {
+                    case 0:
+                        location = "";
+                        setNewLocation.setEnabled(false);
+                        break;
+                    case 1:
+                        location = "Robot1";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 2:
+                        location = "Robot2";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 3:
+                        location = "Workspace1";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 4:
+                        location = "Workspace2";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 5:
+                        location = "Workspace3";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 6:
+                        location = "Workspace4";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 7:
+                        location = "Workspace5";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 8:
+                        location = "Workspace6";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 9:
+                        location = "Workspace7";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 10:
+                        location = "Workspace8";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 11:
+                        location = "Workspace9";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 12:
+                        location = "Workspace10";
+                        setNewLocation.setEnabled(true);
+                        break;
+                    case 13:
+                        location = "Workspace11";
+                        setNewLocation.setEnabled(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                setNewLocation.setEnabled(false);
+
+            }
+        });
         setNewLocation = (Button) findViewById(R.id.btnChangeLocation);
         submit = (Button) findViewById(R.id.btnNewPrimer);
         btnGoBack = (Button) findViewById(R.id.btnOK);
@@ -80,38 +151,36 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         actualLocation.setText(tube.getCurrentLocation());
         submit.setEnabled(true);
         setNewLocation.setEnabled(false);
-        checkIfNewLocationEmpty();
 
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewLocation location = new NewLocation(newLocation.getText().toString());
+                NewLocation locationObj = new NewLocation(location);
                 //closes the popupwindow if nothing has been changed
-                if (newTube == null && location.getNewLocation().toString().equals("")) {
+                if (newTube == null && locationObj.getNewLocation().toString().equals("")) {
                     finish();
                 } else {
                     //only replaces the primer
-                    if (newTube != null && newLocation.getText().equals("")) {
+                    if (newTube != null && locationObj.getNewLocation().toString().equals("")) {
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra(getString(R.string.intentNewTube), (Parcelable) newTube);
                         intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
                         // only changes the current location
-                    } else if (newTube == null && !newLocation.getText().equals("")) {
+                    } else if (newTube == null && !locationObj.getNewLocation().toString().equals("")) {
                         final Intent intentNewPosition = new Intent();
-                        location = new NewLocation(newLocation.getText().toString());
-                        intentNewPosition.putExtra(getString(R.string.intentNewLocation), (Parcelable) location);
+//                        locationObj = new NewLocation(newLocation.getText().toString());
+                        intentNewPosition.putExtra(getString(R.string.intentNewLocation), (Parcelable) locationObj);
                         intentNewPosition.putExtra(getString(R.string.intentActualTube), (Parcelable) tube);
                         intentNewPosition.putExtra(getString(R.string.intentPosition), positionGiven);
                         setResult(Activity.RESULT_OK, intentNewPosition);
                         finish();
-                    } else if (newTube != null && !newLocation.getText().equals("")) {
+                    } else if (newTube != null && !locationObj.getNewLocation().toString().equals("")) {
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra(getString(R.string.intentNewTube), (Parcelable) newTube);
                         intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
-                        location = new NewLocation(newLocation.getText().toString());
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
                     }
@@ -153,7 +222,8 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         setNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), newLocation.getText().toString());
+                NewLocation locationObj = new NewLocation(location);
+                primerImpl.sendLocation(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), locationObj.getNewLocation());
             }
         });
 
@@ -192,37 +262,6 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Checks if message for the change of the current location is empty. If that is the case, the corresponding button
-     * is disabled, otherwise it is enabled.
-     */
-    private void checkIfNewLocationEmpty() {
-        newLocation.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (s.toString().trim().length() == 0) {
-                    setNewLocation.setEnabled(false);
-                } else {
-                    setNewLocation.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().trim().length() == 0) {
-                    setNewLocation.setEnabled(false);
-                } else {
-                    setNewLocation.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-    /**
      * Calls one of two methods that either replaces the primer with a new one or notifies the user that the location
      * has been changed, depending on the {@link ResponseCode} of the REST request.
      *
@@ -247,7 +286,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
      *          if there is no {@link PrimerTube} left.
      */
     private void receiveNewPrimer(Object o) {
-        if (o==null){
+        if (o == null) {
             // setup the alert builder
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Kein Ersatzprimer verfügbar.");
@@ -256,7 +295,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             // create and show the alert dialog
             AlertDialog dialog = builder.create();
             dialog.show();
-        }else{
+        } else {
             Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
             newTube = (PrimerTube) o;
         }

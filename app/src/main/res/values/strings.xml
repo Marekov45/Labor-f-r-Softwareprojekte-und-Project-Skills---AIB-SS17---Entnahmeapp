@@ -100,6 +100,7 @@
 
     <string name="spinner_prompt_workspaces">Wählen Sie einen Workspace</string>
     <string-array name="workspace_array">
+        <item>Neue Position wählen</item>
         <item>Robot 1</item>
         <item>Robot 2</item>
         <item>Workspace 1</item>
