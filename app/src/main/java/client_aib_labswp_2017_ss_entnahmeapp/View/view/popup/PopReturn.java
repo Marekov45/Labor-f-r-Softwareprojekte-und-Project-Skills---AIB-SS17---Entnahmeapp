@@ -20,7 +20,9 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterGather
 
 
 /**
- * Created by Marvin on 21.06.2017.
+ * {@link PopReturn} displays the popupwindow of a primer after it has been clicked in the list.
+ * It supports the removal of primers.
+ * Created by Marvin on 18.06.2017.
  */
 public class PopReturn extends AppCompatActivity implements CustomObserver {
 
@@ -28,10 +30,9 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     private Button btnDelete;
     private Button btnClose;
     private RadioGroup reasonforRemovalGroup;
-//    private RadioButton radioEmpty;
     private ListImpl listImpl;
     private User uobj;
-    private int positionGiven;
+    private int positionGiven; 
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube tubeToRemove;
@@ -39,6 +40,13 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     private ListView listView;
     private User userRemove;
 
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied.
+     *                           This value may be {@code null}.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +58,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
+        //Set the size of the popupwindow
         getWindow().setLayout((int) (width * .8), (int) (height * .36));
 
         primerImpl = new PrimerImpl();
@@ -66,11 +75,11 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         btnDelete = (Button) findViewById(R.id.btnRemove);
         btnClose = (Button) findViewById(R.id.bttnclose);
 
-        uobj = getIntent().getParcelableExtra("USER");
-        tube = getIntent().getParcelableExtra("TUBE");
-        positionGiven = getIntent().getIntExtra("POSITION", 0);
-        tubeToRemove = getIntent().getParcelableExtra("PRIMERTUBETOREMOVE");
-        userRemove= getIntent().getParcelableExtra("USERREMOVE");
+        uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
+        tube = getIntent().getParcelableExtra(getString(R.string.intentTube));
+        positionGiven = getIntent().getIntExtra(getString(R.string.intentPosition), 0);
+        tubeToRemove = getIntent().getParcelableExtra(getString(R.string.intentTubeRemove));
+        userRemove = getIntent().getParcelableExtra(getString(R.string.intentUserRemove));
         final int position = positionGiven - 1;
         btnDelete.setEnabled(true);
 
@@ -81,19 +90,20 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        //enables or disables submit button depending on the radiobutton that is checked
         reasonforRemovalGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rbtnempty:
-                        message.setHint("Grund optional");
+                        message.setHint(getString(R.string.replacementHintOptional));
                         btnDelete.setEnabled(true);
                         break;
                     case R.id.rbtnbroken:
                     case R.id.rbtnspoiled:
                     case R.id.rbtnnoinfo:
                         message.setText("");
-                        message.setHint("Grund zwingend nötig");
+                        message.setHint(getString(R.string.replacementHintRequired));
                         btnDelete.setEnabled(false);
                         checkIfMessageEmpty();
                         break;
@@ -101,14 +111,16 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        // makes REST request for removal of a primer if button has been clicked
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (tube==null){
+
+                if (tube == null) {
                     primerImpl.removePrimer(tubeToRemove.getObjectID(), userRemove.getUsername(), userRemove.getPassword(), createPrimerStatus());
 
-                }else{
+                } else {
                     primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
                 }
                 finish();
@@ -118,6 +130,10 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
 
     }
 
+    /**
+     * Checks if message for the reason of a primer removal is empty. If that is the case, the submit button
+     * is disabled, otherwise it is enabled.
+     */
     private void checkIfMessageEmpty() {
         message.addTextChangedListener(new TextWatcher() {
             @Override
@@ -146,20 +162,33 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     }
 
 
+    /**
+     * Calls method that removes the primer.
+     *
+     * @param o    the response body for the corresponding REST request. It is {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case REMOVEPRIMER:
-                removePrimer(o);
+                removePrimer();
                 break;
         }
     }
 
-
-    private void removePrimer(Object o) {
-        Toast.makeText(this, "Primer has been removed", Toast.LENGTH_SHORT).show();
+    /**
+     * Notifies the user that the primer has been removed.
+     */
+    private void removePrimer() {
+        Toast.makeText(this, R.string.removalMessage, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Returns a statuscode based on the radiobutton that has been checked.
+     *
+     * @return the reason for the removal of a primer
+     */
     private int chooseReason() {
 
         int selectedID = reasonforRemovalGroup.getCheckedRadioButtonId();
@@ -178,6 +207,11 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     }
 
 
+    /**
+     * Sets the {@link PrimerStatus} for the removed primer.
+     *
+     * @return the status of the removed primer. The message of the status can be empty, if the statuscode is 1.
+     */
     private PrimerStatus createPrimerStatus() {
         PrimerStatus status = new PrimerStatus("", 0);
         if (message.getText().toString().matches("")) {
@@ -190,14 +224,20 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         return status;
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseError() {
-        Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseFailure() {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
     }
 }
 

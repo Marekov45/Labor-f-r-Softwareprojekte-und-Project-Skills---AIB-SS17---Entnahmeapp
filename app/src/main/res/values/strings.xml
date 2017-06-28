@@ -79,6 +79,9 @@
 
     <string name="btnconfirmwarning">OK</string>
     <string name="btnReturnPrimer">Primer zurücklegen</string>
+    <string name="removalMessage">Primer wurde entfernt</string>
+    <string name="intentTubeRemove">PRIMERTUBETOREMOVE</string>
+    <string name="intentUserRemove">USERREMOVE</string>
 
 <!-- Strings related to most classes -->
     <string name="logoutMessage">Erfolgreich ausgeloggt</string>
