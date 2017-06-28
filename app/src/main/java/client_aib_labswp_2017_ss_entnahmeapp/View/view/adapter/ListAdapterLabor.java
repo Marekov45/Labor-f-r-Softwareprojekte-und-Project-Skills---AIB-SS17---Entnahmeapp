@@ -14,17 +14,23 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 import java.util.List;
 
 /**
- * Created by Marvin on 17.06.2017.
+ * {@link ListAdapterLabor} converts a list of {@link PrimerTube} objects into {@link View} items loaded into the {@link ListView} container.
  */
-public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filterable {
+public class ListAdapterLabor extends ArrayAdapter<PrimerTube> {
     private int vg;
     private List<PrimerTube> primerTubes;
-//    private List<PrimerTube> filteredTubes;
     Context context;
     ListImpl listImpl;
     User user;
 
-
+    /**
+     * @param context     context of the current state of the application. It must not be {@code null}.
+     * @param vg          row layout for a {@link View} item. it must not be {@code null}.
+     * @param id          position of the view item
+     * @param primerTubes the list of {@link PrimerTube} objects loaded into the {@link ListView}.It might be empty.
+     * @param user        user that logged on to the application. It must not be {@code null}.
+     * @param listImpl    implementation of all rest requests regarding lists. It must not be {@code null}.
+     */
     public ListAdapterLabor(Context context, int vg, int id, List<PrimerTube> primerTubes, User user, ListImpl listImpl) {
         super(context, vg, id, primerTubes);
 
@@ -36,6 +42,10 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
     }
 
 
+    /**
+     * Stores each of the component views inside the tag field of the layout, so they can be immediately accessed
+     * without the need to look them up repeatedly. Improves the scrolling performance of the {@link ListView}.
+     */
     static class ViewHolder {
         public TextView txtPrimer;
         public TextView txtPrimerTube;
@@ -44,6 +54,14 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
 
     }
 
+    /**
+     * Populates the {@link ViewHolder} and stores it inside the layout.
+     *
+     * @param position    the position of the item within the adapter's data set of the item whose view we want
+     * @param convertView the old {@link View} to reuse, if possible
+     * @param parent      the parent that this view will eventually be attached to
+     * @return a {@link View} corresponding to the data at the specified position
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewholder;
@@ -57,10 +75,7 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
             viewholder.txtLocation = (TextView) convertView.findViewById(R.id.locationTxtView);
             convertView.setTag(viewholder);
 
-        }
-
-        //  final PrimerTube primerTube = primerTubes.get(position);
-        else {
+        } else {
             viewholder = (ViewHolder) convertView.getTag();
         }
         viewholder.txtPrimer.setText(primerTubes.get(position).getName());
@@ -73,6 +88,16 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         return convertView;
     }
 
+    /**
+     * Gets the data item associated with the specified position in the data set.
+     * The data of the item is changed, after a new {@link PrimerTube} has been requested.
+     *
+     * @param newTube                the {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
+     *                               if there is no {@link PrimerTube} left.
+     * @param positionForReplacement position of the {@link PrimerTube} in the {@link ListView} that is replaced.
+     * @param newLocation            the new location of the {@link PrimerTube}. Only relevant, if a new location
+     *                               has been requested.
+     */
     public void changeRow(PrimerTube newTube, int positionForReplacement, NewLocation newLocation) {
         getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
         getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
@@ -89,6 +114,15 @@ public class ListAdapterLabor extends ArrayAdapter<PrimerTube> implements Filter
         notifyDataSetChanged();
     }
 
+    /**
+     * Gets the data item associated with the specified position in the data set.
+     * The data of the item is changed, after a new location for the {@link PrimerTube} has been requested.
+     *
+     * @param tube                   the {@link PrimerTube} whose location is about to be changed. It must not be an empty location.
+     * @param positionForNewLocation position of the {@link PrimerTube} in the {@link ListView} that has
+     *                               his location changed.
+     * @param newlocation            the new location of the {@link PrimerTube}.
+     */
     public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation) {
         getItem(positionForNewLocation - 1).setObjectID(tube.getObjectID());
         getItem(positionForNewLocation - 1).setTakeOutDate(tube.getTakeOutDate());
