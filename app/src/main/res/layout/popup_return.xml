@@ -16,7 +16,7 @@
 
                 android:text="Primer darf nicht zurückgelegt werden - Entsorgungsgrund für aktuellen Primer auswählen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/txtReasonforRemoval" android:textSize="24sp"
+                android:layout_height="wrap_content" android:id="@+id/txtReasonforRemoval" android:textSize="20sp"
                 android:layout_weight="1" android:textColor="@android:color/white"
                 android:layout_marginBottom="5dp" android:padding="10dp"/>
     </LinearLayout>
@@ -36,22 +36,22 @@
                     android:text="@string/radioempty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/rbtnempty" android:layout_weight="1"
-                    android:checked="true"/>
+                    android:checked="true" android:textSize="18sp"/>
             <RadioButton
                     android:text="@string/radiobroken"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/rbtnbroken" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
             <RadioButton
                     android:text="Primer verdorben"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/rbtnspoiled" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
             <RadioButton
                     android:text="@string/radionoinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/rbtnnoinfo" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
 
         </RadioGroup>
     </LinearLayout>
@@ -69,7 +69,7 @@
                     android:text="Nachricht:"
                     android:layout_width="366dp"
                     android:layout_height="wrap_content" android:id="@+id/textView" android:layout_weight="1"
-                    android:textSize="24sp" android:textColor="@android:color/white" android:layout_marginTop="10dp"/>
+                    android:textSize="20sp" android:textColor="@android:color/white" android:layout_marginTop="10dp"/>
             <EditText
                     android:layout_width="385dp"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:ems="10"
                     android:id="@+id/etxtMessage" android:layout_weight="1" android:layout_marginTop="10dp"
                     android:hint="Nachricht eintragen" android:textColorHint="@android:color/white"
-                    android:textColor="@android:color/white" android:textSize="24sp"/>
+                    android:textColor="@android:color/white" android:textSize="20sp"/>
         </LinearLayout>
     </LinearLayout>
     <View

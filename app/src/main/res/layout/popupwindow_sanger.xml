@@ -22,7 +22,7 @@
                     android:text="@string/tvdetails"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/tvdetails" android:layout_weight="1"
-                    android:textSize="30sp" android:textStyle="normal|bold" android:textColor="@android:color/white"
+                    android:textSize="24sp" android:textStyle="normal|bold" android:textColor="@android:color/white"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"/>
         </LinearLayout>
@@ -40,12 +40,12 @@
             <TextView
                     android:text="@string/tvPrimerName"
                     android:layout_width="366dp"
-                    android:layout_height="match_parent" android:id="@+id/tvPrimerName" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvPrimerName" android:textSize="20sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <TextView
                     android:text="TextView"
                     android:layout_width="382dp"
-                    android:layout_height="match_parent" android:id="@+id/tvNameActTube" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvNameActTube" android:textSize="20sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
@@ -64,12 +64,12 @@
 
                     android:text="@string/tvLOT"
                     android:layout_width="366dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvLOT" android:textSize="24sp"
+                    android:layout_height="wrap_content" android:id="@+id/tvLOT" android:textSize="20sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <TextView
                     android:text="TextView"
                     android:layout_width="382dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvLOTActTube" android:textSize="24sp"
+                    android:layout_height="wrap_content" android:id="@+id/tvLOTActTube" android:textSize="20sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
 
         </LinearLayout>
@@ -89,12 +89,12 @@
 
                     android:text="@string/tvCurrentLocation"
                     android:layout_width="366dp"
-                    android:layout_height="match_parent" android:id="@+id/tvCurrentLocation" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvCurrentLocation" android:textSize="20sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <TextView
                     android:text="TextView"
                     android:layout_width="382dp"
-                    android:layout_height="match_parent" android:id="@+id/tvActLocation" android:textSize="24sp"
+                    android:layout_height="match_parent" android:id="@+id/tvActLocation" android:textSize="20sp"
                     android:layout_weight="1" android:textAlignment="textStart" android:textColor="@android:color/white"/>
         </LinearLayout>
         <View
@@ -117,7 +117,7 @@
 
                     android:text="@string/tvNewPosition"
                     android:layout_width="366dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvNewPosition" android:textSize="24sp"
+                    android:layout_height="wrap_content" android:id="@+id/tvNewPosition" android:textSize="20sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
 
 
@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/tvReasonForNewPrimer" android:textSize="24sp"
                 android:layout_weight="1" android:textColor="@android:color/white"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="10dp" android:textStyle="normal|bold"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
@@ -179,22 +179,22 @@
                     android:text="@string/radioempty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/radioempty" android:layout_weight="1"
-                    android:checked="true"/>
+                    android:checked="true" android:textSize="18sp"/>
             <RadioButton
                     android:text="@string/radiobroken"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/radiobroken" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
             <RadioButton
                     android:text="@string/radionotfound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/radionotfound" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
             <RadioButton
                     android:text="@string/radionoinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/radionoinfo" android:layout_weight="1"
-            />
+                    android:textSize="18sp"/>
 
         </RadioGroup>
     </LinearLayout>
@@ -212,7 +212,7 @@
 
                     android:text="@string/tvNote"
                     android:layout_width="366dp"
-                    android:layout_height="wrap_content" android:id="@+id/tvNote" android:textSize="24sp"
+                    android:layout_height="wrap_content" android:id="@+id/tvNote" android:textSize="20sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
             <EditText
                     android:layout_width="385dp"
