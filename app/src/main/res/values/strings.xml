@@ -52,6 +52,8 @@
     <string name="radionotfound">Primer nicht auffindbar</string>
     <string name="radionoinfo">Anderer Grund</string>
     <string name="checkBoxNewPrimer">Neuen Primer anfordern</string>
+    <string name="withdrawalMessage">Kein Primer mit dieser PrimerTubeID zu entnehmen</string>
+
 
     <string name="btnclose">Fertig</string>
 

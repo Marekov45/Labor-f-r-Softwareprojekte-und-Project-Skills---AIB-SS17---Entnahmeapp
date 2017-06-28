@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
@@ -18,7 +19,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 import java.util.List;
 
 /**
- * Created by User on 14.06.2017.
+ * {@link ListAdapterLabor} converts a list of {@link PrimerTube} objects into {@link View} items loaded into the {@link ListView} container.
  */
 public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
     private int vg;
@@ -29,7 +30,16 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
     User user;
     PrimerImpl primerImpl;
 
-
+    /**
+     * @param context     context of the current state of the application. It must not be {@code null}.
+     * @param vg          row layout for a {@link View} item. it must not be {@code null}.
+     * @param id          position of the view item
+     * @param primerTubes the list of {@link PrimerTube} objects loaded into the {@link ListView}.It might be empty.
+     * @param pickLists   the list of {@link PickList} objects.It might be empty.
+     * @param user        user that logged on to the application. It must not be {@code null}.
+     * @param listImpl    implementation of all rest requests regarding lists. It must not be {@code null}.
+     * @param primerImpl  implementation of all rest requests regarding primers. It must not be {@code null}.
+     */
     public ListAdapterLastSanger(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, primerTubes);
 
@@ -42,6 +52,10 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         this.primerImpl = primerImpl;
     }
 
+    /**
+     * Stores each of the component views inside the tag field of the layout, so they can be immediately accessed
+     * without the need to look them up repeatedly. Improves the scrolling performance of the {@link ListView}.
+     */
     static class ViewHolder {
         public TextView txtPos;
         public TextView txtPrimer;
@@ -50,6 +64,14 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         public Button manualScan;
     }
 
+    /**
+     * Populates the {@link ViewHolder} and stores it inside the layout.
+     *
+     * @param position    the position of the item within the adapter's data set of the item whose view we want
+     * @param convertView the old {@link View} to reuse, if possible
+     * @param parent      the parent that this view will eventually be attached to
+     * @return a {@link View} corresponding to the data at the specified position
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -77,6 +99,15 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         return view;
     }
 
+    /**
+     * Gets the data item associated with the specified position in the data set.
+     * The data of the item is changed, after a new {@link PrimerTube} has been requested.
+     *
+     * @param newTube                the {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
+     *                               if there is no {@link PrimerTube} left.
+     * @param positionForReplacement position of the {@link PrimerTube} in the {@link ListView} that is replaced.
+     *
+     */
     public void changeRow(PrimerTube newTube, int positionForReplacement) {
         getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
         getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
@@ -92,18 +123,27 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         notifyDataSetChanged();
     }
 
-    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation){
-        getItem(positionForNewLocation -1).setObjectID(tube.getObjectID());
-        getItem(positionForNewLocation-1).setTakeOutDate(tube.getTakeOutDate());
-        getItem(positionForNewLocation-1).setPutBackDate(tube.getPutBackDate());
-        getItem(positionForNewLocation-1).setPrimerTubeID(tube.getPrimerTubeID());
-        getItem(positionForNewLocation-1).setPrimerUID(tube.getPrimerUID());
-        getItem(positionForNewLocation-1).setName(tube.getName());
-        getItem(positionForNewLocation-1).setLotNr(tube.getLotNr());
-        getItem(positionForNewLocation-1).setManufacturer(tube.getManufacturer());
-        getItem(positionForNewLocation-1).setCurrentLocation(newlocation.getNewLocation());
-        getItem(positionForNewLocation-1).setStorageLocation(tube.getStorageLocation());
-        getItem(positionForNewLocation-1).setReturnToStorage(tube.isReturnToStorage());
+    /**
+     * Gets the data item associated with the specified position in the data set.
+     * The data of the item is changed, after a new location for the {@link PrimerTube} has been requested.
+     *
+     * @param tube                   the {@link PrimerTube} whose location is about to be changed. It must not be an empty location.
+     * @param positionForNewLocation position of the {@link PrimerTube} in the {@link ListView} that has
+     *                               his location changed.
+     * @param newlocation            the new location of the {@link PrimerTube}.
+     */
+    public void changeCurrentLocation(PrimerTube tube, int positionForNewLocation, NewLocation newlocation) {
+        getItem(positionForNewLocation - 1).setObjectID(tube.getObjectID());
+        getItem(positionForNewLocation - 1).setTakeOutDate(tube.getTakeOutDate());
+        getItem(positionForNewLocation - 1).setPutBackDate(tube.getPutBackDate());
+        getItem(positionForNewLocation - 1).setPrimerTubeID(tube.getPrimerTubeID());
+        getItem(positionForNewLocation - 1).setPrimerUID(tube.getPrimerUID());
+        getItem(positionForNewLocation - 1).setName(tube.getName());
+        getItem(positionForNewLocation - 1).setLotNr(tube.getLotNr());
+        getItem(positionForNewLocation - 1).setManufacturer(tube.getManufacturer());
+        getItem(positionForNewLocation - 1).setCurrentLocation(newlocation.getNewLocation());
+        getItem(positionForNewLocation - 1).setStorageLocation(tube.getStorageLocation());
+        getItem(positionForNewLocation - 1).setReturnToStorage(tube.isReturnToStorage());
         notifyDataSetChanged();
     }
 }

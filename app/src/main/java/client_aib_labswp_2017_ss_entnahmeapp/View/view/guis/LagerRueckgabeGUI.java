@@ -137,7 +137,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         });
 
 
-        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl, primerImpl, listView);
+        adapter = new ListAdapterGatheredPrimer(this, R.layout.rowlayout_gathered_primer, R.id.txtPrimerLastGathered, tubes, uobj, listImpl, primerImpl);
         listView.setAdapter(adapter);
     }
 

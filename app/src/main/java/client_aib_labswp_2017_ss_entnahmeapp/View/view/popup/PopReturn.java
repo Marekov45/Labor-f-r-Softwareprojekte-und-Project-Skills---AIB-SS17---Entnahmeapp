@@ -32,7 +32,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     private RadioGroup reasonforRemovalGroup;
     private ListImpl listImpl;
     private User uobj;
-    private int positionGiven; 
+    private int positionGiven;
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube tubeToRemove;

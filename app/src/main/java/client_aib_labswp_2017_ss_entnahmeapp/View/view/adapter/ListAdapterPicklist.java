@@ -16,7 +16,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.List;
 
 /**
- * Created by User on 11.06.2017.
+ * {@link ListAdapterPicklist} converts a list of {@link PrimerTube} objects into {@link View} items loaded into the {@link ListView} container.
  */
 public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
     private int vg;
@@ -28,6 +28,16 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
     User user;
     static final int MAXPOSITIONINCARRIER = 32;
 
+    /**
+     * @param context     context of the current state of the application. It must not be {@code null}.
+     * @param vg          row layout for a {@link View} item. it must not be {@code null}.
+     * @param id          position of the view item
+     * @param primerTubes the list of {@link PrimerTube} objects loaded into the {@link ListView}.It might be empty.
+     * @param pickLists   the list of {@link PickList} objects.It might be empty.
+     * @param user        user that logged on to the application. It must not be {@code null}.
+     * @param listImpl    implementation of all rest requests regarding lists. It must not be {@code null}.
+     * @param primerImpl  implementation of all rest requests regarding primers. It must not be {@code null}.
+     */
     public ListAdapterPicklist(Context context, int vg, int id, List<PrimerTube> primerTubes, List<PickList> pickLists, User user, ListImpl listImpl, PrimerImpl primerImpl) {
         super(context, vg, id, primerTubes);
         this.context = context;
@@ -39,6 +49,13 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         this.primerImpl = primerImpl;
     }
 
+    /**
+     * Checks for every {@link PrimerTube} object in the {@link ListView} if the barcode matches
+     * with a {@link PrimerTube} ID. If the values are the same, the fitting {@link PrimerTube} is taken
+     * from the storage.
+     *
+     * @param barcode the barcode that was scanned by the camera of the device
+     */
     public void checkBarcodeWithPrimer(Barcode barcode) {
 
         for (PrimerTube primertube : primerTubes) {
@@ -48,9 +65,17 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
                 notifyDataSetChanged();
             }
         }
-        Toast.makeText(context, "Kein Primer mit dieser PrimerTubeID zu entnehmen.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.withdrawalMessage, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Gets the data item associated with the specified position in the data set.
+     * The data of the item is changed, after a new {@link PrimerTube} has been requested.
+     *
+     * @param newTube                the {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
+     *                               if there is no {@link PrimerTube} left.
+     * @param positionForReplacement position of the {@link PrimerTube} in the {@link ListView} that is replaced.
+     */
     public void changeRow(PrimerTube newTube, int positionForReplacement) {
         getItem(positionForReplacement - 1).setObjectID(newTube.getObjectID());
         getItem(positionForReplacement - 1).setTakeOutDate(newTube.getTakeOutDate());
@@ -64,21 +89,31 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         getItem(positionForReplacement - 1).setStorageLocation(newTube.getStorageLocation());
         getItem(positionForReplacement - 1).setReturnToStorage(newTube.isReturnToStorage());
         newTube.setTaken(false);
-        getItem(positionForReplacement-1).setTaken(false);
+        getItem(positionForReplacement - 1).setTaken(false);
         notifyDataSetChanged();
     }
 
-    //Hold views of the listView to improve its scrolling performance
+    /**
+     * Stores each of the component views inside the tag field of the layout, so they can be immediately accessed
+     * without the need to look them up repeatedly. Improves the scrolling performance of the {@link ListView}.
+     */
     static class ViewHolder {
         public TextView txtPos;
         public TextView txtPrimer;
         public TextView txtStorageLocation;
         public TextView txtDestination;
         public Button manualScan;
-        public TextView txtEntnommen;
         public CheckBox checkEntnommen;
     }
 
+    /**
+     * Populates the {@link ViewHolder} and stores it inside the layout.
+     *
+     * @param position    the position of the item within the adapter's data set of the item whose view we want
+     * @param convertView the old {@link View} to reuse, if possible
+     * @param parent      the parent that this view will eventually be attached to
+     * @return a {@link View} corresponding to the data at the specified position
+     */
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewholder;
@@ -108,6 +143,7 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
 
         holder.manualScan = (Button) convertView.findViewById(R.id.btnTakePrimer);
 
+        //primers can be taken manually with the click of a button if the scanner does not work
         holder.manualScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,10 +164,10 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         }
 
         PickList pickListFinal = null;
-        int postitioncounter = position;
+        int positioncounter = position;
         for (PickList pickList : pickLists) {
-            postitioncounter = postitioncounter - pickList.getPickList().size();
-            if (postitioncounter < 0) {
+            positioncounter = positioncounter - pickList.getPickList().size();
+            if (positioncounter < 0) {
                 pickListFinal = pickList;
                 break;
             }
