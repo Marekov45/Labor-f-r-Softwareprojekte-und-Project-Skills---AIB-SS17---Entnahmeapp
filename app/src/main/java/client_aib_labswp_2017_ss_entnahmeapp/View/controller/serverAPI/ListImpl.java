@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ListImpl {
 
-    private final String BASE_URL = "http://10.0.2.2:8080/";
+    private final String BASE_URL = "http://192.168.2.108:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
 

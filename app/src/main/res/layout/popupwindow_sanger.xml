@@ -119,6 +119,8 @@
                     android:layout_width="366dp"
                     android:layout_height="wrap_content" android:id="@+id/tvNewPosition" android:textSize="24sp"
                     android:layout_weight="1" android:textColor="@android:color/white"/>
+
+
             <EditText
                     android:layout_width="385dp"
                     android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.popup;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -246,8 +247,19 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
      *          if there is no {@link PrimerTube} left.
      */
     private void receiveNewPrimer(Object o) {
-        Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
-        newTube = (PrimerTube) o;
+        if (o==null){
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Kein Ersatzprimer verfügbar.");
+            // add a button
+            builder.setPositiveButton("OK", null);
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }else{
+            Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
+            newTube = (PrimerTube) o;
+        }
     }
 
     /**
