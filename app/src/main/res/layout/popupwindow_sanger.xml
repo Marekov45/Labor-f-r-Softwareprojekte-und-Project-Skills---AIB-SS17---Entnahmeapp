@@ -123,7 +123,7 @@
 
             <Spinner
                     android:id="@+id/spinnerGuiWorkspace"
-                    android:layout_width="373dp"
+                    android:layout_width="382dp"
                     android:entries="@array/workspace_array"
                     android:prompt="@string/spinner_prompt_workspaces"
                     android:popupBackground="@color/wallet_bright_foreground_holo_dark"
@@ -131,7 +131,7 @@
                     android:background="@android:color/background_light"
                     android:layout_height="40dp"
                     android:contentDescription="@string/spinner_prompt"
-                    android:layout_marginBottom="@dimen/cast_libraries_material_featurehighlight_inner_margin"
+                    android:layout_marginBottom="@dimen/cast_libraries_material_featurehighlight_inner_margin" android:layout_weight="1"
             />
 
         </LinearLayout>

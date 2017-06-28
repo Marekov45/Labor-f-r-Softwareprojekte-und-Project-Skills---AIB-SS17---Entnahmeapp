@@ -77,11 +77,6 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.CustomTheme">
         </activity>
-        <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopupWarning"
-                  android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LastProcessedListActivity"
                   android:parentActivityName="client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LoginActivity"
                   android:screenOrientation="portrait"

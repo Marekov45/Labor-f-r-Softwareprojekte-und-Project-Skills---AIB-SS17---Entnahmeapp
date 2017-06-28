@@ -68,7 +68,7 @@
     <string name="headerPrimerTube">PrimerTubeID</string>
     <string name="headerLOT">LOT#</string>
     <string name="headerLocation">Standort/Roboter</string>
-    <string name="btnList">Liste anzeigen</string>
+    <string name="btnList">Gesamtliste erneuern</string>
     <string name="checkBoxAdvSearch">Erweiterte Suche</string>
     <string name="AdvSearchMessage">Suche mit Platzhalter aktiviert</string>
     <string name="newLocationMessage">Neuer Standort wurde gesetzt</string>
