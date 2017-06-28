@@ -125,12 +125,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 final Barcode barcode = data.getParcelableExtra("barcode");
                 System.out.println(barcode.displayValue);
                 adapter.checkBarcodeWithPrimer(barcode);
-//                txtResult.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        txtResult.setText(barcode.displayValue);
-//                    }
-//                });
             }
         }
         if(requestCode==REQUEST_POPUP){
@@ -138,10 +132,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
                 int positionForReplacement = data.getIntExtra("POSITION",0);
                 adapter.changeRow(tubeNew, positionForReplacement);
-//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-//                System.out.println("good");
-            }else {
-//                System.out.println("tube ist null");
             }
         }
     }

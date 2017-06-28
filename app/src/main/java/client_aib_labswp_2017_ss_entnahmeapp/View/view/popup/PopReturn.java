@@ -115,11 +115,8 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (tube == null) {
                     primerImpl.removePrimer(tubeToRemove.getObjectID(), userRemove.getUsername(), userRemove.getPassword(), createPrimerStatus());
-
                 } else {
                     primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
                 }

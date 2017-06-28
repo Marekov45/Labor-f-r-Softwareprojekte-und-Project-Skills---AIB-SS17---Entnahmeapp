@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -28,7 +29,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
     ListImpl listImpl;
     PrimerImpl primerImpl;
     User user;
-    ListView listView;
+
 
     /**
      * @param context    context of the current state of the application. It must not be {@code null}.
@@ -48,7 +49,6 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
         this.listImpl = listImpl;
         this.primerTubes = tubes;
         this.primerImpl = primerImpl;
-        this.listView = listView;
     }
 
     static class ViewHolder {
@@ -64,8 +64,9 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
      * to the storage.
      *
      * @param barcode the barcode that was scanned by the camera of the device
+     * @param listView
      */
-    public void checkBarcodeWithPrimer(Barcode barcode) {
+    public void checkBarcodeWithPrimer(Barcode barcode, ListView listView) {
 
         for (PrimerTube primertube : primerTubes) {
             if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
@@ -80,8 +81,17 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
                     primerImpl.returnPrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
                     primertube.setTaken(true);
                     notifyDataSetChanged();
-                    listView.setSelection(getPosition(primertube));
+                    // setup the alert builder
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Die Lagerkoordinate für den Primer "+primertube.getName()+" lautet:");
+                    builder.setMessage(primertube.getStorageLocation()+"");
+                    // add a button
+                    builder.setPositiveButton("OK", null);
+                    // create and show the alert dialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
 
+                    listView.setSelection(getPosition(primertube));
                 }
 
             }

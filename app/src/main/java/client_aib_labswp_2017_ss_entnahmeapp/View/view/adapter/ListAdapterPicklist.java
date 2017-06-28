@@ -63,6 +63,7 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
                 primerImpl.takePrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
                 primertube.setTaken(true);
                 notifyDataSetChanged();
+                return;
             }
         }
         Toast.makeText(context, R.string.withdrawalMessage, Toast.LENGTH_SHORT).show();
