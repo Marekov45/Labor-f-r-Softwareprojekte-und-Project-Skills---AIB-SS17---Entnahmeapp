@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
                 loginImpl.requestLogin(mNameView.getText().toString(), mPasswordView.getText().toString());
+                mSignInButton.setEnabled(false);
             }
         });
     }
@@ -113,11 +114,19 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     @Override
     public void onResponseError() {
         Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        mSignInButton.setEnabled(true);
     }
 
     @Override
     public void onResponseFailure() {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        mSignInButton.setEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSignInButton.setEnabled(true);
     }
 }
 

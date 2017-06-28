@@ -11,7 +11,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
-import client_aib_labswp_2017_ss_entnahmeapp.View.view.guis.LagerRueckgabeGUI;
 import client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopReturn;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -43,7 +42,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
     static class ViewHolder{
         public TextView txtReturn_Primer;
         public TextView txtReturn_StorageLocation;
-        public CheckBox checkZurueckgegeben;
+        public CheckBox checkIfReturn;
         public Button returnPrimer;
     }
     public void checkBarcodeWithPrimer(Barcode barcode) {
@@ -55,7 +54,6 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
                     intentPopup.putExtra("USERREMOVE",user);
                     intentPopup.putExtra("PRIMERTUBETOREMOVE", primertube);
                     context.startActivity(intentPopup);
-//                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
                     primerTubes.remove(primertube);
                     notifyDataSetChanged();
                 }else{
@@ -81,7 +79,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
 
             viewholder.txtReturn_Primer= (TextView) convertView.findViewById(R.id.txtPrimerLastGathered);
             viewholder.txtReturn_StorageLocation = (TextView) convertView.findViewById(R.id.txtStorageLocationLastGathered);
-            viewholder.checkZurueckgegeben = (CheckBox) convertView.findViewById(R.id.checkZurueck);
+            viewholder.checkIfReturn = (CheckBox) convertView.findViewById(R.id.checkZurueck);
             viewholder.returnPrimer = (Button) convertView.findViewById(R.id.btnReturnPrimer);
             convertView.setTag(viewholder);
 
@@ -96,17 +94,13 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
                 if (!primerTube.isReturnToStorage()){
                     Intent intentPopup = new Intent(context, PopReturn.class);
                     intentPopup.putExtra("USERREMOVE",user);
-
                     intentPopup.putExtra("PRIMERTUBETOREMOVE", primerTube);
                     context.startActivity(intentPopup);
-
-//                    Toast.makeText(context, "NICHT ZURÜCKLEGEN",Toast.LENGTH_SHORT).show();
                     primerTubes.remove(primerTube);
                     notifyDataSetChanged();
                 }else {
                     primerImpl.returnPrimer(primerTube.getObjectID(), user.getUsername(), user.getPassword());
                     primerTube.setTaken(true);
-//                System.out.println("Primer zurückgelegt"+primerTube.getName());
                     notifyDataSetChanged();
                 }
             }
@@ -116,17 +110,19 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube>{
         holder.txtReturn_Primer.setText(primerTube.getName());
         holder.txtReturn_StorageLocation.setText(primerTube.getStorageLocation().toString());
         if (getItem(position).isTaken()) {
-            holder.checkZurueckgegeben.setChecked(true);
+            holder.checkIfReturn.setChecked(true);
             holder.returnPrimer.setEnabled(false);
 
         } else {
-            holder.checkZurueckgegeben.setChecked(false);
+            holder.checkIfReturn.setChecked(false);
             holder.returnPrimer.setEnabled(true);
 
         }
         return convertView;
     }
+    public void enableButton(){
 
+    }
 
 }
 

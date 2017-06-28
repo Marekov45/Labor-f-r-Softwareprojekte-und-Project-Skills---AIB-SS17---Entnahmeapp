@@ -157,7 +157,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
 
 
     private void removePrimer(Object o) {
-        Toast.makeText(this, "Primer has been removed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Primer wurde entfernt", Toast.LENGTH_SHORT).show();
     }
 
     private int chooseReason() {

@@ -8,7 +8,7 @@
     <color name="blue">#505fa3</color>
     <string name="prompt_password">Passwort</string>
     <string name="action_sign_in">Login</string>
-    <string name="spinner_prompt">Wähle eine GUI</string>
+    <string name="spinner_prompt">Wählen Sie eine Ansicht</string>
     <string-array name="gui_array">
         <item>Bitte Ansicht wählen</item>
         <item>Labor Primer-Tracking</item>
@@ -93,5 +93,21 @@
     <string name="replacementHintRequired">Grund zwingend nötig</string>
     <string name="replacementHintOptional">Grund optional</string>
 
+    <string name="spinner_prompt_workspaces">Wählen Sie einen Workspace</string>
+    <string-array name="workspace_array">
+        <item>Robot 1</item>
+        <item>Robot 2</item>
+        <item>Workspace 1</item>
+        <item>Workspace 2</item>
+        <item>Workspace 3</item>
+        <item>Workspace 4</item>
+        <item>Workspace 5</item>
+        <item>Workspace 6</item>
+        <item>Workspace 7</item>
+        <item>Workspace 8</item>
+        <item>Workspace 9</item>
+        <item>Workspace 10</item>
+        <item>Workspace 11</item>
+    </string-array>
 
 </resources>

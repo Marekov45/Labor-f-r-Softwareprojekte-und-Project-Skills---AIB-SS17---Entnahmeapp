@@ -1,6 +1,7 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.popup;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -174,8 +175,20 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     private void receiveNewPrimer(Object o) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        newTube = (PrimerTube) o;
+        if (o==null){
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Kein Ersatzprimer verfügbar.");
+            builder.setMessage("Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.");
+            // add a button
+            builder.setPositiveButton("OK", null);
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }else{
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+            newTube = (PrimerTube) o;
+        }
     }
 
     private int chooseReason() {
