@@ -95,7 +95,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra("barcode");
                 System.out.println(barcode.displayValue);
-                adapter.checkBarcodeWithPrimer(barcode, listView);
+                adapter.checkBarcodeWithPrimer(this, barcode, listView);
 
             }
         }

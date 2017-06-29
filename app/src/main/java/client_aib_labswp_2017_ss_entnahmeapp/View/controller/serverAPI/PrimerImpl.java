@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI;
 
+import android.support.annotation.Nullable;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
@@ -18,7 +19,7 @@ import java.io.IOException;
  * Created by User on 16.06.2017.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.43.65:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
 

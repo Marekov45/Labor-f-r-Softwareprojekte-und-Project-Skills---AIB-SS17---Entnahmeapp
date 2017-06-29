@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class LoginControllerImpl {
 
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.43.65:8080/";
 //    private Retrofit mRetrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
