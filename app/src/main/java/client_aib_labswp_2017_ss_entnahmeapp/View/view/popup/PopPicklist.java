@@ -21,7 +21,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 
 /**
- * Created by User on 11.06.2017.
+ * {@link PopPicklist} displays the popupwindow of a primer after it has been clicked in the list.
+ * It supports the replacement of primers.
  */
 public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
@@ -47,6 +48,13 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
 
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied.
+     *                           This value may be {@code null}.
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +65,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
+        //Set the size of the popupwindow
         getWindow().setLayout((int) (width * .8), (int) (height * .62));
 
         primerImpl = new PrimerImpl();
@@ -79,9 +87,9 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         submit = (Button) findViewById(R.id.btnSubmit);
         btnGoBack = (Button) findViewById(R.id.btnclose);
 
-        uobj = getIntent().getParcelableExtra("USER");
-        tube = getIntent().getParcelableExtra("TUBE");
-        positionGiven = getIntent().getIntExtra("POSITION", 0);
+        uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
+        tube = getIntent().getParcelableExtra(getString(R.string.intentTube));
+        positionGiven = getIntent().getIntExtra(getString(R.string.intentPosition), 0);
         final int position = positionGiven - 1;
 
 
@@ -94,31 +102,34 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //closes the popupwindow if nothing has been changed
                 if (newTube == null) {
                     finish();
                 } else {
+                    //replaces the primer
                     final Intent intentNewTube = new Intent();
-                    intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
-                    intentNewTube.putExtra("POSITION", positionGiven);
+                    intentNewTube.putExtra(getString(R.string.intentNewTube), (Parcelable) newTube);
+                    intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
                     setResult(Activity.RESULT_OK, intentNewTube);
                     finish();
                 }
             }
         });
 
+        //enables or disables submit button depending on the radiobutton that is checked
         reasonforNewPrimerGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radioempty:
-                        message.setHint("Grund optional");
+                        message.setHint(getString(R.string.replacementHintOptional));
                         submit.setEnabled(true);
                         break;
                     case R.id.radiobroken:
                     case R.id.radionotfound:
                     case R.id.radionoinfo:
                         message.setText("");
-                        message.setHint("Grund zwingend nötig");
+                        message.setHint(getString(R.string.replacementHintRequired));
                         submit.setEnabled(false);
                         checkIfMessageEmpty();
                         break;
@@ -126,6 +137,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
             }
         });
 
+        // makes REST request for replacement of a primer if button has been clicked
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +149,10 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
     }
 
-
+    /**
+     * Checks if message for the reason of a primer replacement is empty. If that is the case, the submit button
+     * is disabled, otherwise it is enabled.
+     */
     private void checkIfMessageEmpty() {
         message.addTextChangedListener(new TextWatcher() {
             @Override
@@ -165,6 +180,13 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         });
     }
 
+
+    /**
+     * Calls method that replaces the old primer with a new one.
+     *
+     * @param o    the response body for the corresponding REST request. It is {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
@@ -174,11 +196,22 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         }
     }
 
+    /**
+     * Notifies the user that the primer has been replaced.
+     *
+     * @param o the new {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
+     *          if there is no {@link PrimerTube} left.
+     */
     private void receiveNewPrimer(Object o) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
         newTube = (PrimerTube) o;
     }
 
+    /**
+     * Returns a statuscode based on the radiobutton that has been checked.
+     *
+     * @return the reason for the replacement of a primer
+     */
     private int chooseReason() {
 
         int selectedID = reasonforNewPrimerGroup.getCheckedRadioButtonId();
@@ -196,7 +229,11 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         return 0;
     }
 
-
+    /**
+     * Sets the {@link PrimerStatus} for the replaced primer.
+     *
+     * @return the status of the replaced primer. The message of the status can be empty, if the statuscode is 1.
+     */
     private PrimerStatus createPrimerStatus() {
         PrimerStatus status = new PrimerStatus("", 0);
         if (message.getText().toString().matches("")) {
@@ -209,22 +246,28 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         return status;
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
-        Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Notifies the user when something went wrong with the request.
+     */
     @Override
     public void onResponseFailure(ResponseCode code) {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
         switch (code) {
             case REMOVEANDREPLACEPRIMER:
                 // setup the alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Kein Ersatzprimer verfügbar.");
-                builder.setMessage("Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.");
+                builder.setTitle(getString(R.string.noReplacementMessage));
+                builder.setMessage(getString(R.string.newListMessage));
                 // add a button
-                builder.setPositiveButton("OK", null);
+                builder.setPositiveButton(getString(R.string.btnOK), null);
                 // create and show the alert dialog
                 AlertDialog dialog = builder.create();
                 dialog.show();

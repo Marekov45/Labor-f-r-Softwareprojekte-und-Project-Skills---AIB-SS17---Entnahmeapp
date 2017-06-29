@@ -25,7 +25,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterGather
 /**
  * {@link PopReturn} displays the popupwindow of a primer after it has been clicked in the list.
  * It supports the removal of primers.
- * Created by Marvin on 18.06.2017.
  */
 public class PopReturn extends AppCompatActivity implements CustomObserver {
 
@@ -123,8 +122,8 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
                 } else {
                     primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
                     final Intent intentNewTube = new Intent();
-                    intentNewTube.putExtra("TUBEREMOVED", (Parcelable) tube);
-                    intentNewTube.putExtra("POSITION", positionGiven);
+                    intentNewTube.putExtra(getString(R.string.intentTubeRemoveAlt), (Parcelable) tube);
+                    intentNewTube.putExtra(getString(R.string.intentPosition), positionGiven);
                     setResult(Activity.RESULT_OK, intentNewTube);
 
                 }

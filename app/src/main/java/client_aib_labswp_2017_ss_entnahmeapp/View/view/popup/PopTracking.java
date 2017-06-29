@@ -25,7 +25,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 /**
  * {@link PopTracking} displays the popupwindow of a primer after it has been clicked in the list.
  * It supports the replacement of primers and the change of their current location.
- * Created by Marvin on 18.06.2017.
  */
 public class PopTracking extends AppCompatActivity implements CustomObserver {
 
@@ -72,6 +71,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         actualLocation = (TextView) findViewById(R.id.txtLocation);
         message = (EditText) findViewById(R.id.editTxtMessage);
         spinnerLocation = (Spinner) findViewById(R.id.spinnerGuiWorkspace);
+        //spinner with every possible location to choose from
         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -356,10 +356,10 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
             case REMOVEANDREPLACEPRIMER:
                 // setup the alert builder
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Kein Ersatzprimer verfügbar.");
-                builder.setMessage("Bitte laden Sie die Liste erneut.");
+                builder.setTitle(getString(R.string.noReplacementMessage));
+                builder.setMessage(getString(R.string.loadListMessage));
                 // add a button
-                builder.setPositiveButton("OK", null);
+                builder.setPositiveButton(getString(R.string.btnOK), null);
                 // create and show the alert dialog
                 AlertDialog dialog = builder.create();
                 dialog.show();

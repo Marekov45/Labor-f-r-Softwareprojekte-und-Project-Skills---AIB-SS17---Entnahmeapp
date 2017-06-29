@@ -83,6 +83,7 @@
     <string name="btnReturnPrimer">Primer zurücklegen</string>
     <string name="removalMessage">Primer wurde entfernt</string>
     <string name="intentTubeRemove">PRIMERTUBETOREMOVE</string>
+    <string name="intentTubeRemoveAlt">TUBEREMOVED</string>
     <string name="intentUserRemove">USERREMOVE</string>
 
 <!-- Strings related to most classes -->
@@ -97,6 +98,10 @@
     <string name="intentUser">USER</string>
     <string name="replacementHintRequired">Grund zwingend nötig</string>
     <string name="replacementHintOptional">Grund optional</string>
+    <string name="noReplacementMessage">Kein Ersatzprimer verfügbar</string>
+    <string name="newListMessage">Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.</string>
+    <string name="loadListMessage">Bitte laden Sie die Liste erneut.</string>
+    <string name="btnOK">OK</string>
 
     <string name="spinner_prompt_workspaces">Wählen Sie einen Workspace</string>
     <string-array name="workspace_array">
