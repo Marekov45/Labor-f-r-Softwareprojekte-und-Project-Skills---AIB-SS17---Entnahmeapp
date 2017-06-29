@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
+import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
+import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
@@ -60,7 +62,7 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
 
         for (PrimerTube primertube : primerTubes) {
             if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
-                primerImpl.takePrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
+                primerImpl.takePrimer(primertube.getObjectID(), getPosition(primertube), user.getUsername(), user.getPassword());
                 primertube.setTaken(true);
                 notifyDataSetChanged();
                 return;
@@ -149,7 +151,7 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
             @Override
             public void onClick(View v) {
                 System.out.println(position);
-                primerImpl.takePrimer(primerTubes.get(position).getObjectID(), user.getUsername(), user.getPassword());
+                primerImpl.takePrimer(primerTubes.get(position).getObjectID(), position, user.getUsername(), user.getPassword());
                 getItem(position).setTaken(true);
                 notifyDataSetChanged();
             }
@@ -178,5 +180,9 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         return convertView;
     }
 
+    public void updateTakenStatus(int position, boolean status){
+        getItem(position).setTaken(status);
+        notifyDataSetChanged();
+    }
 
 }

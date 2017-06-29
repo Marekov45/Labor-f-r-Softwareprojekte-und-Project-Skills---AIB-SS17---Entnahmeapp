@@ -40,7 +40,7 @@ public class LoginControllerImpl {
                     Boolean status = response.body();
                     cObserver.onResponseSuccess(status, ResponseCode.LOGIN);
                 } else {
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.LOGIN);
                 }
             }
 

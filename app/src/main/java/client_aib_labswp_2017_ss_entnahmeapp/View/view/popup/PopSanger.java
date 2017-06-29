@@ -321,7 +321,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     @Override
-    public void onResponseError() {
+    public void onResponseError(Object o, ResponseCode code) {
         Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
     }
 

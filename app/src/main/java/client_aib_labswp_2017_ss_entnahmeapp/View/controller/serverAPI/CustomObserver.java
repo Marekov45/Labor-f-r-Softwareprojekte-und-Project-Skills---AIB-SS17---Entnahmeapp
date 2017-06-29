@@ -13,7 +13,7 @@ public interface CustomObserver {
      */
     public void onResponseSuccess(Object o, ResponseCode code);
 
-    public void onResponseError();
+    public void onResponseError(Object o, ResponseCode code);
 
     public void onResponseFailure();
 }

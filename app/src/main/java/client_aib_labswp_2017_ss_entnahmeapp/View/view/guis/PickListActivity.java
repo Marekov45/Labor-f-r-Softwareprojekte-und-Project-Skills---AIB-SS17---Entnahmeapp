@@ -155,7 +155,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     }
 
     private void receivePrimerList(Object o) {
-//        System.out.println(o.toString());
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         final List<PickList> pickLists = (List<PickList>) o;
 
@@ -187,8 +186,16 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     }
 
     @Override
-    public void onResponseError() {
+    public void onResponseError(Object o, ResponseCode code) {
         Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        switch (code){
+            case TAKEPRIMER:
+                int position = (int) o;
+                adapter.updateTakenStatus(position, false);
+                break;
+        }
+
+
     }
 
     @Override

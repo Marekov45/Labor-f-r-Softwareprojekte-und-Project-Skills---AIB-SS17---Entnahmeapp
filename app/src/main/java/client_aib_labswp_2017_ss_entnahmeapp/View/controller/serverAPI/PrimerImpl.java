@@ -31,7 +31,7 @@ public class PrimerImpl {
     private PrimerAPI primerAPI = mRetrofit.create(PrimerAPI.class);
     private CustomObserver cObserver;
 
-    public void takePrimer(long id, String name, String password) {
+    public void takePrimer(long id, final int position, String name, String password) {
         Call<Void> call = primerAPI.takePrimer(id, name, password);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -46,7 +46,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(position, ResponseCode.TAKEPRIMER);
                 }
             }
 
@@ -74,7 +74,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.RETURNPRIMER);
                 }
             }
 
@@ -105,7 +105,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.SENDLOCATION);
                 }
             }
 
@@ -116,6 +116,7 @@ public class PrimerImpl {
             }
         });
     }
+
     public void removeAndGetNewPrimer(long id, String name, String password, PrimerStatus primerStatus) {
         Call<PrimerTube> call = primerAPI.removeAndGetNewPrimer(id, name, password, primerStatus);
         call.enqueue(new Callback<PrimerTube>() {
@@ -132,7 +133,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.REMOVEANDREPLACEPRIMER);
                 }
             }
 
@@ -159,7 +160,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.REMOVEPRIMER);
                 }
             }
 

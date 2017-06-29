@@ -352,7 +352,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
      * Notifies the user when something went wrong with the request.
      */
     @Override
-    public void onResponseError() {
+    public void onResponseError(Object o, ResponseCode code) {
         Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
     }
 

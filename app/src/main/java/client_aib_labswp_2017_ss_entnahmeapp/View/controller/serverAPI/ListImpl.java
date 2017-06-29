@@ -49,7 +49,7 @@ public class ListImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.LIST);
                 }
             }
 
@@ -77,7 +77,7 @@ public class ListImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.COMPLETELIST);
                 }
             }
 
@@ -105,7 +105,7 @@ public class ListImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.COMPLETEGATHEREDLIST);
                 }
             }
 
@@ -132,7 +132,7 @@ public class ListImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.GATHEREDLIST);
                 }
             }
 
@@ -161,7 +161,7 @@ public class ListImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError();
+                    cObserver.onResponseError(null, ResponseCode.LASTSANGER);
                 }
             }
 
