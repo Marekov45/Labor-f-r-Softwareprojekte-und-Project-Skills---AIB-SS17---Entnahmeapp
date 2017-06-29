@@ -1,6 +1,9 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.view.popup;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -119,6 +122,11 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
                     primerImpl.removePrimer(tubeToRemove.getObjectID(), userRemove.getUsername(), userRemove.getPassword(), createPrimerStatus());
                 } else {
                     primerImpl.removePrimer(tube.getObjectID(), uobj.getUsername(), uobj.getPassword(), createPrimerStatus());
+                    final Intent intentNewTube = new Intent();
+                    intentNewTube.putExtra("TUBEREMOVED", (Parcelable) tube);
+                    intentNewTube.putExtra("POSITION", positionGiven);
+                    setResult(Activity.RESULT_OK, intentNewTube);
+
                 }
                 finish();
             }

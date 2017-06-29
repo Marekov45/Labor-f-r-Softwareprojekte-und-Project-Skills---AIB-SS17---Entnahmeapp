@@ -51,6 +51,11 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
         this.primerImpl = primerImpl;
     }
 
+    public void setPrimerOnTakenIfRemovedManually(PrimerTube tubeToRemove, int positionForReplacement) {
+        getItem(positionForReplacement-1).setReturned(true);
+        notifyDataSetChanged();
+    }
+
     static class ViewHolder {
         public TextView txtReturn_Primer;
         public TextView txtReturn_StorageLocation;

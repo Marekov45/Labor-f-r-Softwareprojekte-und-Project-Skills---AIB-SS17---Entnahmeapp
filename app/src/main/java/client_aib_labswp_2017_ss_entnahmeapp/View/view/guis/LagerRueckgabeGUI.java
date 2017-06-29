@@ -99,6 +99,13 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
 
             }
         }
+        if (requestCode==REQUEST_POPUP&&resultCode==RESULT_OK){
+            if(data!=null){
+                PrimerTube tubeToRemove= data.getParcelableExtra("TUBEREMOVED");
+                int positionForReplacement = data.getIntExtra("POSITION",0);
+                adapter.setPrimerOnTakenIfRemovedManually(tubeToRemove, positionForReplacement);
+            }
+        }
     }
 
     @Override
