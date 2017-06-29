@@ -15,7 +15,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import java.io.IOException;
 
 /**
- * Created by User on 16.06.2017.
+ * {@link PrimerImpl} implements the REST requests regarding primers.
  */
 public class PrimerImpl {
     private final String BASE_URL = "http://192.168.2.108:8080/";
@@ -89,16 +89,15 @@ public class PrimerImpl {
 
     public void sendLocation(long id, String name, String password, String location) {
         System.out.println(location);
-        String test= location;
+        String test = location;
         System.out.println(test);
-        Call<Void> call = primerAPI.sendLocation(id,name,password,test);
+        Call<Void> call = primerAPI.sendLocation(id, name, password, test);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     cObserver.onResponseSuccess(null, ResponseCode.SENDLOCATION);
-                }
-                else {
+                } else {
                     try {
                         System.out.println(response.code());
                         System.out.println(response.errorBody().string());
@@ -122,10 +121,10 @@ public class PrimerImpl {
         call.enqueue(new Callback<PrimerTube>() {
             @Override
             public void onResponse(Call<PrimerTube> call, Response<PrimerTube> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     PrimerTube primerTube = response.body();
                     cObserver.onResponseSuccess(primerTube, ResponseCode.REMOVEANDREPLACEPRIMER);
-                }else{
+                } else {
                     try {
                         System.out.println(response.code());
                         System.out.println(response.errorBody().string());
@@ -150,9 +149,9 @@ public class PrimerImpl {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     cObserver.onResponseSuccess(null, ResponseCode.REMOVEPRIMER);
-                }else{
+                } else {
                     try {
                         System.out.println(response.code());
                         System.out.println(response.errorBody().string());
@@ -172,8 +171,9 @@ public class PrimerImpl {
         });
     }
 
-
-
+    /**
+     * @param customObserver is not allowed to be {@code null}.
+     */
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

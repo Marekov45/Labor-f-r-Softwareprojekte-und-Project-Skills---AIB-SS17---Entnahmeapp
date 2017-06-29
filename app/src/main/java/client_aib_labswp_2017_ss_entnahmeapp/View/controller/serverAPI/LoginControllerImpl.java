@@ -13,15 +13,15 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by User on 06.06.2017.
+ * {@link LoginControllerImpl} implements the REST request regarding the user authentication.
  */
 public class LoginControllerImpl {
 
     private final String BASE_URL = "http://192.168.2.108:8080/";
-//    private Retrofit mRetrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
-
+    // Initializes Retrofit REST API
     private Retrofit mRetrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -51,6 +51,9 @@ public class LoginControllerImpl {
         });
     }
 
+    /**
+     * @param customObserver is not allowed to be {@code null}.
+     */
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

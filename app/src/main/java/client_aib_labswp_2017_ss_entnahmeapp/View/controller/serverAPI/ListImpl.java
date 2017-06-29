@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by User on 08.06.2017.
+ * {@link ListImpl} implements the REST requests regarding all list types.
  */
 public class ListImpl {
 
     private final String BASE_URL = "http://192.168.2.108:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
-
+    // Initializes Retrofit REST API
     private Retrofit mRetrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -32,8 +32,8 @@ public class ListImpl {
     private ListAPI listAPI = mRetrofit.create(ListAPI.class);
     private CustomObserver cObserver;
 
-    public void requestList(String name, final String password, String typeOfProcess) {
 
+    public void requestList(String name, final String password, String typeOfProcess) {
         Call<List<PickList>> call = listAPI.getPicklist(typeOfProcess, name, password);
         call.enqueue(new Callback<List<PickList>>() {
             @Override
@@ -144,18 +144,16 @@ public class ListImpl {
         });
     }
 
-
-
-    public void requestLastSangerList(String name, String password){
-        Call<List<PickList>> call= listAPI.getLastProcessedSanger(name, password);
+    public void requestLastSangerList(String name, String password) {
+        Call<List<PickList>> call = listAPI.getLastProcessedSanger(name, password);
         call.enqueue(new Callback<List<PickList>>() {
             @Override
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
                     System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LASTSANGER);
-                }else{
+                } else {
                     try {
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
@@ -173,6 +171,9 @@ public class ListImpl {
         });
     }
 
+    /**
+     * @param customObserver is not allowed to be {@code null}.
+     */
     public void setCObserver(CustomObserver customObserver) {
         this.cObserver = customObserver;
     }

@@ -2,7 +2,7 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode;
 
 
 /**
- * Created by User on 07.06.2017.
+ * Response codes that can be used.
  */
 public enum ResponseCode {
     LOGIN,
