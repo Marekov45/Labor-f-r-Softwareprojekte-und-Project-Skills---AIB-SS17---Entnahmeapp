@@ -145,6 +145,12 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     @Override
     public void onResponseError(Object o, ResponseCode code) {
         Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        switch (code){
+            case RETURNPRIMER:
+                int position = (int) o;
+                adapter.changeReturnStatus(position, false);
+                break;
+        }
     }
 
     @Override

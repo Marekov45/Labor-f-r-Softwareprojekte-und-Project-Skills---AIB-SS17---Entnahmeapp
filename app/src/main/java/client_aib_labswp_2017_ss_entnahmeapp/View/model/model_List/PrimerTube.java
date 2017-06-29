@@ -29,6 +29,7 @@ public class PrimerTube implements Parcelable{
 
     private String currentLocation;
     private boolean taken;
+    private boolean returned;
 
     public PrimerTube(long objectID, String primerTubeID, String primerUID, String name, String lotNr, StorageLocation storageLocation, boolean returnToStorage, String manufacturer, String currentLocation) {
         this.objectID=objectID;
@@ -167,7 +168,13 @@ public class PrimerTube implements Parcelable{
     public void setTaken(boolean taken) {
         this.taken = taken;
     }
+    public boolean isReturned(){
+        return returned;
+    }
 
+    public void setReturned (boolean returned){
+        this.returned=returned;
+    }
 
 
     @Override

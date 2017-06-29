@@ -59,7 +59,7 @@ public class PrimerImpl {
         });
     }
 
-    public void returnPrimer(long id, String name, String password) {
+    public void returnPrimer(long id, final int position, String name, String password) {
         Call<Void> call = primerAPI.returnPrimer(id, name, password);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -74,7 +74,7 @@ public class PrimerImpl {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    cObserver.onResponseError(null, ResponseCode.RETURNPRIMER);
+                    cObserver.onResponseError(position, ResponseCode.RETURNPRIMER);
                 }
             }
 

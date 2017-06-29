@@ -78,7 +78,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
                     primerTubes.remove(primertube);
                     notifyDataSetChanged();
                 } else {
-                    primerImpl.returnPrimer(primertube.getObjectID(), user.getUsername(), user.getPassword());
+                    primerImpl.returnPrimer(primertube.getObjectID(), getPosition(primertube), user.getUsername(), user.getPassword());
                     primertube.setTaken(true);
                     notifyDataSetChanged();
                     // setup the alert builder
@@ -137,8 +137,8 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
                     primerTubes.remove(primerTube);
                     notifyDataSetChanged();
                 } else {
-                    primerImpl.returnPrimer(primerTube.getObjectID(), user.getUsername(), user.getPassword());
-                    primerTube.setTaken(true);
+                    primerImpl.returnPrimer(primerTube.getObjectID(), position, user.getUsername(), user.getPassword());
+                    primerTube.setReturned(true);
                     notifyDataSetChanged();
                 }
             }
@@ -147,7 +147,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
 
         holder.txtReturn_Primer.setText(primerTube.getName());
         holder.txtReturn_StorageLocation.setText(primerTube.getStorageLocation().toString());
-        if (getItem(position).isTaken()) {
+        if (getItem(position).isReturned()) {
             holder.checkIfReturn.setChecked(true);
             holder.returnPrimer.setEnabled(false);
 
@@ -159,6 +159,9 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
         return convertView;
     }
 
-
+    public void changeReturnStatus(int position, boolean status){
+        getItem(position).setReturned(status);
+        notifyDataSetChanged();
+    }
 }
 
