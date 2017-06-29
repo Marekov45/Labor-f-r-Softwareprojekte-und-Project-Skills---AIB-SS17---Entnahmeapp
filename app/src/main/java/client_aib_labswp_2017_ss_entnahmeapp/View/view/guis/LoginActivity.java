@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
         mSignInButton.setEnabled(true);
     }

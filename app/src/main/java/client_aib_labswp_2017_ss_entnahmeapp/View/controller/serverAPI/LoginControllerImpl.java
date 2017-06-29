@@ -46,7 +46,7 @@ public class LoginControllerImpl {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.LOGIN);
             }
         });
     }

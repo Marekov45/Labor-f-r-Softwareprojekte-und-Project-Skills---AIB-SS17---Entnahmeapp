@@ -144,7 +144,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
 
     }

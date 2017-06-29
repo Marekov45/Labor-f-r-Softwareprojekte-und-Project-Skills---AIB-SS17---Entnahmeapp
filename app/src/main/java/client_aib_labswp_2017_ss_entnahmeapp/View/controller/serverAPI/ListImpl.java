@@ -56,7 +56,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.LIST);
             }
         });
     }
@@ -84,7 +84,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.COMPLETELIST);
             }
         });
 
@@ -112,7 +112,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.COMPLETEGATHEREDLIST);
             }
         });
     }
@@ -139,7 +139,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.GATHEREDLIST);
             }
         });
     }
@@ -168,7 +168,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.LASTSANGER);
             }
         });
     }

@@ -15,5 +15,5 @@ public interface CustomObserver {
 
     public void onResponseError(Object o, ResponseCode code);
 
-    public void onResponseFailure();
+    public void onResponseFailure(ResponseCode code);
 }

@@ -55,7 +55,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.TAKEPRIMER);
             }
         });
     }
@@ -83,7 +83,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.RETURNPRIMER);
             }
         });
     }
@@ -113,7 +113,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.SENDLOCATION);
             }
         });
     }
@@ -141,7 +141,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<PrimerTube> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.REMOVEANDREPLACEPRIMER);
             }
         });
     }
@@ -168,7 +168,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.REMOVEPRIMER);
             }
         });
     }

@@ -161,7 +161,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
     }
 }

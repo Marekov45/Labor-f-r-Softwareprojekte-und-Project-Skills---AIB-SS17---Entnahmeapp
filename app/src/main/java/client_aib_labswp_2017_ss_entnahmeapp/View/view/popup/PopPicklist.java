@@ -77,7 +77,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
         message = (EditText) findViewById(R.id.editTextNote);
         submit = (Button) findViewById(R.id.btnSubmit);
-        btnGoBack=(Button) findViewById(R.id.btnclose);
+        btnGoBack = (Button) findViewById(R.id.btnclose);
 
         uobj = getIntent().getParcelableExtra("USER");
         tube = getIntent().getParcelableExtra("TUBE");
@@ -94,9 +94,9 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(newTube==null){
+                if (newTube == null) {
                     finish();
-                }else{
+                } else {
                     final Intent intentNewTube = new Intent();
                     intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
                     intentNewTube.putExtra("POSITION", positionGiven);
@@ -175,20 +175,8 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     private void receiveNewPrimer(Object o) {
-        if (o==null){
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Kein Ersatzprimer verfügbar.");
-            builder.setMessage("Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.");
-            // add a button
-            builder.setPositiveButton("OK", null);
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else{
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-            newTube = (PrimerTube) o;
-        }
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        newTube = (PrimerTube) o;
     }
 
     private int chooseReason() {
@@ -227,8 +215,21 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        switch (code) {
+            case REMOVEANDREPLACEPRIMER:
+                // setup the alert builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Kein Ersatzprimer verfügbar.");
+                builder.setMessage("Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.");
+                // add a button
+                builder.setPositiveButton("OK", null);
+                // create and show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
     }
 }
 
