@@ -77,68 +77,68 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
 
         message = (EditText) findViewById(R.id.editTextNote);
         submit = (Button) findViewById(R.id.btnSubmit);
-        btnGoBack=(Button) findViewById(R.id.btnclose);
+        btnGoBack = (Button) findViewById(R.id.btnclose);
         spinnerLocation = (Spinner) findViewById(R.id.spinnerGuiWorkspace);
 
         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                switch (spinnerLocation.getSelectedItemPosition()){
+                switch (spinnerLocation.getSelectedItemPosition()) {
                     case 0:
-                        location ="";
+                        location = "";
                         btnNewPosition.setEnabled(false);
                         break;
                     case 1:
-                        location="Robot1";
+                        location = "Robot1";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 2:
-                        location ="Robot2";
+                        location = "Robot2";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 3:
-                        location="Workspace1";
+                        location = "Workspace1";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 4:
-                        location="Workspace2";
+                        location = "Workspace2";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 5:
-                        location="Workspace3";
+                        location = "Workspace3";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 6:
-                        location="Workspace4";
+                        location = "Workspace4";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 7:
-                        location="Workspace5";
+                        location = "Workspace5";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 8:
-                        location="Workspace6";
+                        location = "Workspace6";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 9:
-                        location="Workspace7";
+                        location = "Workspace7";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 10:
-                        location="Workspace8";
+                        location = "Workspace8";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 11:
-                        location="Workspace9";
+                        location = "Workspace9";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 12:
-                        location="Workspace10";
+                        location = "Workspace10";
                         btnNewPosition.setEnabled(true);
                         break;
                     case 13:
-                        location="Workspace11";
+                        location = "Workspace11";
                         btnNewPosition.setEnabled(true);
                         break;
                 }
@@ -164,16 +164,16 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
             @Override
             public void onClick(View v) {
                 NewLocation locationObj = new NewLocation(location);
-                if(newTube==null&&locationObj.getNewLocation().toString().equals("")){
+                if (newTube == null && locationObj.getNewLocation().toString().equals("")) {
                     finish();
-                }else{
-                    if(newTube!=null&&locationObj.getNewLocation().toString().equals("")){
+                } else {
+                    if (newTube != null && locationObj.getNewLocation().toString().equals("")) {
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
                         intentNewTube.putExtra("POSITION", positionGiven);
                         setResult(Activity.RESULT_OK, intentNewTube);
                         finish();
-                    }else if(newTube==null&&!locationObj.getNewLocation().toString().equals("")){
+                    } else if (newTube == null && !locationObj.getNewLocation().toString().equals("")) {
                         final Intent intentNewPostition = new Intent();
                         intentNewPostition.putExtra("NEWLOCATION", (Parcelable) locationObj);
                         intentNewPostition.putExtra("ACTUALTUBE", (Parcelable) tube);
@@ -181,7 +181,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                         setResult(Activity.RESULT_OK, intentNewPostition);
                         finish();
 
-                    }else if(newTube!=null && !locationObj.getNewLocation().toString().equals("")){
+                    } else if (newTube != null && !locationObj.getNewLocation().toString().equals("")) {
 
                         final Intent intentNewTube = new Intent();
                         intentNewTube.putExtra("NEWTUBE", (Parcelable) newTube);
@@ -270,24 +270,15 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                 break;
         }
     }
+
     private void sendNewLocation() {
         Toast.makeText(this, "SuccessLocationSent", Toast.LENGTH_SHORT).show();
     }
 
     private void receiveNewPrimer(Object o) {
-        if (o==null){
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Kein Ersatzprimer verfügbar.");
-            // add a button
-            builder.setPositiveButton("OK", null);
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else{
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-            newTube = (PrimerTube) o;
-        }
+
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        newTube = (PrimerTube) o;
     }
 
     private int chooseReason() {
@@ -326,8 +317,21 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        switch (code) {
+            case REMOVEANDREPLACEPRIMER:
+                // setup the alert builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Kein Ersatzprimer verfügbar.");
+                builder.setMessage("Bitte laden Sie die Liste erneut.");
+                // add a button
+                builder.setPositiveButton("OK", null);
+                // create and show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
     }
 }
 

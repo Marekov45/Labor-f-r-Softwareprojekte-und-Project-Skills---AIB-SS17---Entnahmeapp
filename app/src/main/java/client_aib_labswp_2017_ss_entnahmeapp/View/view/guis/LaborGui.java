@@ -221,7 +221,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
      * Notifies the user when something went wrong with the request.
      */
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
     }
 

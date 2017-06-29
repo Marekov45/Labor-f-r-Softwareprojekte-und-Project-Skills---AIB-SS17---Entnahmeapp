@@ -71,7 +71,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         newStatusGroup = (RadioGroup) findViewById(R.id.statusGroup);
         actualLocation = (TextView) findViewById(R.id.txtLocation);
         message = (EditText) findViewById(R.id.editTxtMessage);
-        spinnerLocation= (Spinner) findViewById(R.id.spinnerGuiWorkspace);
+        spinnerLocation = (Spinner) findViewById(R.id.spinnerGuiWorkspace);
         spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -286,19 +286,9 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
      *          if there is no {@link PrimerTube} left.
      */
     private void receiveNewPrimer(Object o) {
-        if (o == null) {
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Kein Ersatzprimer verfügbar.");
-            // add a button
-            builder.setPositiveButton("OK", null);
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } else {
-            Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
-            newTube = (PrimerTube) o;
-        }
+
+        Toast.makeText(this, R.string.replacementMessage, Toast.LENGTH_SHORT).show();
+        newTube = (PrimerTube) o;
     }
 
     /**
@@ -360,7 +350,20 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
      * Notifies the user when something went wrong with the request.
      */
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
+        switch (code) {
+            case REMOVEANDREPLACEPRIMER:
+                // setup the alert builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Kein Ersatzprimer verfügbar.");
+                builder.setMessage("Bitte laden Sie die Liste erneut.");
+                // add a button
+                builder.setPositiveButton("OK", null);
+                // create and show the alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
     }
 }

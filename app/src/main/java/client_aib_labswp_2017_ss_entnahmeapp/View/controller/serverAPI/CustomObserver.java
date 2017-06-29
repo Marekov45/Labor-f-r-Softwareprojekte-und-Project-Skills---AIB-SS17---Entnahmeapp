@@ -23,8 +23,5 @@ public interface CustomObserver {
      */
     public void onResponseError(Object o, ResponseCode code);
 
-    /**
-     * Called if the REST request has failed.
-     */
-    public void onResponseFailure();
+    public void onResponseFailure(ResponseCode code);
 }

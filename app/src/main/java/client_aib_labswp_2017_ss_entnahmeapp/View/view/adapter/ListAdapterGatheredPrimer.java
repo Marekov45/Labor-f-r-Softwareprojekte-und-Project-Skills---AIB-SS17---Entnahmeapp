@@ -12,6 +12,7 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PickList;
+import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 import client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopReturn;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -68,26 +69,27 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
      * with a {@link PrimerTube} ID. If the values are the same, the fitting {@link PrimerTube} is returned
      * to the storage.
      *
+     * @param context
      * @param barcode  the barcode that was scanned by the camera of the device
      * @param listView
      */
-    public void checkBarcodeWithPrimer(Barcode barcode, ListView listView) {
+    public void checkBarcodeWithPrimer(Context context, Barcode barcode, ListView listView) {
 
         for (PrimerTube primertube : primerTubes) {
             if (barcode.displayValue.equals(primertube.getPrimerTubeID())) {
                 if (!primertube.isReturnToStorage()) {
                     Intent intentPopup = new Intent(context, PopReturn.class);
+                    primertube.setReturned(true);
                     intentPopup.putExtra("USERREMOVE", user);
                     intentPopup.putExtra("PRIMERTUBETOREMOVE", primertube);
                     context.startActivity(intentPopup);
-                    primerTubes.remove(primertube);
                     notifyDataSetChanged();
                 } else {
                     primerImpl.returnPrimer(primertube.getObjectID(), getPosition(primertube), user.getUsername(), user.getPassword());
                     primertube.setReturned(true);
 
                     // setup the alert builder
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
                     builder.setTitle("Die Lagerkoordinate für den Primer " + primertube.getName() + " lautet:");
                     builder.setMessage(primertube.getStorageLocation() + "");
                     // add a button

@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ListImpl {
 
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.43.65:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
     // Initializes Retrofit REST API
@@ -56,7 +56,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.LIST);
             }
         });
     }
@@ -84,7 +84,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.COMPLETELIST);
             }
         });
 
@@ -112,7 +112,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.COMPLETEGATHEREDLIST);
             }
         });
     }
@@ -139,7 +139,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PrimerTube>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.GATHEREDLIST);
             }
         });
     }
@@ -166,7 +166,7 @@ public class ListImpl {
             @Override
             public void onFailure(Call<List<PickList>> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.LASTSANGER);
             }
         });
     }

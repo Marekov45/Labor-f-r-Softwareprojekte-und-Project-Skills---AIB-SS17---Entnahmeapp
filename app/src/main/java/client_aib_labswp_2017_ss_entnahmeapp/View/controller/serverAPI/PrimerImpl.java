@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI;
 
+import android.support.annotation.Nullable;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
@@ -18,7 +19,7 @@ import java.io.IOException;
  * {@link PrimerImpl} implements the REST requests regarding primers.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://192.168.2.108:8080/";
+    private final String BASE_URL = "http://192.168.43.65:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
 
@@ -54,7 +55,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.TAKEPRIMER);
             }
         });
     }
@@ -82,7 +83,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.RETURNPRIMER);
             }
         });
     }
@@ -111,7 +112,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.SENDLOCATION);
             }
         });
     }
@@ -139,7 +140,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<PrimerTube> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.REMOVEANDREPLACEPRIMER);
             }
         });
     }
@@ -166,7 +167,7 @@ public class PrimerImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-                cObserver.onResponseFailure();
+                cObserver.onResponseFailure(ResponseCode.REMOVEPRIMER);
             }
         });
     }

@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         Toast toast = Toast.makeText(getApplicationContext(), "Falscher Benutzername oder falsches Passwort", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
+        mSignInButton.setEnabled(true);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
         mSignInButton.setEnabled(true);
     }

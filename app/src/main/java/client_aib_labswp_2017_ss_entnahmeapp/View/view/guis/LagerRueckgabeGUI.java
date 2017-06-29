@@ -95,7 +95,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra("barcode");
                 System.out.println(barcode.displayValue);
-                adapter.checkBarcodeWithPrimer(barcode, listView);
+                adapter.checkBarcodeWithPrimer(this, barcode, listView);
 
             }
         }
@@ -161,7 +161,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     }
 
     @Override
-    public void onResponseFailure() {
+    public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
     }
 }
