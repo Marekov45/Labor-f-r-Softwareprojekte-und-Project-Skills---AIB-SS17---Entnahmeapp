@@ -52,7 +52,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
     }
 
     public void setPrimerOnTakenIfRemovedManually(PrimerTube tubeToRemove, int positionForReplacement) {
-        getItem(positionForReplacement-1).setReturned(true);
+        getItem(positionForReplacement - 1).setReturned(true);
         notifyDataSetChanged();
     }
 
@@ -68,7 +68,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
      * with a {@link PrimerTube} ID. If the values are the same, the fitting {@link PrimerTube} is returned
      * to the storage.
      *
-     * @param barcode the barcode that was scanned by the camera of the device
+     * @param barcode  the barcode that was scanned by the camera of the device
      * @param listView
      */
     public void checkBarcodeWithPrimer(Barcode barcode, ListView listView) {
@@ -84,18 +84,18 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
                     notifyDataSetChanged();
                 } else {
                     primerImpl.returnPrimer(primertube.getObjectID(), getPosition(primertube), user.getUsername(), user.getPassword());
-                    primertube.setTaken(true);
-                    notifyDataSetChanged();
+                    primertube.setReturned(true);
+
                     // setup the alert builder
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Die Lagerkoordinate für den Primer "+primertube.getName()+" lautet:");
-                    builder.setMessage(primertube.getStorageLocation()+"");
+                    builder.setTitle("Die Lagerkoordinate für den Primer " + primertube.getName() + " lautet:");
+                    builder.setMessage(primertube.getStorageLocation() + "");
                     // add a button
                     builder.setPositiveButton("OK", null);
                     // create and show the alert dialog
                     AlertDialog dialog = builder.create();
                     dialog.show();
-
+                    notifyDataSetChanged();
                     listView.setSelection(getPosition(primertube));
                 }
 
@@ -164,7 +164,7 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
         return convertView;
     }
 
-    public void changeReturnStatus(int position, boolean status){
+    public void changeReturnStatus(int position, boolean status) {
         getItem(position).setReturned(status);
         notifyDataSetChanged();
     }
