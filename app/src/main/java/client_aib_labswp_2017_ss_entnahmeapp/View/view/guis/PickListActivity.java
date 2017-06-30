@@ -226,7 +226,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
      * Notifies the {@link User} when something went wrong with the request. If the error occurred for the
      * {@link ResponseCode#TAKEPRIMER} code, the taken status for the {@link PrimerTube} will be reset to false.
      *
-     * @param o    the content of the response body for the corresponding REST request. It must not be {@code null}.
+     * @param o    the content of the response body for the corresponding REST request.
      * @param code it must not be {@code null}.
      */
     @Override

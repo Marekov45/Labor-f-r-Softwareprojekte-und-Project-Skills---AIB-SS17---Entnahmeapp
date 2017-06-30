@@ -61,6 +61,7 @@
 
 
 
+
     <string name="btnclose">Fertig</string>
 
     <string name="tvCurrentLocation">Aktuelle Position:</string>
@@ -91,6 +92,7 @@
     <string name="intentTubeRemove">PRIMERTUBETOREMOVE</string>
     <string name="intentTubeRemoveAlt">TUBEREMOVED</string>
     <string name="intentUserRemove">USERREMOVE</string>
+    <string name="toastReturnPrimer">Primer zurückgelegt</string>
 
 <!-- Strings related to most classes -->
     <string name="logoutMessage">Erfolgreich ausgeloggt</string>

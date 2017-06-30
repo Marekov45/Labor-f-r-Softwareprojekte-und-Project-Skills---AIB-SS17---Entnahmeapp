@@ -24,6 +24,9 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterLastSa
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link LastProcessedListActivity} displays the GUI for the most recently processed list.
+ */
 public class LastProcessedListActivity extends AppCompatActivity implements CustomObserver {
 
     private Button logoutButtonLastSanger;
@@ -36,7 +39,12 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
     ListAdapterLastSanger adapter;
     PrimerImpl primerImpl;
 
-
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +54,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         listImpl = new ListImpl();
         listImpl.setCObserver(this);
 
-        primerImpl= new PrimerImpl();
+        primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
 
         listView = (ListView) findViewById(R.id.listvLastSanger);
@@ -70,6 +78,12 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         });
     }
 
+    /**
+     * Calls method that receives last processed picklists for locations that can process "Sanger".
+     *
+     * @param o    the response body for the corresponding REST request.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
@@ -80,37 +94,48 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         }
     }
 
-
-
+    /**
+     * Called when the activity that launched exits, giving the {@code requestCode} it started with,
+     * the {@code resultCode} it returned, and any additional {@code data} from it.
+     *
+     * @param requestCode allows to identify who this result came from. It must not be {@code null}.
+     * @param resultCode  returned by the {@link PopSanger} activity through one of its setResult methods.
+     * @param data        intent, which can return result data to the caller.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_POPUP) {
             if (resultCode == Activity.RESULT_OK) {
-                PrimerTube tubeNew = data.getParcelableExtra("NEWTUBE");
-                PrimerTube actualtube = data.getParcelableExtra("ACTUALTUBE");
-                int positionForReplacement = data.getIntExtra("POSITION", 0);
-                NewLocation newLocation = data.getParcelableExtra("NEWLOCATION");
-                if(tubeNew!=null&&newLocation==null){
+                PrimerTube tubeNew = data.getParcelableExtra(getString(R.string.intentNewTube));
+                PrimerTube actualtube = data.getParcelableExtra(getString(R.string.intentActualTube));
+                int positionForReplacement = data.getIntExtra(getString(R.string.intentPosition), 0);
+                NewLocation newLocation = data.getParcelableExtra(getString(R.string.intentNewLocation));
+                if (tubeNew != null && newLocation == null) {
                     adapter.changeRow(tubeNew, positionForReplacement);
                 }
-                if(newLocation!=null&&tubeNew==null){
+                if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
-                    System.out.println("eine neue position"+newLocation.getNewLocation().toString());
+                    //  System.out.println("eine neue position" + newLocation.getNewLocation().toString());
                 }
-                if(tubeNew==null&&newLocation==null){
-
+                if (tubeNew == null && newLocation == null) {
 
                 }
 //                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-                System.out.println("good");
+                //  System.out.println("good");
             } else {
 //                System.out.println("tube ist null");
             }
         }
+
     }
 
+    /**
+     * Sets the adapter for the listview and fills it with primers that were received by the REST request.
+     *
+     * @param o the list of picklists from the response body. It might be empty.
+     */
     private void receiveLastSangerList(Object o) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
 
         final List<PrimerTube> tubes = new ArrayList<>();
@@ -123,12 +148,12 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
                     Intent intentPopUp = new Intent(LastProcessedListActivity.this, PopSanger.class);
-                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
-                    intentPopUp.putExtra("POSITION", position);
-                    intentPopUp.putExtra("USER", uobj);
+                    intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
+                    intentPopUp.putExtra(getString(R.string.intentPosition), position);
+                    intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
-                    Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -137,15 +162,26 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         listView.setAdapter(adapter);
     }
 
+    /**
+     * Notifies the {@link User} when something went wrong with the request.
+     *
+     * @param o    the content of the response body for the corresponding REST request. It must not be {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
-        Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
 
     }
 
+    /**
+     * Notifies the {@link User} when something went wrong with the request.
+     *
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseFailure(ResponseCode code) {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
 
     }
 }
