@@ -180,7 +180,13 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         return convertView;
     }
 
-    public void updateTakenStatus(int position, boolean status){
+    /**
+     * Updates the status  if an error occured during the withdrawal of a primer.
+     *
+     * @param position position of the primer in the listview
+     * @param status   tells if a primer has been taken
+     */
+    public void updateTakenStatus(int position, boolean status) {
         getItem(position).setTaken(status);
         notifyDataSetChanged();
     }

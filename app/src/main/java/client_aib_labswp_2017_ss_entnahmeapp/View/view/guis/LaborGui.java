@@ -210,7 +210,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
@@ -218,7 +218,9 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
+     *
+     * @param code must not be {@code null}.
      */
     @Override
     public void onResponseFailure(ResponseCode code) {
@@ -226,7 +228,7 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
     }
 
     /**
-     * Called when the user submits the query in the searchview. If the advanced search has been activated,
+     * Called when the {@link User} submits the query in the searchview. If the advanced search has been activated,
      * the wildcard "%" is used at the end of the query text.
      *
      * @param query the query text that is to be submitted. It is not allowed to be {@code null} and must not be an empty

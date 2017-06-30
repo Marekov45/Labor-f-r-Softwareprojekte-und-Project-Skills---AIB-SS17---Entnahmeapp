@@ -97,55 +97,55 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
                         btnNewPosition.setEnabled(false);
                         break;
                     case 1:
-                        location = "Robot1";
+                        location = getResources().getStringArray(R.array.workspace_array)[1];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 2:
-                        location = "Robot2";
+                        location = getResources().getStringArray(R.array.workspace_array)[2];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 3:
-                        location = "Workspace1";
+                        location = getResources().getStringArray(R.array.workspace_array)[3];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 4:
-                        location = "Workspace2";
+                        location = getResources().getStringArray(R.array.workspace_array)[4];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 5:
-                        location = "Workspace3";
+                        location = getResources().getStringArray(R.array.workspace_array)[5];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 6:
-                        location = "Workspace4";
+                        location = getResources().getStringArray(R.array.workspace_array)[6];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 7:
-                        location = "Workspace5";
+                        location = getResources().getStringArray(R.array.workspace_array)[7];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 8:
-                        location = "Workspace6";
+                        location = getResources().getStringArray(R.array.workspace_array)[8];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 9:
-                        location = "Workspace7";
+                        location = getResources().getStringArray(R.array.workspace_array)[9];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 10:
-                        location = "Workspace8";
+                        location = getResources().getStringArray(R.array.workspace_array)[10];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 11:
-                        location = "Workspace9";
+                        location = getResources().getStringArray(R.array.workspace_array)[11];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 12:
-                        location = "Workspace10";
+                        location = getResources().getStringArray(R.array.workspace_array)[12];
                         btnNewPosition.setEnabled(true);
                         break;
                     case 13:
-                        location = "Workspace11";
+                        location = getResources().getStringArray(R.array.workspace_array)[13];
                         btnNewPosition.setEnabled(true);
                         break;
                 }
@@ -274,7 +274,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Calls one of two methods that either replaces the primer with a new one or notifies the user that the location
+     * Calls one of two methods that either replaces the primer with a new one or notifies the {@link User} that the location
      * has been changed, depending on the {@link ResponseCode} of the REST request.
      *
      * @param o    the response body for the corresponding REST request. It must not be {@code null}.
@@ -293,14 +293,14 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user that the current location has been changed.
+     * Notifies the {@link User} that the current location has been changed.
      */
     private void sendNewLocation() {
         Toast.makeText(this, R.string.newLocationMessage, Toast.LENGTH_SHORT).show();
     }
 
     /**
-     * Notifies the user that the primer has been replaced.
+     * Notifies the {@link User} that the primer has been replaced.
      *
      * @param o the new {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
      *          if there is no {@link PrimerTube} left.
@@ -351,7 +351,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
@@ -359,7 +359,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseFailure(ResponseCode code) {

@@ -30,7 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * {@link PickListActivity} displays the GUI for the withdrawal of primers. It supports all of the three procedure types
+ * (Sanger, Manual, Extra).
  */
 public class PickListActivity extends AppCompatActivity implements CustomObserver {
 
@@ -41,18 +42,25 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     private Button bListeAnzeigen;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
-    public static final int REQUEST_POPUP=300;
+    public static final int REQUEST_POPUP = 300;
     private ListImpl listImpl;
     private PrimerImpl primerImpl;
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
     ListAdapterPicklist adapter;
+
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picklist);
-        uobj = getIntent().getParcelableExtra("USER");
+        uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
 
         listView = (ListView) findViewById(R.id.listv);
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header, listView, false);
@@ -91,7 +99,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
             @Override
             public void onClick(View v) {
 
-                if (chooseList().equals("A")) {
+                if (chooseList().equals(getString(R.string.all))) {
                     listImpl.requestAllLists(uobj.getUsername(), uobj.getPassword());
                 } else {
                     listImpl.requestList(uobj.getUsername(), uobj.getPassword(), chooseList());
@@ -99,43 +107,64 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 }
             }
         });
-    };
+    } 
 
+
+    /**
+     * Returns a list type based on the radiobutton that has been checked.
+     *
+     * @return the type of procedure
+     */
     private String chooseList() {
 
         int selectedID = listGroup.getCheckedRadioButtonId();
 
         switch (selectedID) {
             case R.id.radioRoboter:
-                return "S";
+                return getString(R.string.sanger);
             case R.id.radioManuell:
-                return "M";
+                return getString(R.string.manual);
             case R.id.radioExtra:
-                return "E";
+                return getString(R.string.extra);
             case R.id.radioAll:
-                return "A";
+                return getString(R.string.all);
         }
         return null;
     }
 
+    /**
+     * Called when the activity that launched exits, giving the {@code requestCode} it started with,
+     * the {@code resultCode} it returned, and any additional {@code data} from it.
+     *
+     * @param requestCode allows to identify who this result came from. It must not be {@code null}.
+     * @param resultCode  returned by the {@link PopPicklist} activity through one of its setResult methods.
+     * @param data        intent, which can return result data to the caller.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
-                final Barcode barcode = data.getParcelableExtra("barcode");
+                final Barcode barcode = data.getParcelableExtra(getString(R.string.intentBarcode));
                 System.out.println(barcode.displayValue);
                 adapter.checkBarcodeWithPrimer(barcode);
             }
         }
-        if(requestCode==REQUEST_POPUP){
-            if(resultCode== Activity.RESULT_OK){
-                PrimerTube tubeNew= data.getParcelableExtra("NEWTUBE");
-                int positionForReplacement = data.getIntExtra("POSITION",0);
+        if (requestCode == REQUEST_POPUP) {
+            if (resultCode == Activity.RESULT_OK) {
+                PrimerTube tubeNew = data.getParcelableExtra(getString(R.string.intentNewTube));
+                int positionForReplacement = data.getIntExtra(getString(R.string.intentPosition), 0);
                 adapter.changeRow(tubeNew, positionForReplacement);
             }
         }
     }
 
+    /**
+     * Calls one of two methods that either receives a list with primers or takes the primer out of the storage,
+     * depending on the {@link ResponseCode} of the REST request.
+     *
+     * @param o    the response body for the corresponding REST request. It must not be {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
@@ -144,18 +173,26 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                 receivePrimerList(o);
                 break;
             case TAKEPRIMER:
-                takePrimer(o);
+                takePrimer();
                 break;
         }
     }
 
-    private void takePrimer(Object o) {
-        Toast.makeText(this, "Primer has been taken", Toast.LENGTH_SHORT).show();
+    /**
+     * Notifies the user that a primer has been taken from the storage.
+     */
+    private void takePrimer() {
+        Toast.makeText(this, R.string.takenMessage, Toast.LENGTH_SHORT).show();
 
     }
 
+    /**
+     * Sets the adapter for the listview and fills it with primers that were received by the REST request.
+     *
+     * @param o the list of picklists from the response body. It might be empty.
+     */
     private void receivePrimerList(Object o) {
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         final List<PickList> pickLists = (List<PickList>) o;
 
         final List<PrimerTube> tubes = new ArrayList<>();
@@ -167,14 +204,14 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
-                    PrimerTube actualTube = tubes.get(position-1);
+                    PrimerTube actualTube = tubes.get(position - 1);
                     Intent intentPopUp = new Intent(PickListActivity.this, PopPicklist.class);
-                    intentPopUp.putExtra("TUBE", (Parcelable) actualTube);
-                    intentPopUp.putExtra("POSITION",position);
-                    intentPopUp.putExtra("USER",uobj);
+                    intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
+                    intentPopUp.putExtra(getString(R.string.intentPosition), position);
+                    intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
-                    Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -185,10 +222,17 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
     }
 
+    /**
+     * Notifies the {@link User} when something went wrong with the request. If the error occurred for the
+     * {@link ResponseCode#TAKEPRIMER} code, the taken status for the {@link PrimerTube} will be reset to false.
+     *
+     * @param o    the content of the response body for the corresponding REST request. It must not be {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
-        Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
-        switch (code){
+        Toast.makeText(this, R.string.restError, Toast.LENGTH_SHORT).show();
+        switch (code) {
             case TAKEPRIMER:
                 int position = (int) o;
                 adapter.updateTakenStatus(position, false);
@@ -198,9 +242,14 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
 
     }
 
+    /**
+     * Notifies the {@link User} when something went wrong with the request.
+     *
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseFailure(ResponseCode code) {
-        Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.restFailure, Toast.LENGTH_SHORT).show();
     }
 
 }

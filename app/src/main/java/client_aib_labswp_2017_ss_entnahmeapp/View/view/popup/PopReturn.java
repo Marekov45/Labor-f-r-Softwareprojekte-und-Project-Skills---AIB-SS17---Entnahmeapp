@@ -182,7 +182,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user that the primer has been removed.
+     * Notifies the {@link User} that the primer has been removed.
      */
     private void removePrimer() {
         Toast.makeText(this, R.string.removalMessage, Toast.LENGTH_SHORT).show();
@@ -229,7 +229,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
@@ -237,7 +237,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseFailure(ResponseCode code) {

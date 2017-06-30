@@ -197,7 +197,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user that the primer has been replaced.
+     * Notifies the {@link User} that the primer has been replaced.
      *
      * @param o the new {@link PrimerTube} that replaces the old one. The replacement can be {@code null},
      *          if there is no {@link PrimerTube} left.
@@ -207,11 +207,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         newTube = (PrimerTube) o;
     }
 
-    /**
-     * Returns a statuscode based on the radiobutton that has been checked.
-     *
-     * @return the reason for the replacement of a primer
-     */
+
     private int chooseReason() {
 
         int selectedID = reasonforNewPrimerGroup.getCheckedRadioButtonId();
@@ -247,7 +243,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
@@ -255,7 +251,7 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
     }
 
     /**
-     * Notifies the user when something went wrong with the request.
+     * Notifies the {@link User} when something went wrong with the request.
      */
     @Override
     public void onResponseFailure(ResponseCode code) {

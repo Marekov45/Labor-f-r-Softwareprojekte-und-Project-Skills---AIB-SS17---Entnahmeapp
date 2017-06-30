@@ -53,6 +53,12 @@
     <string name="radionoinfo">Anderer Grund</string>
     <string name="checkBoxNewPrimer">Neuen Primer anfordern</string>
     <string name="withdrawalMessage">Kein Primer mit dieser PrimerTubeID zu entnehmen</string>
+    <string name="takenMessage">Primer wurde entnommen</string>
+    <string name="sanger">S</string>
+    <string name="manual">M</string>
+    <string name="extra">E</string>
+    <string name="all">A</string>
+
 
 
     <string name="btnclose">Fertig</string>
@@ -102,6 +108,7 @@
     <string name="newListMessage">Die Liste kann nicht abgearbeitet werden. Bitte laden Sie eine neue Liste.</string>
     <string name="loadListMessage">Bitte laden Sie die Liste erneut.</string>
     <string name="btnOK">OK</string>
+    <string name="intentBarcode">barcode</string>
 
     <string name="spinner_prompt_workspaces">Wählen Sie einen Workspace</string>
     <string-array name="workspace_array">

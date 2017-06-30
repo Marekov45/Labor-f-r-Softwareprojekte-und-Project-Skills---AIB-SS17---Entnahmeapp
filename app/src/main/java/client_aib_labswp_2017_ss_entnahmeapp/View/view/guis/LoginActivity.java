@@ -15,12 +15,11 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.Re
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 
 /**
- * A login screen that offers login via email/password.
+ * {@link LoginActivity} displays the login screen for the application.
  */
 public class LoginActivity extends AppCompatActivity implements CustomObserver {
 
 
-    // UI references.
     private EditText mNameView;
     private EditText mPasswordView;
     private TextView textWarnung;
@@ -29,6 +28,12 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     private Button mSignInButton;
     private LoginControllerImpl loginImpl;
 
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it most recently supplied
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +51,6 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
 
         textWarnung = (TextView) findViewById(R.id.auswahlWarnung);
 
-        addListenerToButton();
-    }
-
-    private void addListenerToButton() {
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,8 +60,11 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         });
     }
 
+    /**
+     * Starts an activity depending on the spinner item that the {@link User} has chosen.
+     */
     private void startSelectedActivity() {
-        User user = new User( mNameView.getText().toString(), mPasswordView.getText().toString());
+        User user = new User(mNameView.getText().toString(), mPasswordView.getText().toString());
 
 
         switch (spinnerGui.getSelectedItemPosition()) {
@@ -69,28 +73,31 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 break;
             case 1:
                 Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
-                intentLabor.putExtra("USER",user);
+                intentLabor.putExtra("USER", user);
                 startActivity(intentLabor);
                 break;
-            case 2 :
+            case 2:
                 Intent intentLetzte = new Intent(LoginActivity.this, LastProcessedListActivity.class);
-                intentLetzte.putExtra("USER",user);
+                intentLetzte.putExtra("USER", user);
                 startActivity(intentLetzte);
                 break;
             case 3:
                 Intent intentEntnahme = new Intent(LoginActivity.this, PickListActivity.class);
-                intentEntnahme.putExtra("USER",user);
+                intentEntnahme.putExtra("USER", user);
                 startActivity(intentEntnahme);
                 break;
             case 4:
                 Intent intentRueck = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
-                intentRueck.putExtra("USER",user);
+                intentRueck.putExtra("USER", user);
                 startActivity(intentRueck);
                 break;
 
         }
     }
 
+    /**
+     * Notifies the {@link User} if a wrong username or password has been entered.
+     */
     private void wrongAuthentification() {
         Toast toast = Toast.makeText(getApplicationContext(), "Falscher Benutzername oder falsches Passwort", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
@@ -98,6 +105,12 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         mSignInButton.setEnabled(true);
     }
 
+    /**
+     * Calls one of two methods that either authorizes the {@link User} to utilize the app or prohibits the access.
+     *
+     * @param o    the response body for the corresponding REST request. It must not be {@code null}.
+     * @param code it must not be {@code null}.
+     */
     @Override
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
@@ -111,19 +124,27 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         }
     }
 
-
+    /**
+     * Notifies the {@link User} when something went wrong with the request.
+     */
     @Override
     public void onResponseError(Object o, ResponseCode code) {
         Toast.makeText(this, "ResponseError", Toast.LENGTH_SHORT).show();
         mSignInButton.setEnabled(true);
     }
 
+    /**
+     * Notifies the {@link User} when something went wrong with the request.
+     */
     @Override
     public void onResponseFailure(ResponseCode code) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();
         mSignInButton.setEnabled(true);
     }
 
+    /**
+     * Resumes the activity if the {@link User} returns from the paused state.
+     */
     @Override
     protected void onResume() {
         super.onResume();
