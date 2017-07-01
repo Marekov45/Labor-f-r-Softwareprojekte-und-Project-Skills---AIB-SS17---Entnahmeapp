@@ -23,5 +23,10 @@ public interface CustomObserver {
      */
     public void onResponseError(Object o, ResponseCode code);
 
+    /**
+     * Called if something went wrong with the request.
+     *
+     * @param code it must not be {@code null}.
+     */
     public void onResponseFailure(ResponseCode code);
 }
