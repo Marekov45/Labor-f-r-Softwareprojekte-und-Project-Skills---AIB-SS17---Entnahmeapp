@@ -153,7 +153,7 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
      * @param o the list of primertubes from the response body. It might be empty.
      */
     private void receiveGatheredPrimerList(Object o) {
-        //  Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         final List<PrimerTube> tubes = (List<PrimerTube>) o;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -161,6 +161,7 @@ public class LaboratoryGui extends AppCompatActivity implements CustomObserver, 
      */
     private void receiveAllGatheredList(Object o) {
         final List<PrimerTube> tubes = (List<PrimerTube>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -188,6 +189,7 @@ public class LaboratoryGui extends AppCompatActivity implements CustomObserver, 
      */
     private void receiveGatheredList(Object o) {
         final List<PrimerTube> tubesSearch = (List<PrimerTube>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

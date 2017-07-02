@@ -1,5 +1,6 @@
 package client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI;
 
+import android.support.annotation.Nullable;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;

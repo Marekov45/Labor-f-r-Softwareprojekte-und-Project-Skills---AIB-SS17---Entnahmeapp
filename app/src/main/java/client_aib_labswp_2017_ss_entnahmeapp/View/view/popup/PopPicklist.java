@@ -27,7 +27,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
     private EditText message;
-
     private Button submit;
     private Button btnGoBack;
     private RadioGroup reasonforNewPrimerGroup;

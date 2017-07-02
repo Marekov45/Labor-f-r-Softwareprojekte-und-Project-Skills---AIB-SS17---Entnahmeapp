@@ -187,7 +187,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
      * @param o the list of picklists from the response body. It might be empty.
      */
     private void receivePrimerList(Object o) {
-       // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         final List<PickList> pickLists = (List<PickList>) o;
 
         final List<PrimerTube> tubes = new ArrayList<>();
@@ -205,8 +205,6 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
-
-                    // Toast.makeText(PickListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }

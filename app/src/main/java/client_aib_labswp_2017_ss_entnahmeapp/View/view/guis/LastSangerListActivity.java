@@ -127,8 +127,8 @@ public class LastSangerListActivity extends AppCompatActivity implements CustomO
      * @param o the list of picklists from the response body. It might be empty.
      */
     private void receiveLastSangerList(Object o) {
-        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
 
         final List<PrimerTube> tubes = new ArrayList<>();
         for (PickList pickList : pickLists) {
@@ -144,8 +144,6 @@ public class LastSangerListActivity extends AppCompatActivity implements CustomO
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
-
-                    // Toast.makeText(LastSangerListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }

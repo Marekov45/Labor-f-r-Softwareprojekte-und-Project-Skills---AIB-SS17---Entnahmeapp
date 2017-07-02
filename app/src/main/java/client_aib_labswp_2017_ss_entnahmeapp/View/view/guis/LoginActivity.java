@@ -73,21 +73,25 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
             case 1:
                 Intent intentLabor = new Intent(LoginActivity.this, LaboratoryGui.class);
                 intentLabor.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentLabor);
                 break;
             case 2:
                 Intent intentLetzte = new Intent(LoginActivity.this, LastSangerListActivity.class);
                 intentLetzte.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentLetzte);
                 break;
             case 3:
                 Intent intentEntnahme = new Intent(LoginActivity.this, PickListActivity.class);
                 intentEntnahme.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentEntnahme);
                 break;
             case 4:
                 Intent intentRueck = new Intent(LoginActivity.this, ReturnGUI.class);
                 intentRueck.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentRueck);
                 break;
 
@@ -98,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
      * Notifies the {@link User} if a wrong username or password has been entered.
      */
     private void wrongAuthentification() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Falscher Benutzername oder falsches Passwort", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.failurelogin, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
         mSignInButton.setEnabled(true);
