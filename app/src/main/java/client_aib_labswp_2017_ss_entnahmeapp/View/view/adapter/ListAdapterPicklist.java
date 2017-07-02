@@ -148,7 +148,6 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         holder.manualScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(position);
                 primerImpl.takePrimer(primerTubes.get(position).getObjectID(), position, user.getUsername(), user.getPassword());
                 getItem(position).setTaken(true);
                 notifyDataSetChanged();

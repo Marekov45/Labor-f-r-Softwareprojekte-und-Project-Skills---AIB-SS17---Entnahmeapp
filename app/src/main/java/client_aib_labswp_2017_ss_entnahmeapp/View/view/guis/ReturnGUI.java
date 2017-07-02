@@ -107,7 +107,6 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra(getString(R.string.intentBarcode));
-                System.out.println(barcode.displayValue);
                 adapter.checkBarcodeWithPrimer(this, barcode, listView);
 
             }
