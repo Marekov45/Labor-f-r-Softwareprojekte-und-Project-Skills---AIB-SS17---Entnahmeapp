@@ -41,6 +41,7 @@ public class LoginControllerImpl {
                     cObserver.onResponseSuccess(status, ResponseCode.LOGIN);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();

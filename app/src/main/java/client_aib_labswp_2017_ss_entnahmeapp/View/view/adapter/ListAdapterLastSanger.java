@@ -25,10 +25,12 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
     private int vg;
     private List<PrimerTube> primerTubes;
     private List<PickList> pickLists;
-    Context context;
-    ListImpl listImpl;
-    User user;
-    PrimerImpl primerImpl;
+    private Context context;
+    private ListImpl listImpl;
+    private User user;
+    private PrimerImpl primerImpl;
+    static final int MAXPOSITIONINCARRIER = 32;
+
 
     /**
      * @param context     context of the current state of the application. It must not be {@code null}.
@@ -50,6 +52,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         this.user = user;
         this.listImpl = listImpl;
         this.primerImpl = primerImpl;
+
     }
 
     /**
@@ -61,7 +64,6 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         public TextView txtPrimer;
         public TextView txtStorageLocation;
         public TextView txtDestination;
-        public Button manualScan;
     }
 
     /**
@@ -91,7 +93,7 @@ public class ListAdapterLastSanger extends ArrayAdapter<PrimerTube> {
         final PrimerTube primerTube = primerTubes.get(position);
         final ListAdapterLastSanger.ViewHolder holder = (ListAdapterLastSanger.ViewHolder) view.getTag();
 
-        holder.txtPos.setText(String.valueOf((position % 32) + 1));
+        holder.txtPos.setText(String.valueOf((position % MAXPOSITIONINCARRIER) + 1));
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
         NewLocation location = new NewLocation(primerTube.getCurrentLocation());

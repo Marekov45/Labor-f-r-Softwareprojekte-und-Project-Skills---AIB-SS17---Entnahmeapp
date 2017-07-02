@@ -44,6 +44,7 @@ public class ListImpl {
 
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -71,6 +72,7 @@ public class ListImpl {
                     cObserver.onResponseSuccess(primerListAllProc, ResponseCode.COMPLETELIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -98,6 +100,7 @@ public class ListImpl {
                     cObserver.onResponseSuccess(gatheredPrimerListAll, ResponseCode.COMPLETEGATHEREDLIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -124,6 +127,7 @@ public class ListImpl {
                     cObserver.onResponseSuccess(gatheredPrimerList, ResponseCode.GATHEREDLIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -150,6 +154,7 @@ public class ListImpl {
                     cObserver.onResponseSuccess(primerList, ResponseCode.LASTSANGER);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
