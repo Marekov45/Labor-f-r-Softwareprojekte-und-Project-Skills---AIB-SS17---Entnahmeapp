@@ -32,10 +32,6 @@ import java.util.List;
  */
 public class ReturnGUI extends AppCompatActivity implements CustomObserver {
 
-    private TextView txtResult;
-    private Button scanButton;
-    private Button logoutReturn;
-    private Button showGatheredPrimer;
     private ListView listView;
     private ListImpl listImpl;
     private PrimerImpl primerImpl;
@@ -44,7 +40,7 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
     public static final int REQUEST_POPUP = 300;
     private User uobj;
     private ListAdapterGatheredPrimer adapter;
-    Context context;
+    private Context context;
 
 
     /**
@@ -69,7 +65,7 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_gathered_primer, listView, false);
         listView.addHeaderView(headerView);
 
-        logoutReturn = (Button) findViewById(R.id.btn_logoutReturn);
+        Button logoutReturn = (Button) findViewById(R.id.btn_logoutReturn);
         logoutReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +73,7 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
             }
         });
 
-        showGatheredPrimer = (Button) findViewById(R.id.btn_gatheredPrimer);
+        Button showGatheredPrimer = (Button) findViewById(R.id.btn_gatheredPrimer);
         showGatheredPrimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +81,7 @@ public class ReturnGUI extends AppCompatActivity implements CustomObserver {
             }
         });
 
-        scanButton = (Button) findViewById(R.id.scanReturn);
+        Button scanButton = (Button) findViewById(R.id.scanReturn);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }

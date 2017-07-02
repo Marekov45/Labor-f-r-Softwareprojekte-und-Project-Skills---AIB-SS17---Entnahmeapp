@@ -36,10 +36,6 @@ import java.util.List;
 public class PickListActivity extends AppCompatActivity implements CustomObserver {
 
 
-    private TextView txtResult;
-    private Button scanButton;
-    private Button logoutButton;
-    private Button bListeAnzeigen;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     public static final int REQUEST_POPUP = 300;
@@ -48,7 +44,7 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
     private RadioGroup listGroup;
     private User uobj;
     private ListView listView;
-    ListAdapterPicklist adapter;
+    private ListAdapterPicklist adapter;
 
     /**
      * Initializes the activity.
@@ -71,11 +67,11 @@ public class PickListActivity extends AppCompatActivity implements CustomObserve
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
 
-        scanButton = (Button) findViewById(R.id.scan);
-        bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
+        Button scanButton = (Button) findViewById(R.id.scan);
+        Button bListeAnzeigen = (Button) findViewById(R.id.bListeAnzeigen);
 
         listGroup = (RadioGroup) findViewById(R.id.listGroup);
-        logoutButton = (Button) findViewById(R.id.btnLogout);
+        Button logoutButton = (Button) findViewById(R.id.btnLogout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

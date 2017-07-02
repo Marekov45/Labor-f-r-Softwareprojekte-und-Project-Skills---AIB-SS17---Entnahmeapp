@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     private EditText mNameView;
     private EditText mPasswordView;
     private TextView textWarnung;
-    private View mLoginFormView;
     private Spinner spinnerGui;
     private Button mSignInButton;
     private LoginControllerImpl loginImpl;
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         spinnerGui = (Spinner) findViewById(R.id.spinnerGui);
 
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
-        mLoginFormView = findViewById(R.id.login_form);
+        View mLoginFormView = findViewById(R.id.login_form);
 
         textWarnung = (TextView) findViewById(R.id.auswahlWarnung);
 
@@ -115,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LOGIN:
-                if ((Boolean) o == true) {
+                if ((Boolean) o) {
                     startSelectedActivity();
                 } else {
                     wrongAuthentification();

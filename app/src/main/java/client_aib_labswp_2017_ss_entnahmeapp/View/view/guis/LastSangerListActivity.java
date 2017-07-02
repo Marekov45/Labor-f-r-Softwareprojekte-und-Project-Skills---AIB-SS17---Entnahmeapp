@@ -29,15 +29,12 @@ import java.util.List;
  */
 public class LastSangerListActivity extends AppCompatActivity implements CustomObserver {
 
-    private Button logoutButtonLastSanger;
-    private Button showListLastSanger;
     private User uobj;
     private ListView listView;
     private ListImpl listImpl;
-    private RadioGroup listGroup;
     public static final int REQUEST_POPUP = 300;
-    ListAdapterLastSanger adapter;
-    PrimerImpl primerImpl;
+    private ListAdapterLastSanger adapter;
+    private PrimerImpl primerImpl;
 
     /**
      * Initializes the activity.
@@ -61,15 +58,15 @@ public class LastSangerListActivity extends AppCompatActivity implements CustomO
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_last_sanger, listView, false);
         listView.addHeaderView(headerView);
 
-        listGroup = (RadioGroup) findViewById(R.id.listGroup);
-        logoutButtonLastSanger = (Button) findViewById(R.id.btnLogoutLastSanger);
+        RadioGroup listGroup = (RadioGroup) findViewById(R.id.listGroup);
+        Button logoutButtonLastSanger = (Button) findViewById(R.id.btnLogoutLastSanger);
         logoutButtonLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavUtils.navigateUpFromSameTask(LastSangerListActivity.this);
             }
         });
-        showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
+        Button showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
         showListLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,15 +112,10 @@ public class LastSangerListActivity extends AppCompatActivity implements CustomO
                 }
                 if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
-                    //  System.out.println("eine neue position" + newLocation.getNewLocation().toString());
                 }
                 if (tubeNew == null && newLocation == null) {
 
                 }
-//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-                //  System.out.println("good");
-            } else {
-//                System.out.println("tube ist null");
             }
         }
 

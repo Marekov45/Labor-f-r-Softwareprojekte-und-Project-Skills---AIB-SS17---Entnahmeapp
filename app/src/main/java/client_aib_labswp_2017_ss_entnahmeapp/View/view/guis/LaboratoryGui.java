@@ -26,13 +26,9 @@ import java.util.List;
  */
 public class LaboratoryGui extends AppCompatActivity implements CustomObserver, SearchView.OnQueryTextListener {
 
-
-    private Button logoutButton;
-    private Button listButton;
     private SearchView view;
     private ListImpl listImpl;
     private User uobj;
-    private CheckBox searchBox;
     private boolean wildcardSearch;
     private ListView listView;
     public static final int REQUEST_POPUP = 300;
@@ -58,7 +54,7 @@ public class LaboratoryGui extends AppCompatActivity implements CustomObserver, 
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_tracking, listView, false);
         listView.addHeaderView(headerView);
         view = (SearchView) findViewById(R.id.search);
-        logoutButton = (Button) findViewById(R.id.logout);
+        Button logoutButton = (Button) findViewById(R.id.logout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,14 +63,14 @@ public class LaboratoryGui extends AppCompatActivity implements CustomObserver, 
             }
 
         });
-        listButton = (Button) findViewById(R.id.btnShowListAll);
+        Button listButton = (Button) findViewById(R.id.btnShowListAll);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
             }
         });
-        searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
+        CheckBox searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
         searchBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
