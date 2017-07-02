@@ -84,7 +84,6 @@
     <!-- Strings related only to rueckgabe -->
     <string name="removeWarning">Hinweis</string>
     <string name="removeMessage">Diesen Primer bitte entsorgen!</string>
-
     <string name="btnconfirmwarning">OK</string>
     <string name="btnReturnPrimer">Primer zurücklegen</string>
     <string name="removalMessage">Primer wurde entfernt</string>

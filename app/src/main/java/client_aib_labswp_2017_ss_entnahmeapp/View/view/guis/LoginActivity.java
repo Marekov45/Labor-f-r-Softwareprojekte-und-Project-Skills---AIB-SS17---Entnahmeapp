@@ -71,28 +71,28 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 textWarnung.setVisibility(View.VISIBLE);
                 break;
             case 1:
-                Intent intentLabor = new Intent(LoginActivity.this, LaboratoryGui.class);
-                intentLabor.putExtra("USER", user);
+                Intent intentLaboratory = new Intent(LoginActivity.this, LaboratoryGui.class);
+                intentLaboratory.putExtra("USER", user);
                 Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
-                startActivity(intentLabor);
+                startActivity(intentLaboratory);
                 break;
             case 2:
-                Intent intentLetzte = new Intent(LoginActivity.this, LastSangerListActivity.class);
-                intentLetzte.putExtra("USER", user);
+                Intent intentLastSanger = new Intent(LoginActivity.this, LastSangerListActivity.class);
+                intentLastSanger.putExtra("USER", user);
                 Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
-                startActivity(intentLetzte);
+                startActivity(intentLastSanger);
                 break;
             case 3:
-                Intent intentEntnahme = new Intent(LoginActivity.this, PickListActivity.class);
-                intentEntnahme.putExtra("USER", user);
+                Intent intentPickList = new Intent(LoginActivity.this, PickListActivity.class);
+                intentPickList.putExtra("USER", user);
                 Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
-                startActivity(intentEntnahme);
+                startActivity(intentPickList);
                 break;
             case 4:
-                Intent intentRueck = new Intent(LoginActivity.this, ReturnGUI.class);
-                intentRueck.putExtra("USER", user);
+                Intent intentReturn = new Intent(LoginActivity.this, ReturnGUI.class);
+                intentReturn.putExtra("USER", user);
                 Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
-                startActivity(intentRueck);
+                startActivity(intentReturn);
                 break;
 
         }
