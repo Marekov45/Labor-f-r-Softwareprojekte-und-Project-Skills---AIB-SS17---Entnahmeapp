@@ -28,9 +28,9 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.List;
 
 /**
- * {@link LagerRueckgabeGUI} displays the GUI for the return of primers.
+ * {@link ReturnGUI} displays the GUI for the return of primers.
  */
-public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserver {
+public class ReturnGUI extends AppCompatActivity implements CustomObserver {
 
     private TextView txtResult;
     private Button scanButton;
@@ -73,7 +73,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         logoutReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.navigateUpFromSameTask(LagerRueckgabeGUI.this);
+                NavUtils.navigateUpFromSameTask(ReturnGUI.this);
             }
         });
 
@@ -92,7 +92,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LagerRueckgabeGUI.this, ScanActivity.class);
+                Intent intent = new Intent(ReturnGUI.this, ScanActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
@@ -165,7 +165,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LagerRueckgabeGUI.this, PopReturn.class);
+                    Intent intentPopUp = new Intent(ReturnGUI.this, PopReturn.class);
                     intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);

@@ -72,12 +72,12 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 textWarnung.setVisibility(View.VISIBLE);
                 break;
             case 1:
-                Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
+                Intent intentLabor = new Intent(LoginActivity.this, LaboratoryGui.class);
                 intentLabor.putExtra("USER", user);
                 startActivity(intentLabor);
                 break;
             case 2:
-                Intent intentLetzte = new Intent(LoginActivity.this, LastProcessedListActivity.class);
+                Intent intentLetzte = new Intent(LoginActivity.this, LastSangerListActivity.class);
                 intentLetzte.putExtra("USER", user);
                 startActivity(intentLetzte);
                 break;
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 startActivity(intentEntnahme);
                 break;
             case 4:
-                Intent intentRueck = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
+                Intent intentRueck = new Intent(LoginActivity.this, ReturnGUI.class);
                 intentRueck.putExtra("USER", user);
                 startActivity(intentRueck);
                 break;

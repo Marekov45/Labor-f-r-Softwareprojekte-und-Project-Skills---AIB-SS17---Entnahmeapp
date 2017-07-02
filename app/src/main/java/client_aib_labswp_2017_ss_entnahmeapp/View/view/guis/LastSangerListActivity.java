@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link LastProcessedListActivity} displays the GUI for the most recently processed list.
+ * {@link LastSangerListActivity} displays the GUI for the most recently processed list.
  */
-public class LastProcessedListActivity extends AppCompatActivity implements CustomObserver {
+public class LastSangerListActivity extends AppCompatActivity implements CustomObserver {
 
     private Button logoutButtonLastSanger;
     private Button showListLastSanger;
@@ -66,7 +66,7 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         logoutButtonLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.navigateUpFromSameTask(LastProcessedListActivity.this);
+                NavUtils.navigateUpFromSameTask(LastSangerListActivity.this);
             }
         });
         showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
@@ -147,13 +147,13 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LastProcessedListActivity.this, PopSanger.class);
+                    Intent intentPopUp = new Intent(LastSangerListActivity.this, PopSanger.class);
                     intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
 
-                    // Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(LastSangerListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }
