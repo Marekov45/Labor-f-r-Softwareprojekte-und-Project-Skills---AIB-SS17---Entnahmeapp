@@ -27,15 +27,8 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
  */
 public class PopSanger extends AppCompatActivity implements CustomObserver {
 
-    private TextView primerName;
-    private TextView shownName;
-    private TextView primerLOT;
-    private TextView shownLOT;
-    private TextView shownLocation;
-    private TextView primerNote;
     private EditText message;
     private Button submit;
-    private Button btnGoBack;
     private RadioGroup reasonforNewPrimerGroup;
     private Button btnNewPosition;
     private Spinner spinnerLocation;
@@ -44,7 +37,7 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
-    String location;
+    private String location;
 
     /**
      * Initializes the activity.
@@ -70,20 +63,20 @@ public class PopSanger extends AppCompatActivity implements CustomObserver {
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
 
-        primerName = (TextView) findViewById(R.id.tvPrimerName);
-        shownName = (TextView) findViewById(R.id.tvNameActTube);
+        TextView primerName = (TextView) findViewById(R.id.tvPrimerName);
+        TextView shownName = (TextView) findViewById(R.id.tvNameActTube);
 
-        primerLOT = (TextView) findViewById(R.id.tvLOT);
-        shownLOT = (TextView) findViewById(R.id.tvLOTActTube);
+        TextView primerLOT = (TextView) findViewById(R.id.tvLOT);
+        TextView shownLOT = (TextView) findViewById(R.id.tvLOTActTube);
 
-        shownLocation = (TextView) findViewById(R.id.tvActLocation);
-        primerNote = (TextView) findViewById(R.id.tvNote);
+        TextView shownLocation = (TextView) findViewById(R.id.tvActLocation);
+        TextView primerNote = (TextView) findViewById(R.id.tvNote);
         reasonforNewPrimerGroup = (RadioGroup) findViewById(R.id.reasonNewPrimerGroup);
 
 
         message = (EditText) findViewById(R.id.editTextNote);
         submit = (Button) findViewById(R.id.btnSubmit);
-        btnGoBack = (Button) findViewById(R.id.btnclose);
+        Button btnGoBack = (Button) findViewById(R.id.btnclose);
         spinnerLocation = (Spinner) findViewById(R.id.spinnerGuiWorkspace);
 
         //spinner with every possible location to choose from

@@ -6,6 +6,8 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Benutzername</string>
+    <string name="sucesslogin">Erfolgreich eingeloggt</string>
+    <string name="failurelogin">Falscher Benutzername oder falsches Passwort</string>
     <color name="blue">#505fa3</color>
     <string name="prompt_password">Passwort</string>
     <string name="action_sign_in">Login</string>
@@ -93,6 +95,7 @@
 
     <!-- Strings related to most classes -->
     <string name="logoutMessage">Erfolgreich ausgeloggt</string>
+    <string name="sucessloadlist">Liste erfolgreich geladen</string>
     <string name="restError">ResponseError</string>
     <string name="restFailure">Failure</string>
     <string name="intentNewTube">NEWTUBE</string>

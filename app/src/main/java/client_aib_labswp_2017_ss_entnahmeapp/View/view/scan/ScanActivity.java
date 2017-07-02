@@ -23,10 +23,10 @@ import java.io.IOException;
  * Created by Marvin on 04.05.2017.
  */
 public class ScanActivity extends AppCompatActivity {
-    SurfaceView cameraView;
-    BarcodeDetector barcode;
-    CameraSource cameraSource;
-    SurfaceHolder holder;
+    private SurfaceView cameraView;
+    private BarcodeDetector barcode;
+    private CameraSource cameraSource;
+    private SurfaceHolder holder;
 
     /**
      * Initializes the activity.

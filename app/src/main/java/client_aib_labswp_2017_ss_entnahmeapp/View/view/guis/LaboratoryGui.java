@@ -22,17 +22,13 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterLabor;
 import java.util.List;
 
 /**
- * {@link LaborGui} displays the GUI for the tracking of primers. It also supports the specific search of primers based on their names.
+ * {@link LaboratoryGui} displays the GUI for the tracking of primers. It also supports the specific search of primers based on their names.
  */
-public class LaborGui extends AppCompatActivity implements CustomObserver, SearchView.OnQueryTextListener {
+public class LaboratoryGui extends AppCompatActivity implements CustomObserver, SearchView.OnQueryTextListener {
 
-
-    private Button logoutButton;
-    private Button listButton;
     private SearchView view;
     private ListImpl listImpl;
     private User uobj;
-    private CheckBox searchBox;
     private boolean wildcardSearch;
     private ListView listView;
     public static final int REQUEST_POPUP = 300;
@@ -58,29 +54,29 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_tracking, listView, false);
         listView.addHeaderView(headerView);
         view = (SearchView) findViewById(R.id.search);
-        logoutButton = (Button) findViewById(R.id.logout);
+        Button logoutButton = (Button) findViewById(R.id.logout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavUtils.navigateUpFromSameTask(LaborGui.this);
-                Toast.makeText(LaborGui.this, R.string.logoutMessage, Toast.LENGTH_SHORT).show();
+                NavUtils.navigateUpFromSameTask(LaboratoryGui.this);
+                Toast.makeText(LaboratoryGui.this, R.string.logoutMessage, Toast.LENGTH_SHORT).show();
             }
 
         });
-        listButton = (Button) findViewById(R.id.btnShowListAll);
+        Button listButton = (Button) findViewById(R.id.btnShowListAll);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listImpl.requestAllGatheredPrimers(uobj.getUsername(), uobj.getPassword());
             }
         });
-        searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
+        CheckBox searchBox = (CheckBox) findViewById(R.id.boxAdvancedSearch);
         searchBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     wildcardSearch = true;
-                    Toast.makeText(LaborGui.this, R.string.AdvSearchMessage, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LaboratoryGui.this, R.string.AdvSearchMessage, Toast.LENGTH_SHORT).show();
                 } else {
                     wildcardSearch = false;
                 }
@@ -165,12 +161,13 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
      */
     private void receiveAllGatheredList(Object o) {
         final List<PrimerTube> tubes = (List<PrimerTube>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LaborGui.this, PopTracking.class);
+                    Intent intentPopUp = new Intent(LaboratoryGui.this, PopTracking.class);
                     intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
@@ -192,12 +189,13 @@ public class LaborGui extends AppCompatActivity implements CustomObserver, Searc
      */
     private void receiveGatheredList(Object o) {
         final List<PrimerTube> tubesSearch = (List<PrimerTube>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTubeSearch = tubesSearch.get(position - 1);
-                    Intent intentpopUpSearch = new Intent(LaborGui.this, PopTracking.class);
+                    Intent intentpopUpSearch = new Intent(LaboratoryGui.this, PopTracking.class);
                     intentpopUpSearch.putExtra(getString(R.string.intentTube), (Parcelable) actualTubeSearch);
                     intentpopUpSearch.putExtra(getString(R.string.intentPosition), position);
                     intentpopUpSearch.putExtra(getString(R.string.intentUser), uobj);

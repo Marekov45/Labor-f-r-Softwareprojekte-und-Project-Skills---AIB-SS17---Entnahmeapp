@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import client.aib_labswp_2017_ss_entnahmeapp.R;
-import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.ResponseCode;
-import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.CustomObserver;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
@@ -24,10 +22,10 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
     private int vg;
     private List<PrimerTube> primerTubes;
     private List<PickList> pickLists;
-    Context context;
-    ListImpl listImpl;
-    PrimerImpl primerImpl;
-    User user;
+    private Context context;
+    private ListImpl listImpl;
+    private PrimerImpl primerImpl;
+    private User user;
     static final int MAXPOSITIONINCARRIER = 32;
 
     /**
@@ -139,7 +137,7 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         final ViewHolder holder = (ViewHolder) convertView.getTag();
 
 
-        holder.txtPos.setText(String.valueOf((position % 32) + 1));
+        holder.txtPos.setText(String.valueOf((position % MAXPOSITIONINCARRIER) + 1));
 
         holder.txtPrimer.setText(primerTube.getName());
         holder.txtStorageLocation.setText(primerTube.getStorageLocation().toString());
@@ -150,7 +148,6 @@ public class ListAdapterPicklist extends ArrayAdapter<PrimerTube> {
         holder.manualScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(position);
                 primerImpl.takePrimer(primerTubes.get(position).getObjectID(), position, user.getUsername(), user.getPassword());
                 getItem(position).setTaken(true);
                 notifyDataSetChanged();

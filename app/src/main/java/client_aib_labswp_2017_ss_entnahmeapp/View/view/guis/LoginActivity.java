@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     private EditText mNameView;
     private EditText mPasswordView;
     private TextView textWarnung;
-    private View mLoginFormView;
     private Spinner spinnerGui;
     private Button mSignInButton;
     private LoginControllerImpl loginImpl;
@@ -47,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
         spinnerGui = (Spinner) findViewById(R.id.spinnerGui);
 
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
-        mLoginFormView = findViewById(R.id.login_form);
+        View mLoginFormView = findViewById(R.id.login_form);
 
         textWarnung = (TextView) findViewById(R.id.auswahlWarnung);
 
@@ -72,23 +71,27 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
                 textWarnung.setVisibility(View.VISIBLE);
                 break;
             case 1:
-                Intent intentLabor = new Intent(LoginActivity.this, LaborGui.class);
+                Intent intentLabor = new Intent(LoginActivity.this, LaboratoryGui.class);
                 intentLabor.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentLabor);
                 break;
             case 2:
-                Intent intentLetzte = new Intent(LoginActivity.this, LastProcessedListActivity.class);
+                Intent intentLetzte = new Intent(LoginActivity.this, LastSangerListActivity.class);
                 intentLetzte.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentLetzte);
                 break;
             case 3:
                 Intent intentEntnahme = new Intent(LoginActivity.this, PickListActivity.class);
                 intentEntnahme.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentEntnahme);
                 break;
             case 4:
-                Intent intentRueck = new Intent(LoginActivity.this, LagerRueckgabeGUI.class);
+                Intent intentRueck = new Intent(LoginActivity.this, ReturnGUI.class);
                 intentRueck.putExtra("USER", user);
+                Toast.makeText(this, R.string.sucesslogin, Toast.LENGTH_SHORT).show();
                 startActivity(intentRueck);
                 break;
 
@@ -99,7 +102,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
      * Notifies the {@link User} if a wrong username or password has been entered.
      */
     private void wrongAuthentification() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Falscher Benutzername oder falsches Passwort", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), R.string.failurelogin, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
         mSignInButton.setEnabled(true);
@@ -115,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements CustomObserver {
     public void onResponseSuccess(Object o, ResponseCode code) {
         switch (code) {
             case LOGIN:
-                if ((Boolean) o == true) {
+                if ((Boolean) o) {
                     startSelectedActivity();
                 } else {
                     wrongAuthentification();

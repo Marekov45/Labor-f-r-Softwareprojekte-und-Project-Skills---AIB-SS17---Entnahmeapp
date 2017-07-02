@@ -19,7 +19,7 @@ import java.io.IOException;
  * {@link PrimerImpl} implements the REST requests regarding primers.
  */
 public class PrimerImpl {
-    private final String BASE_URL = "http://192.168.43.65:8080/";
+    private final String BASE_URL = "http://10.0.2.2:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
 
@@ -89,9 +89,7 @@ public class PrimerImpl {
     }
 
     public void sendLocation(long id, String name, String password, String location) {
-        System.out.println(location);
         String test = location;
-        System.out.println(test);
         Call<Void> call = primerAPI.sendLocation(id, name, password, test);
         call.enqueue(new Callback<Void>() {
             @Override

@@ -25,19 +25,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link LastProcessedListActivity} displays the GUI for the most recently processed list.
+ * {@link LastSangerListActivity} displays the GUI for the most recently processed list.
  */
-public class LastProcessedListActivity extends AppCompatActivity implements CustomObserver {
+public class LastSangerListActivity extends AppCompatActivity implements CustomObserver {
 
-    private Button logoutButtonLastSanger;
-    private Button showListLastSanger;
     private User uobj;
     private ListView listView;
     private ListImpl listImpl;
-    private RadioGroup listGroup;
     public static final int REQUEST_POPUP = 300;
-    ListAdapterLastSanger adapter;
-    PrimerImpl primerImpl;
+    private ListAdapterLastSanger adapter;
+    private PrimerImpl primerImpl;
 
     /**
      * Initializes the activity.
@@ -61,15 +58,15 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_last_sanger, listView, false);
         listView.addHeaderView(headerView);
 
-        listGroup = (RadioGroup) findViewById(R.id.listGroup);
-        logoutButtonLastSanger = (Button) findViewById(R.id.btnLogoutLastSanger);
+        RadioGroup listGroup = (RadioGroup) findViewById(R.id.listGroup);
+        Button logoutButtonLastSanger = (Button) findViewById(R.id.btnLogoutLastSanger);
         logoutButtonLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.navigateUpFromSameTask(LastProcessedListActivity.this);
+                NavUtils.navigateUpFromSameTask(LastSangerListActivity.this);
             }
         });
-        showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
+        Button showListLastSanger = (Button) findViewById(R.id.btnShowListLastSanger);
         showListLastSanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,15 +112,10 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
                 }
                 if (newLocation != null && tubeNew == null) {
                     adapter.changeCurrentLocation(actualtube, positionForReplacement, newLocation);
-                    //  System.out.println("eine neue position" + newLocation.getNewLocation().toString());
                 }
                 if (tubeNew == null && newLocation == null) {
 
                 }
-//                listView.getChildAt(positionForReplacement).setBackgroundColor(Color.RED);
-                //  System.out.println("good");
-            } else {
-//                System.out.println("tube ist null");
             }
         }
 
@@ -135,8 +127,8 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
      * @param o the list of picklists from the response body. It might be empty.
      */
     private void receiveLastSangerList(Object o) {
-        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
         List<PickList> pickLists = (List<PickList>) o;
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
 
         final List<PrimerTube> tubes = new ArrayList<>();
         for (PickList pickList : pickLists) {
@@ -147,13 +139,11 @@ public class LastProcessedListActivity extends AppCompatActivity implements Cust
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LastProcessedListActivity.this, PopSanger.class);
+                    Intent intentPopUp = new Intent(LastSangerListActivity.this, PopSanger.class);
                     intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
                     startActivityForResult(intentPopUp, REQUEST_POPUP);
-
-                    // Toast.makeText(LastProcessedListActivity.this, "List Item was clicked at " + position, Toast.LENGTH_SHORT).show();
                 }
 
             }

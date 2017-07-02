@@ -11,8 +11,6 @@ import client.aib_labswp_2017_ss_entnahmeapp.R;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.ListImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.controller.serverAPI.PrimerImpl;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
-import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PickList;
-import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
 import client_aib_labswp_2017_ss_entnahmeapp.View.view.popup.PopReturn;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -26,10 +24,10 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
 
     private int vg;
     private List<PrimerTube> primerTubes;
-    Context context;
-    ListImpl listImpl;
-    PrimerImpl primerImpl;
-    User user;
+    private Context context;
+    private ListImpl listImpl;
+    private PrimerImpl primerImpl;
+    private User user;
 
 
     /**

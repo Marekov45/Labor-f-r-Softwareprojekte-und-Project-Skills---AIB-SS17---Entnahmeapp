@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ListImpl {
 
-    private final String BASE_URL = "http://192.168.43.65:8080/";
+    private final String BASE_URL = "http://10.0.2.2:8080/";
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
     // Initializes Retrofit REST API
@@ -40,11 +40,11 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
-                    System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LIST);
 
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -69,10 +69,10 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerListAllProc = response.body();
-                    System.out.println(primerListAllProc.size());
                     cObserver.onResponseSuccess(primerListAllProc, ResponseCode.COMPLETELIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -97,10 +97,10 @@ public class ListImpl {
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
                 if (response.isSuccessful()) {
                     List<PrimerTube> gatheredPrimerListAll = response.body();
-                    System.out.println(gatheredPrimerListAll.size());
                     cObserver.onResponseSuccess(gatheredPrimerListAll, ResponseCode.COMPLETEGATHEREDLIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -124,10 +124,10 @@ public class ListImpl {
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
                 if (response.isSuccessful()) {
                     List<PrimerTube> gatheredPrimerList = response.body();
-                    System.out.println(gatheredPrimerList.size());
                     cObserver.onResponseSuccess(gatheredPrimerList, ResponseCode.GATHEREDLIST);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -151,10 +151,10 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
-                    System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LASTSANGER);
                 } else {
                     try {
+                        System.out.println(response.code());
                         System.out.println(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();

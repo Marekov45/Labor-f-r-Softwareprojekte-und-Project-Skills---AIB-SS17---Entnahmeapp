@@ -19,7 +19,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.controller.enumResponseCode.Re
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.User;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerStatus;
 import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
-import client_aib_labswp_2017_ss_entnahmeapp.View.view.adapter.ListAdapterGatheredPrimer;
 
 
 /**
@@ -30,7 +29,6 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
 
 
     private Button btnDelete;
-    private Button btnClose;
     private RadioGroup reasonforRemovalGroup;
     private ListImpl listImpl;
     private User uobj;
@@ -75,7 +73,7 @@ public class PopReturn extends AppCompatActivity implements CustomObserver {
 
 
         btnDelete = (Button) findViewById(R.id.btnRemove);
-        btnClose = (Button) findViewById(R.id.bttnclose);
+        Button btnClose = (Button) findViewById(R.id.bttnclose);
 
         uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
         tube = getIntent().getParcelableExtra(getString(R.string.intentTube));

@@ -28,14 +28,10 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.List;
 
 /**
- * {@link LagerRueckgabeGUI} displays the GUI for the return of primers.
+ * {@link ReturnGUI} displays the GUI for the return of primers.
  */
-public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserver {
+public class ReturnGUI extends AppCompatActivity implements CustomObserver {
 
-    private TextView txtResult;
-    private Button scanButton;
-    private Button logoutReturn;
-    private Button showGatheredPrimer;
     private ListView listView;
     private ListImpl listImpl;
     private PrimerImpl primerImpl;
@@ -44,7 +40,7 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
     public static final int REQUEST_POPUP = 300;
     private User uobj;
     private ListAdapterGatheredPrimer adapter;
-    Context context;
+    private Context context;
 
 
     /**
@@ -69,15 +65,15 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         ViewGroup headerView = (ViewGroup) getLayoutInflater().inflate(R.layout.header_gathered_primer, listView, false);
         listView.addHeaderView(headerView);
 
-        logoutReturn = (Button) findViewById(R.id.btn_logoutReturn);
+        Button logoutReturn = (Button) findViewById(R.id.btn_logoutReturn);
         logoutReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.navigateUpFromSameTask(LagerRueckgabeGUI.this);
+                NavUtils.navigateUpFromSameTask(ReturnGUI.this);
             }
         });
 
-        showGatheredPrimer = (Button) findViewById(R.id.btn_gatheredPrimer);
+        Button showGatheredPrimer = (Button) findViewById(R.id.btn_gatheredPrimer);
         showGatheredPrimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,14 +81,14 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
             }
         });
 
-        scanButton = (Button) findViewById(R.id.scanReturn);
+        Button scanButton = (Button) findViewById(R.id.scanReturn);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LagerRueckgabeGUI.this, ScanActivity.class);
+                Intent intent = new Intent(ReturnGUI.this, ScanActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
@@ -111,7 +107,6 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 final Barcode barcode = data.getParcelableExtra(getString(R.string.intentBarcode));
-                System.out.println(barcode.displayValue);
                 adapter.checkBarcodeWithPrimer(this, barcode, listView);
 
             }
@@ -158,14 +153,14 @@ public class LagerRueckgabeGUI extends AppCompatActivity implements CustomObserv
      * @param o the list of primertubes from the response body. It might be empty.
      */
     private void receiveGatheredPrimerList(Object o) {
-        //  Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.sucessloadlist, Toast.LENGTH_SHORT).show();
         final List<PrimerTube> tubes = (List<PrimerTube>) o;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id != -1) {
                     PrimerTube actualTube = tubes.get(position - 1);
-                    Intent intentPopUp = new Intent(LagerRueckgabeGUI.this, PopReturn.class);
+                    Intent intentPopUp = new Intent(ReturnGUI.this, PopReturn.class);
                     intentPopUp.putExtra(getString(R.string.intentTube), (Parcelable) actualTube);
                     intentPopUp.putExtra(getString(R.string.intentPosition), position);
                     intentPopUp.putExtra(getString(R.string.intentUser), uobj);
