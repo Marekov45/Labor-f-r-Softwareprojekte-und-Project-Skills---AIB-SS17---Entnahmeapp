@@ -3,6 +3,7 @@
     <string name="title_activity_login">Primerverwaltung</string>
     <string name="title_activity_labor">Labor</string>
     <string name="title_activity_primerlist">Liste</string>string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Benutzername</string>
     <color name="blue">#505fa3</color>
@@ -15,6 +16,8 @@
         <item>Labor Letzte Roboterliste</item>
         <item>Lager Entnahme</item>
         <item>Lager Rückgabe</item>
+
+    <!-- Strings related to taking of primers -->
     </string-array>
     <string name="bListeAnzeigen">Liste anzeigen</string>
 
@@ -43,8 +46,6 @@
     <string name="tvManufacturer">Hersteller:</string>
     <string name="tvReasonForNewPrimer">Grund für neuen Primer auswählen</string>
 
-
-
     <string name="tvNote">Nachricht:</string>
     <string name="btnSubmit">Neuen Primer anfordern</string>
     <string name="radioempty">Primer leer</string>
@@ -58,10 +59,6 @@
     <string name="manual">M</string>
     <string name="extra">E</string>
     <string name="all">A</string>
-
-
-
-
     <string name="btnclose">Fertig</string>
 
     <string name="tvCurrentLocation">Aktuelle Position:</string>
@@ -94,7 +91,7 @@
     <string name="intentUserRemove">USERREMOVE</string>
     <string name="toastReturnPrimer">Primer zurückgelegt</string>
 
-<!-- Strings related to most classes -->
+    <!-- Strings related to most classes -->
     <string name="logoutMessage">Erfolgreich ausgeloggt</string>
     <string name="restError">ResponseError</string>
     <string name="restFailure">Failure</string>
@@ -111,7 +108,6 @@
     <string name="loadListMessage">Bitte laden Sie die Liste erneut.</string>
     <string name="btnOK">OK</string>
     <string name="intentBarcode">barcode</string>
-
     <string name="spinner_prompt_workspaces">Wählen Sie einen Workspace</string>
     <string-array name="workspace_array">
         <item>Neue Position wählen</item>
