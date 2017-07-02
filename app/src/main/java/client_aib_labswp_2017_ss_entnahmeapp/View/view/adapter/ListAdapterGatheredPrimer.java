@@ -69,9 +69,9 @@ public class ListAdapterGatheredPrimer extends ArrayAdapter<PrimerTube> {
      * with a {@link PrimerTube} ID. If the values are the same, the fitting {@link PrimerTube} is returned
      * to the storage.
      *
-     * @param context
+     * @param context context of the current state of the application. It must not be {@code null}.
      * @param barcode  the barcode that was scanned by the camera of the device
-     * @param listView
+     * @param listView the view in which the current primertubes are shown
      */
     public void checkBarcodeWithPrimer(Context context, Barcode barcode, ListView listView) {
 
