@@ -40,7 +40,6 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
-                    System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LIST);
 
                 } else {
@@ -69,7 +68,6 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerListAllProc = response.body();
-                    System.out.println(primerListAllProc.size());
                     cObserver.onResponseSuccess(primerListAllProc, ResponseCode.COMPLETELIST);
                 } else {
                     try {
@@ -97,7 +95,6 @@ public class ListImpl {
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
                 if (response.isSuccessful()) {
                     List<PrimerTube> gatheredPrimerListAll = response.body();
-                    System.out.println(gatheredPrimerListAll.size());
                     cObserver.onResponseSuccess(gatheredPrimerListAll, ResponseCode.COMPLETEGATHEREDLIST);
                 } else {
                     try {
@@ -124,7 +121,6 @@ public class ListImpl {
             public void onResponse(Call<List<PrimerTube>> call, Response<List<PrimerTube>> response) {
                 if (response.isSuccessful()) {
                     List<PrimerTube> gatheredPrimerList = response.body();
-                    System.out.println(gatheredPrimerList.size());
                     cObserver.onResponseSuccess(gatheredPrimerList, ResponseCode.GATHEREDLIST);
                 } else {
                     try {
@@ -151,7 +147,6 @@ public class ListImpl {
             public void onResponse(Call<List<PickList>> call, Response<List<PickList>> response) {
                 if (response.isSuccessful()) {
                     List<PickList> primerList = response.body();
-                    System.out.println(primerList.size());
                     cObserver.onResponseSuccess(primerList, ResponseCode.LASTSANGER);
                 } else {
                     try {
