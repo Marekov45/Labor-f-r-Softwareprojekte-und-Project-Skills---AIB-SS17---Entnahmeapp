@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.io.IOException;
 
 /**
  * {@link LoginControllerImpl} implements the REST request regarding the user authentication.
@@ -18,7 +19,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class LoginControllerImpl {
 
     private final String BASE_URL = "http://10.0.2.2:8080/";
-//    private Retrofit mRetrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
     public static final Gson GSON = new GsonBuilder().setLenient().create();
     // Initializes Retrofit REST API
@@ -40,6 +40,11 @@ public class LoginControllerImpl {
                     Boolean status = response.body();
                     cObserver.onResponseSuccess(status, ResponseCode.LOGIN);
                 } else {
+                    try {
+                        System.out.println(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     cObserver.onResponseError(null, ResponseCode.LOGIN);
                 }
             }
