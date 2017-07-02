@@ -3,7 +3,6 @@ package client_aib_labswp_2017_ss_entnahmeapp.View.view.popup;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -29,11 +28,9 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
  */
 public class PopTracking extends AppCompatActivity implements CustomObserver {
 
-    private TextView actualLocation;
     private Button setNewLocation;
     private EditText message;
     private Button submit;
-    private Button btnGoBack;
     private RadioGroup newStatusGroup;
     private Spinner spinnerLocation;
 
@@ -42,7 +39,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
     private PrimerTube tube;
     private PrimerImpl primerImpl;
     private PrimerTube newTube;
-    String location;
+    private String location;
 
     /**
      * Initializes the activity.
@@ -68,7 +65,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
         newStatusGroup = (RadioGroup) findViewById(R.id.statusGroup);
-        actualLocation = (TextView) findViewById(R.id.txtLocation);
+        TextView actualLocation = (TextView) findViewById(R.id.txtLocation);
         message = (EditText) findViewById(R.id.editTxtMessage);
         spinnerLocation = (Spinner) findViewById(R.id.spinnerGuiWorkspace);
         //spinner with every possible location to choose from
@@ -143,7 +140,7 @@ public class PopTracking extends AppCompatActivity implements CustomObserver {
         });
         setNewLocation = (Button) findViewById(R.id.btnChangeLocation);
         submit = (Button) findViewById(R.id.btnNewPrimer);
-        btnGoBack = (Button) findViewById(R.id.btnOK);
+        Button btnGoBack = (Button) findViewById(R.id.btnOK);
         uobj = getIntent().getParcelableExtra(getString(R.string.intentUser));
         tube = getIntent().getParcelableExtra(getString(R.string.intentTube));
         positionGiven = getIntent().getIntExtra(getString(R.string.intentPosition), 0);

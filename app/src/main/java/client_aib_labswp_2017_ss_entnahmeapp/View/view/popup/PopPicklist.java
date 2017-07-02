@@ -26,15 +26,6 @@ import client_aib_labswp_2017_ss_entnahmeapp.View.model.model_List.PrimerTube;
  */
 public class PopPicklist extends AppCompatActivity implements CustomObserver {
 
-    private TextView primerName;
-    private TextView shownName;
-    private TextView primerID;
-    private TextView shownID;
-    private TextView primerLOT;
-    private TextView shownLOT;
-    private TextView primerManufacturer;
-    private TextView shownManufacturer;
-    private TextView primerNote;
     private EditText message;
 
     private Button submit;
@@ -72,15 +63,15 @@ public class PopPicklist extends AppCompatActivity implements CustomObserver {
         primerImpl = new PrimerImpl();
         primerImpl.setCObserver(this);
 
-        primerName = (TextView) findViewById(R.id.tvPrimerName);
-        shownName = (TextView) findViewById(R.id.tvNameActTube);
-        primerID = (TextView) findViewById(R.id.tvPrimerTubeID);
-        shownID = (TextView) findViewById(R.id.tvIDActTube);
-        primerLOT = (TextView) findViewById(R.id.tvLOT);
-        shownLOT = (TextView) findViewById(R.id.tvLOTActTube);
-        primerManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
-        shownManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
-        primerNote = (TextView) findViewById(R.id.tvNote);
+        TextView primerName = (TextView) findViewById(R.id.tvPrimerName);
+        TextView shownName = (TextView) findViewById(R.id.tvNameActTube);
+        TextView primerID = (TextView) findViewById(R.id.tvPrimerTubeID);
+        TextView shownID = (TextView) findViewById(R.id.tvIDActTube);
+        TextView primerLOT = (TextView) findViewById(R.id.tvLOT);
+        TextView shownLOT = (TextView) findViewById(R.id.tvLOTActTube);
+        TextView primerManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
+        TextView shownManufacturer = (TextView) findViewById(R.id.tvManufacturerActTube);
+        TextView primerNote = (TextView) findViewById(R.id.tvNote);
         reasonforNewPrimerGroup = (RadioGroup) findViewById(R.id.reasonNewPrimerGroup);
 
         message = (EditText) findViewById(R.id.editTextNote);
